@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { eventTypes, mockSlotsByMode, EventType, ConsultationMode, clinicDetails } from "@/app/data/booking";
-import { generateGoogleCalendarUrl, generateGoogleMeetLink } from "@/app/lib/google-calendar";
+import { generateGoogleCalendarUrl, generateGoogleMeetLink, generateValidGoogleMeetUrl } from "@/app/lib/google-calendar";
 import { Button } from "@/app/components/ui/Button";
 
 // Helper to get days in month
@@ -635,7 +635,7 @@ export function CalScheduler() {
 
               {mode === "online" ? (
                 <a
-                  href="https://meet.google.com/new"
+                  href={generateGoogleMeetLink()}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full sm:flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[var(--color-brand-sky)] text-[var(--color-brand-navy)] font-bold text-sm border-2 border-[var(--color-brand-navy)] shadow-[3px_3px_0px_0px_var(--color-brand-navy)] hover:bg-[var(--color-brand-pink)] transition-all"

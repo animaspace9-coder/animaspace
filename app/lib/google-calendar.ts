@@ -45,3 +45,8 @@ export function generateGoogleCalendarUrl(details: MeetingDetails): string {
 export function generateValidGoogleMeetUrl(): string {
   return "https://meet.google.com/new";
 }
+
+export function generateGoogleMeetLink(): string {
+  return "https://meet.google.com/new";
+}
+
