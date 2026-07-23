@@ -42,7 +42,6 @@ next-env.d.ts
 
 # ── Video / audio (large binary files — not for git) ──────────────────────────
 *.mp4
-*.webm
 *.mov
 *.avi
 *.mkv
