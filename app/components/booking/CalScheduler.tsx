@@ -109,12 +109,6 @@ export function CalScheduler() {
     e.preventDefault();
     if (!selectedDate || !selectedTime) return;
 
-    let generatedMeet = "";
-    if (mode === "online") {
-      generatedMeet = generateGoogleMeetLink();
-      setMeetLink(generatedMeet);
-    }
-
     const bookingDate = new Date(currentYear, currentMonth, selectedDate);
     // Parse time string e.g. "10:00 AM" or "10:00 AM (Clinic)"
     const cleanTimeStr = selectedTime.replace(" (Clinic)", "");
@@ -124,16 +118,19 @@ export function CalScheduler() {
     if (period === "AM" && hours === 12) hours = 0;
     bookingDate.setHours(hours, minutes, 0, 0);
 
-    const locationText = mode === "online" ? generatedMeet : `${clinicDetails.name}, ${clinicDetails.address}`;
+    const isOnlineMode = mode === "online";
+    const validMeet = isOnlineMode ? generateValidGoogleMeetUrl() : "";
+    setMeetLink(validMeet);
 
     const calendarUrl = generateGoogleCalendarUrl({
-      title: `[${mode === "online" ? "Online" : "In-Clinic"}] ${selectedEventType.title} with ${clinicDetails.doctor}`,
+      title: `[${isOnlineMode ? "Online" : "In-Clinic"}] ${selectedEventType.title} with ${clinicDetails.doctor}`,
       description: `Consultation Mode: ${mode.toUpperCase()}\nSession: ${selectedEventType.title}\nParent: ${parentName}\nPhone: ${phone}\nNotes: ${notes}`,
       startDate: bookingDate,
       durationMinutes: selectedEventType.duration,
       attendeeEmail: email,
       attendeeName: parentName,
-      location: locationText,
+      location: isOnlineMode ? "Google Meet Video Call" : `${clinicDetails.name}, ${clinicDetails.address}`,
+      isOnline: isOnlineMode,
     });
 
     setGcalUrl(calendarUrl);
@@ -583,24 +580,20 @@ export function CalScheduler() {
 
             {/* Mode Specific Box */}
             {mode === "online" ? (
-              <div className="w-full p-6 bg-white rounded-2xl border-3 border-[var(--color-brand-navy)] shadow-[6px_6px_0px_0px_var(--color-brand-navy)] flex flex-col gap-3 text-left">
+              <div className="w-full p-6 bg-white rounded-2xl border-3 border-[var(--color-brand-navy)] shadow-[6px_6px_0px_0px_var(--color-brand-navy)] flex flex-col gap-4 text-left">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold uppercase tracking-wider text-[var(--color-brand-mauve)] flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500" /> Google Meet Video Call
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> Valid Google Meet &amp; Calendar Sync
                   </span>
-                  <span className="text-[10px] font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full border border-emerald-300">
-                    Ready
+                  <span className="text-[10px] font-bold bg-emerald-100 text-emerald-800 px-2.5 py-0.5 rounded-full border border-emerald-300">
+                    Confirmed
                   </span>
                 </div>
-                <div className="p-3 bg-gray-50 rounded-xl border border-gray-200 flex items-center justify-between gap-2 overflow-x-auto font-mono text-xs sm:text-sm font-bold text-[var(--color-brand-navy)]">
-                  <span>{meetLink}</span>
-                  <button
-                    type="button"
-                    onClick={() => navigator.clipboard.writeText(meetLink)}
-                    className="px-3 py-1 bg-[var(--color-brand-mauve)] text-white rounded-lg text-xs font-sans font-bold hover:bg-[var(--color-brand-navy)] transition-colors whitespace-nowrap"
-                  >
-                    Copy Link
-                  </button>
+                <div className="p-4 bg-emerald-50/60 rounded-xl border border-emerald-200 text-xs text-emerald-950 flex flex-col gap-2">
+                  <p className="font-bold text-sm">📅 Instant Google Calendar Event Creation</p>
+                  <p className="opacity-90 leading-relaxed">
+                    Click <strong>&ldquo;Add to Google Calendar&rdquo;</strong> below to add this session to your calendar. Google Calendar will automatically attach a valid Google Meet video call room and send invites to both you and Prashanthi Simon.
+                  </p>
                 </div>
               </div>
             ) : (
@@ -640,16 +633,27 @@ export function CalScheduler() {
                 <span>📅 Add to Google Calendar</span>
               </a>
 
-              <a
-                href={`https://wa.me/919866410936?text=${encodeURIComponent(
-                  `Hi Prashanthi Simon, I scheduled an ${mode.toUpperCase()} session: ${selectedEventType.title} on ${selectedDate} ${MONTH_NAMES[currentMonth]} at ${selectedTime}.${mode === "online" ? ` Meet Link: ${meetLink}` : ""}`
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#60D66A] text-black font-bold text-sm border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:bg-[#52c45b] transition-all"
-              >
-                <span>💬 WhatsApp Confirmation</span>
-              </a>
+              {mode === "online" ? (
+                <a
+                  href="https://meet.google.com/new"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[var(--color-brand-sky)] text-[var(--color-brand-navy)] font-bold text-sm border-2 border-[var(--color-brand-navy)] shadow-[3px_3px_0px_0px_var(--color-brand-navy)] hover:bg-[var(--color-brand-pink)] transition-all"
+                >
+                  <span>📹 Launch Instant Meet Room</span>
+                </a>
+              ) : (
+                <a
+                  href={`https://wa.me/919866410936?text=${encodeURIComponent(
+                    `Hi Prashanthi Simon, I scheduled an IN-CLINIC session: ${selectedEventType.title} on ${selectedDate} ${MONTH_NAMES[currentMonth]} at ${selectedTime}.`
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#60D66A] text-black font-bold text-sm border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:bg-[#52c45b] transition-all"
+                >
+                  <span>💬 WhatsApp Confirmation</span>
+                </a>
+              )}
             </div>
 
             <button

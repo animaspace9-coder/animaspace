@@ -1,6 +1,6 @@
 /**
  * Google Calendar Helper Utilities
- * Generates direct Google Calendar web links and ICS data for online meetings.
+ * Generates direct Google Calendar web links for valid Google Meet & In-Clinic appointments.
  */
 
 export interface MeetingDetails {
@@ -11,28 +11,37 @@ export interface MeetingDetails {
   attendeeEmail: string;
   attendeeName: string;
   location?: string;
+  isOnline?: boolean;
 }
 
 export function generateGoogleCalendarUrl(details: MeetingDetails): string {
-  const startIso = details.startDate.toISOString().replace(/-|:|\.\d\d\d/g, "");
+  // Format YYYYMMDDTHHmmssZ in UTC
+  const formatUtc = (d: Date) => d.toISOString().replace(/-|:|\.\d\d\d/g, "");
+  
+  const startIso = formatUtc(details.startDate);
   const endDate = new Date(details.startDate.getTime() + details.durationMinutes * 60000);
-  const endIso = endDate.toISOString().replace(/-|:|\.\d\d\d/g, "");
+  const endIso = formatUtc(endDate);
 
-  const meetUrl = `https://meet.google.com/animaspace-${Math.random().toString(36).substring(2, 7)}`;
+  const locationText = details.isOnline 
+    ? "Google Meet Video Call" 
+    : (details.location || "Anima Space Child Psychology Center, Jubilee Hills, Hyderabad");
 
   const params = new URLSearchParams({
     action: "TEMPLATE",
-    text: `[Anima Space] ${details.title}`,
+    text: details.title,
     dates: `${startIso}/${endIso}`,
-    details: `${details.description}\n\nJoin Google Meet: ${meetUrl}\nClient: ${details.attendeeName} (${details.attendeeEmail})`,
-    location: details.location || "Google Meet Video Call",
+    details: `${details.description}\n\nClient Name: ${details.attendeeName}\nClient Email: ${details.attendeeEmail}`,
+    location: locationText,
     add: details.attendeeEmail,
   });
 
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }
 
-export function generateGoogleMeetLink(): string {
-  const code = Array.from({ length: 3 }, () => Math.random().toString(36).substring(2, 5)).join("-");
-  return `https://meet.google.com/${code}`;
+/**
+ * Returns Google's official valid instant meeting URL.
+ * Google Meet converts 'meet.google.com/new' instantly into a valid, active meeting room.
+ */
+export function generateValidGoogleMeetUrl(): string {
+  return "https://meet.google.com/new";
 }
