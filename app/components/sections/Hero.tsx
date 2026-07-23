@@ -93,6 +93,7 @@ export const Hero = () => {
               muted
               playsInline
               preload="metadata"
+              poster="/caring-hands.png"
               className="w-full h-full object-cover relative z-0"
             >
               <source src="/hero-video.webm" type="video/webm" />

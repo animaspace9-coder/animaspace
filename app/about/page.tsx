@@ -70,18 +70,15 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Illustration Placeholder */}
-          <div className="relative w-full aspect-[4/3] bg-[var(--color-brand-pink)] rounded-[2.5rem] overflow-hidden border-4 border-[var(--color-brand-navy)] shadow-[8px_8px_0px_0px_var(--color-brand-navy)] flex items-center justify-center">
-            <div className="text-center p-8">
-              <span className="text-6xl mb-4 block">🏡</span>
-              <p className="font-heading font-bold text-[var(--color-brand-navy)] text-lg">
-                [Illustration Placeholder]
-                <br />
-                <span className="text-sm font-normal">DrawKit — Warm Office Scene</span>
-              </p>
-            </div>
-            <div className="absolute top-6 right-6 w-10 h-10 rounded-full bg-[var(--color-brand-sky)] border-2 border-[var(--color-brand-navy)]" />
-            <div className="absolute bottom-8 left-8 w-8 h-8 rotate-12 bg-[var(--color-brand-mauve)] border-2 border-[var(--color-brand-navy)] rounded-lg" />
+          {/* Illustration */}
+          <div className="relative w-full aspect-[4/3] bg-[var(--color-brand-pink)] rounded-[2.5rem] overflow-hidden border-4 border-[var(--color-brand-navy)] shadow-[8px_8px_0px_0px_var(--color-brand-navy)] flex items-center justify-center p-2">
+            <img 
+              src="/serene-space.jpg" 
+              alt="Anima Space serene & supportive therapy environment" 
+              className="w-full h-full object-cover rounded-[2rem]"
+            />
+            <div className="absolute top-6 right-6 w-10 h-10 rounded-full bg-[var(--color-brand-sky)] border-2 border-[var(--color-brand-navy)] z-10" />
+            <div className="absolute bottom-8 left-8 w-8 h-8 rotate-12 bg-[var(--color-brand-mauve)] border-2 border-[var(--color-brand-navy)] rounded-lg z-10" />
           </div>
         </div>
       </section>

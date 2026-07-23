@@ -38,17 +38,16 @@ export const ApproachBlock = () => {
           </p>
         </div>
 
-        {/* Illustration Placeholder */}
+        {/* Illustration */}
         <div 
           ref={imgRef}
-          className="order-1 lg:order-2 w-full aspect-square md:aspect-[4/3] bg-white rounded-[3rem] border-4 border-[var(--color-brand-navy)] shadow-[8px_8px_0px_0px_var(--color-brand-sky)] flex flex-col items-center justify-center p-8 relative overflow-hidden"
+          className="order-1 lg:order-2 w-full aspect-square md:aspect-[4/3] bg-[#fbf9f4] rounded-[3rem] border-4 border-[var(--color-brand-navy)] shadow-[8px_8px_0px_0px_var(--color-brand-sky)] flex items-center justify-center p-4 sm:p-6 relative overflow-hidden"
         >
-          <div className="absolute inset-0 bg-gradient-to-tr from-[var(--color-brand-rose)] to-[var(--color-brand-off-white)] mix-blend-overlay"></div>
-          <span className="text-7xl mb-6 z-10">🌿</span>
-          <p className="font-heading font-bold text-center text-[var(--color-brand-navy)] z-10 text-xl">
-            [Illustration Placeholder]<br/>
-            <span className="text-sm font-normal">Supportive Scene</span>
-          </p>
+          <img 
+            src="/caring-hands.png" 
+            alt="Gentle holding hands illustration with band-aids and floral details" 
+            className="w-full h-full object-contain relative z-10 drop-shadow-sm rounded-[2rem]"
+          />
         </div>
       </div>
     </section>
