@@ -3,6 +3,7 @@ import { Nunito, Outfit } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/app/components/sections/Navbar";
 import { Footer } from "@/app/components/sections/Footer";
+import { WhatsAppButton } from "@/app/components/ui/WhatsAppButton";
 
 const fontHeading = Nunito({
   variable: "--font-heading",
@@ -34,12 +35,13 @@ export default function RootLayout({
       lang="en"
       className={`${fontHeading.variable} ${fontBody.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col relative">
         <Navbar />
         <main className="flex-grow">
           {children}
         </main>
         <Footer />
+        <WhatsAppButton />
       </body>
     </html>
   );

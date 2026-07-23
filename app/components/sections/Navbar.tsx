@@ -12,7 +12,7 @@ export const Navbar = () => {
     { label: "About Us", href: "/about" },
     { label: "Our Services", href: "/services" },
     { label: "Blogs", href: "/blog" },
-    { label: "Contact Us", href: "/contact" },
+    { label: "Contact", href: "/contact" },
     { label: "Book Session", href: "/book", isCta: true },
   ];
 

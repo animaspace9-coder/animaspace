@@ -5,7 +5,7 @@ export const navigation = [
   { name: "About Us", href: "/about" },
   { name: "Our Services", href: "/services" },
   { name: "Blogs", href: "/blog" },
-  { name: "Contact Us", href: "/contact" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export const serviceSubNav = [

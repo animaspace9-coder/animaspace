@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { gsap } from "gsap";
+import { Menu, X } from "lucide-react";
 import "./PillNav.css";
 
 export interface PillNavItem {
@@ -191,7 +192,7 @@ export const PillNav = ({
             scaleY: 1,
             duration: 0.3,
             ease,
-            transformOrigin: "top center",
+            transformOrigin: "top right",
           }
         );
       } else {
@@ -275,13 +276,16 @@ export const PillNav = ({
           </div>
 
           <button
-            className="mobile-menu-button mobile-only"
+            className="mobile-menu-button mobile-only flex items-center justify-center w-10 h-10 rounded-full bg-[var(--color-brand-navy)] text-white shadow-md border border-white/20 active:scale-95 transition-transform"
             onClick={toggleMobileMenu}
-            aria-label="Toggle menu"
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
             ref={hamburgerRef}
           >
-            <span className="hamburger-line" />
-            <span className="hamburger-line" />
+            {isMobileMenuOpen ? (
+              <X className="w-5 h-5 text-white stroke-[2.5]" />
+            ) : (
+              <Menu className="w-5 h-5 text-white stroke-[2.5]" />
+            )}
           </button>
         </nav>
       </div>

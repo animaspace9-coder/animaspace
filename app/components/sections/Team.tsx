@@ -43,26 +43,18 @@ export const Team = () => {
           className="bg-[var(--color-brand-off-white)] rounded-[2.5rem] md:rounded-[3rem] border-4 border-[var(--color-brand-navy)] shadow-[8px_8px_0px_0px_var(--color-brand-navy)] md:shadow-[12px_12px_0px_0px_var(--color-brand-navy)] overflow-hidden p-6 sm:p-10 md:p-14"
         >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center">
-            {/* Left/Top: Clean Photo Placeholder Frame */}
+            {/* Left/Top: High Authority Profile Photo Frame */}
             <div className="lg:col-span-5 flex flex-col items-center">
-              <div className="relative w-full max-w-sm aspect-[4/5] rounded-[2rem] bg-[var(--color-brand-pink)]/40 border-4 border-[var(--color-brand-navy)] flex flex-col items-center justify-center p-6 text-center shadow-[6px_6px_0px_0px_var(--color-brand-navy)] overflow-hidden group">
-                {/* Decorative Icon */}
-                <div className="w-20 h-20 rounded-full bg-[var(--color-brand-mauve)] border-3 border-[var(--color-brand-navy)] flex items-center justify-center mb-4 text-3xl text-white shadow-md">
-                  👩‍⚕️
-                </div>
-                
-                <p className="font-heading font-bold text-[var(--color-brand-navy)] text-lg leading-snug">
-                  [ Client Photo Placeholder ]
-                </p>
-                <p className="text-xs text-[var(--color-brand-espresso)] font-medium mt-1">
-                  Prashanthi Simon
-                  <br />
-                  <span className="text-[11px] opacity-75">Lead Child Psychologist</span>
-                </p>
+              <div className="relative w-full max-w-sm aspect-[4/5] rounded-[2rem] bg-white border-4 border-[var(--color-brand-navy)] shadow-[6px_6px_0px_0px_var(--color-brand-navy)] overflow-hidden group">
+                <img
+                  src={expert.image}
+                  alt={expert.name}
+                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
+                />
 
                 {/* Corner Accent Pills */}
-                <div className="absolute top-4 right-4 w-7 h-7 rounded-full bg-[var(--color-brand-sky)] border-2 border-[var(--color-brand-navy)]" />
-                <div className="absolute bottom-4 left-4 w-7 h-7 rotate-12 bg-[var(--color-brand-rose)] border-2 border-[var(--color-brand-navy)] rounded-md" />
+                <div className="absolute top-4 right-4 w-7 h-7 rounded-full bg-[var(--color-brand-sky)] border-2 border-[var(--color-brand-navy)] shadow-sm" />
+                <div className="absolute bottom-4 left-4 w-7 h-7 rotate-12 bg-[var(--color-brand-rose)] border-2 border-[var(--color-brand-navy)] rounded-md shadow-sm" />
               </div>
 
               {/* Experience Badge */}
