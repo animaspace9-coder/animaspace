@@ -1,0 +1,240 @@
+.pill-nav-container {
+  position: relative;
+  width: 100%;
+  z-index: 99;
+}
+
+.pill-nav-wrapper {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0.5rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Standalone Isolated Logo Sizing */
+.isolated-logo-link {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.isolated-logo-link:hover {
+  transform: scale(1.04);
+}
+
+.isolated-logo-img {
+  height: 2.5rem; /* ~40px default */
+  width: auto;
+  object-fit: contain;
+  filter: contrast(1.8) brightness(0.75);
+  mix-blend-mode: multiply;
+}
+
+@media (min-width: 768px) {
+  .isolated-logo-img {
+    height: 3rem; /* ~48px desktop */
+  }
+}
+
+/* Floating Pill Nav Bar */
+.pill-nav {
+  --nav-h: 40px;
+  --pill-pad-x: 16px;
+  --pill-gap: 3px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.pill-nav-items {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: var(--nav-h);
+  background: var(--base, var(--color-brand-navy));
+  border-radius: 9999px;
+  padding: 4px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.pill-list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: var(--pill-gap);
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.pill-list > li {
+  display: flex;
+  height: 100%;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0 var(--pill-pad-x);
+  background: var(--pill-bg, transparent);
+  color: var(--pill-text, #fff);
+  text-decoration: none;
+  border-radius: 9999px;
+  box-sizing: border-box;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1;
+  text-transform: capitalize;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.2s ease;
+}
+
+.pill .hover-circle {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  border-radius: 50%;
+  background: var(--hover-bg, var(--color-brand-mauve));
+  z-index: 1;
+  display: block;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.pill .label-stack {
+  position: relative;
+  display: inline-block;
+  line-height: 1;
+  z-index: 2;
+}
+
+.pill .pill-label {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  line-height: 1;
+  will-change: transform;
+}
+
+.pill .pill-label-hover {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--hover-text, #fff);
+  z-index: 3;
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+.pill.is-active {
+  background: var(--pill-active-bg, var(--color-brand-mauve));
+  color: #fff;
+}
+
+/* CTA Pill Special Highlight */
+.pill-cta {
+  background: var(--color-brand-mauve);
+  color: #fff !important;
+  border-radius: 9999px;
+  font-weight: 800;
+}
+
+.pill-cta:hover {
+  opacity: 0.92;
+}
+
+.desktop-only {
+  display: flex;
+}
+
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: flex !important;
+  }
+}
+
+.mobile-menu-button {
+  width: var(--nav-h);
+  height: var(--nav-h);
+  border-radius: 50%;
+  background: var(--base, var(--color-brand-navy));
+  border: none;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.hamburger-line {
+  width: 18px;
+  height: 2px;
+  background: #fff;
+  border-radius: 1px;
+  transition: all 0.2s ease;
+  transform-origin: center;
+}
+
+.mobile-menu-popover {
+  position: absolute;
+  top: 5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  background: var(--base, var(--color-brand-navy));
+  border-radius: 24px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
+  z-index: 998;
+  opacity: 0;
+  transform-origin: top center;
+  visibility: hidden;
+  padding: 8px;
+}
+
+.mobile-menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mobile-menu-popover .mobile-menu-link {
+  display: block;
+  padding: 14px 20px;
+  color: #fff;
+  background-color: transparent;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 16px;
+  transition: all 0.2s ease;
+}
+
+.mobile-menu-popover .mobile-menu-link:hover,
+.mobile-menu-popover .mobile-menu-link.is-active {
+  background-color: var(--color-brand-mauve);
+  color: #fff;
+}
