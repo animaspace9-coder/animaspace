@@ -53,6 +53,7 @@ next-env.d.ts
 /*.png
 /*.gif
 /*.webp
+/*.webm
 
 # ── Raw SVG source files in project root (use public/ for deployed assets) ────
 /AnimaSpace*.svg

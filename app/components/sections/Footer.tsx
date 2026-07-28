@@ -4,6 +4,7 @@ import React, { useRef, useLayoutEffect } from "react";
 import Link from "next/link";
 import { navigation, serviceSubNav, contactInfo } from "@/app/data/content";
 import { animateFadeUp } from "@/app/lib/gsap";
+import SkarCredit from "@/app/components/ui/SkarCredit";
 
 /* ─── Hand-Drawn Kid Doodle Character SVG ─── */
 const KidDoodleCharacter = () => (
@@ -297,28 +298,25 @@ export const Footer = () => {
       </div>
 
       {/* ── Bottom Bar & Credit ── */}
-      <div className="max-w-7xl mx-auto px-6 w-full pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-medium text-[var(--color-brand-espresso)]/70 border-t border-[var(--color-brand-charcoal)]/10 mt-2">
-        <p>&copy; {currentYear} Anima Space. All rights reserved.</p>
-        
-        {/* "Made with love by skar" requirement */}
-        <div className="flex items-center gap-1.5 text-sm sm:text-xs">
-          <span>Made with</span>
-          <HeartDoodle />
-          <span>by</span>
-          <a
-            href="https://www.skarcreation.in/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-bold text-[var(--color-brand-navy)] underline hover:text-[var(--color-brand-mauve)] transition-colors"
-          >
-            skar
-          </a>
+      <div className="max-w-7xl mx-auto px-6 w-full pt-8 flex flex-col md:grid md:grid-cols-3 items-center gap-4 text-xs font-medium text-[var(--color-brand-espresso)]/70 border-t border-[var(--color-brand-charcoal)]/10 mt-2">
+        {/* Left: Copyright */}
+        <p className="text-center md:text-left">&copy; {currentYear} Anima Space. All Rights Reserved.</p>
+
+        {/* Center: Skar Credit */}
+        <div className="flex justify-center w-full">
+          <SkarCredit
+            accentColor="#0A1C33"
+            words={["<3", "with love", "❤️", "care", "passion"]}
+            className="py-0 text-[var(--color-brand-espresso)]/80 text-xs sm:text-sm font-medium"
+          />
         </div>
 
-        <div className="flex gap-4">
+        {/* Right: Legal links */}
+        <div className="flex gap-4 items-center justify-center md:justify-end w-full">
           <a href="#privacy" className="hover:text-[var(--color-brand-navy)] transition-colors">
             Privacy Policy
           </a>
+          <span className="opacity-30">•</span>
           <a href="#disclaimer" className="hover:text-[var(--color-brand-navy)] transition-colors">
             Disclaimer
           </a>
