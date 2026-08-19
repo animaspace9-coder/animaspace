@@ -1,8 +1,9 @@
 import { createClient } from "next-sanity";
+import { projectId, dataset, apiVersion } from "../env";
 
 export const client = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
-  apiVersion: "2026-08-19", // today's date, kept hard-coded per Sanity best practices
+  projectId,
+  dataset,
+  apiVersion,
   useCdn: true, // fast, cached published-content reads
 });
