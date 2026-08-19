@@ -14,6 +14,7 @@ interface ServicePageData {
   bgAccent: string;
   icon: string;
   intro: string;
+  bulletPoints?: string[];
   whatToExpect: string[];
   whoItsFor: string;
   faqs: { question: string; answer: string }[];
@@ -80,9 +81,19 @@ export const ServiceSubPage = ({ data }: { data: ServicePageData }) => {
             <span className="inline-block text-sm font-bold uppercase tracking-widest text-[var(--color-brand-mauve)] mb-6">
               About this service
             </span>
-            <p className="text-xl text-[var(--color-brand-espresso)] leading-relaxed mb-8">
+            <p className="text-xl text-[var(--color-brand-espresso)] leading-relaxed mb-6">
               {data.intro}
             </p>
+            {data.bulletPoints && data.bulletPoints.length > 0 && (
+              <ul className="mb-8 flex flex-col gap-2">
+                {data.bulletPoints.map((point, i) => (
+                  <li key={i} className="flex items-start gap-3 text-[var(--color-brand-espresso)]">
+                    <span className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-[var(--color-brand-navy)] text-white flex items-center justify-center text-xs">✓</span>
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
             <div className="p-6 bg-[var(--color-brand-sky)]/30 border-2 border-[var(--color-brand-navy)] rounded-2xl">
               <h3 className="font-heading font-bold text-[var(--color-brand-navy)] mb-3">Who this is for</h3>
               <p className="text-[var(--color-brand-espresso)]">{data.whoItsFor}</p>

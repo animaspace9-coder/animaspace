@@ -1,10 +1,17 @@
 "use client";
 
 import React, { useRef, useLayoutEffect } from "react";
-import { approachBlock } from "@/app/data/content";
+import { approachBlock as defaultApproach } from "@/app/data/content";
 import { animateFadeUp } from "@/app/lib/gsap";
 
-export const ApproachBlock = () => {
+interface ApproachBlockProps {
+  headline?: string;
+  description?: string;
+}
+
+export const ApproachBlock = ({ headline, description }: ApproachBlockProps) => {
+  const resolvedHeadline = headline ?? defaultApproach.headline;
+  const resolvedDescription = description ?? defaultApproach.description;
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const textRef = useRef<HTMLParagraphElement>(null);
@@ -28,13 +35,13 @@ export const ApproachBlock = () => {
             ref={titleRef}
             className="font-heading text-4xl md:text-5xl font-bold text-[var(--color-brand-off-white)]"
           >
-            {approachBlock.headline}
+            {resolvedHeadline}
           </h2>
           <p 
             ref={textRef}
             className="text-[var(--color-brand-sky)] text-xl leading-relaxed"
           >
-            {approachBlock.description}
+            {resolvedDescription}
           </p>
         </div>
 

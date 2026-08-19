@@ -1,11 +1,23 @@
 "use client";
 
 import React, { useRef, useLayoutEffect } from "react";
-import { team } from "@/app/data/content";
+import { team as defaultTeam } from "@/app/data/content";
 import { Button } from "@/app/components/ui/Button";
 import gsap from "gsap";
 
-export const Team = () => {
+interface TeamMember {
+  name: string;
+  role: string;
+  bio: string;
+  experience?: string;
+  image?: string;
+  qualifications?: string[];
+  specialties?: string[];
+}
+interface TeamProps { member?: TeamMember }
+
+export const Team = ({ member }: TeamProps) => {
+  const expert = member ?? defaultTeam[0];
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -22,7 +34,6 @@ export const Team = () => {
     return () => ctx.revert();
   }, []);
 
-  const expert = team[0];
 
   return (
     <section ref={containerRef} className="py-20 md:py-28 px-6 bg-[var(--color-brand-sky)] overflow-hidden">

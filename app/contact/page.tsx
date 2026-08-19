@@ -1,21 +1,37 @@
 import type { Metadata } from "next";
+import { client } from "@/sanity/lib/client";
+import { contactPageQuery } from "@/sanity/lib/queries";
 import { Button } from "@/app/components/ui/Button";
 import { PageHero } from "@/app/components/sections/PageHero";
-import { contactInfo } from "@/app/data/content";
+import { contactInfo as defaultContactInfo } from "@/app/data/content";
 import { clinicDetails } from "@/app/data/booking";
 import { FAQ } from "@/app/components/sections/FAQ";
 
 export const metadata: Metadata = {
-  title: "Contact Us & Clinic Directions — Anima Space",
-  description: "Reach out to Prashanthi Simon at Anima Space in Jubilee Hills, Hyderabad. Child & adolescent psychology (ages 8–18), parent guidance, and clinic contact info.",
+  title: "Contact Us — Anima Space",
+  description: "Reach out to Prashanthi Simon at Anima Space. Book a consultation for psychological counselling, coaching, career guidance, and training.",
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const cms = await client
+    .fetch(contactPageQuery, {}, { next: { revalidate: 60 } })
+    .catch(() => null);
+
+  const contactInfo = {
+    phone: cms?.phone ?? defaultContactInfo.phone,
+    email: cms?.email ?? defaultContactInfo.email,
+    address: cms?.address ?? defaultContactInfo.address,
+    hours: cms?.hours ?? defaultContactInfo.hours,
+  };
+
+  const pageHeroTitle = cms?.pageHeroTitle ?? "Contact Us & Clinic Directions.";
+  const pageHeroSubtitle = cms?.pageHeroSubtitle ?? "Have questions or looking for guidance? Connect directly with Prashanthi Simon and the Anima Space team.";
+
   return (
     <>
       <PageHero
-        title="Contact Us & Clinic Directions."
-        subtitle="Have questions, need guidance, or looking for clinic directions? Connect directly with Prashanthi Simon and the Anima Space team in Jubilee Hills, Hyderabad."
+        title={pageHeroTitle}
+        subtitle={pageHeroSubtitle}
         colorClass="bg-[var(--color-brand-sky)]/30"
       />
 

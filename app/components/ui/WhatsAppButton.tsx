@@ -1,8 +1,14 @@
 "use client";
 
 import React from "react";
+import { usePathname } from "next/navigation";
 
 export const WhatsAppButton = () => {
+  const pathname = usePathname();
+
+  if (pathname?.startsWith("/studio")) {
+    return null;
+  }
   return (
     <a
       href="https://wa.me/919866410936?text=Hi%20Prashanthi%20Simon,%20I%20would%20like%20to%20inquire%20about%20a%20child%20psychology%20session."

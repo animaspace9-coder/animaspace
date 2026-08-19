@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import { client } from "@/sanity/lib/client";
+import { aboutPageQuery } from "@/sanity/lib/queries";
 import { PageHero } from "@/app/components/sections/PageHero";
 import { ApproachBlock } from "@/app/components/sections/ApproachBlock";
 import { Team } from "@/app/components/sections/Team";
 import { Button } from "@/app/components/ui/Button";
-import { approachBlock } from "@/app/data/content";
 
 export const metadata: Metadata = {
   title: "About Us — Anima Space",
@@ -11,39 +12,87 @@ export const metadata: Metadata = {
     "Learn about Anima Space, our mission, and the psychologist behind the practice — Prashanthi Simon.",
 };
 
-const coreValues = [
+const defaultCoreValues = [
   {
     icon: "🤍",
-    title: "Child-Centred",
-    description: "Every decision we make starts with what is best for the child in front of us.",
+    title: "Safe & Confidential",
+    description:
+      "Every session is held in a safe, confidential, compassionate, and non-judgemental space where you can speak freely.",
     colorClass: "bg-[var(--color-brand-sky)]",
   },
   {
-    icon: "🔬",
-    title: "Evidence-Based",
-    description: "We use approaches backed by robust clinical research — never trends or fads.",
+    icon: "🌱",
+    title: "Growth-Centred",
+    description:
+      "We believe every individual has the capacity for growth. Our goal is to help you recognise your strengths and unlock your potential.",
     colorClass: "bg-[var(--color-brand-pink)]",
   },
   {
-    icon: "🔒",
-    title: "Confidential & Safe",
-    description: "Every session is a safe space — nothing leaves our walls without your consent.",
+    icon: "🤝",
+    title: "Personalised Support",
+    description:
+      "We understand that every individual is unique. Our approach is tailored to your specific needs, goals, and life stage.",
     colorClass: "bg-[var(--color-brand-rose)]",
   },
   {
-    icon: "🤝",
-    title: "Family Partnership",
-    description: "We work with families, not just the child — because healing happens in relationship.",
+    icon: "💡",
+    title: "Purposeful Living",
+    description:
+      "We help individuals move from understanding themselves to living with greater clarity, confidence, and purpose.",
     colorClass: "bg-[var(--color-brand-mauve)]/20",
   },
 ];
 
-export default function AboutPage() {
+const colorClasses = [
+  "bg-[var(--color-brand-sky)]",
+  "bg-[var(--color-brand-pink)]",
+  "bg-[var(--color-brand-rose)]",
+  "bg-[var(--color-brand-mauve)]/20",
+];
+
+export default async function AboutPage() {
+  const cms = await client
+    .fetch(aboutPageQuery, {}, { next: { revalidate: 60 } })
+    .catch(() => null);
+
+  const coreValues =
+    cms?.coreValues && cms.coreValues.length > 0
+      ? cms.coreValues.map(
+          (v: { icon: string; title: string; description: string }, i: number) => ({
+            icon: v.icon,
+            title: v.title,
+            description: v.description,
+            colorClass: colorClasses[i % colorClasses.length],
+          })
+        )
+      : defaultCoreValues;
+
+  const storyParagraphs: string[] = cms?.storyParagraphs ?? [
+    "Prashanthi Simon founded Anima Space with the vision to create a safe space where psychological well-being, personal growth, and purposeful living come together.",
+    'Anima means life, and Space represents what we strive to create: a safe, confidential, compassionate, and non-judgemental space where you can speak freely, be heard, and feel understood.',
+    "It is built on the belief that every individual deserves to be heard, understood, supported, and empowered.",
+  ];
+
+  const teamMember = cms?.teamMember
+    ? {
+        name: cms.teamMember.name,
+        role: cms.teamMember.role,
+        bio: cms.teamMember.bio,
+        experience: cms.teamMember.experience,
+        image: cms.teamMember.imageUrl ?? "/prashanthi-simon.png",
+        qualifications: cms.teamMember.qualifications ?? [],
+        specialties: cms.teamMember.specialties ?? [],
+      }
+    : undefined;
+
   return (
     <>
       <PageHero
-        title="A space built on trust, warmth, and science."
-        subtitle="Anima Space was founded with one belief: every child deserves to be heard, understood, and helped — by someone who truly knows how."
+        title={cms?.pageHeroTitle ?? "Where Understanding Begins, Growth Unfolds."}
+        subtitle={
+          cms?.pageHeroSubtitle ??
+          "Anima Space was founded with the vision to create a safe space where psychological well-being, personal growth, and purposeful living come together."
+        }
         colorClass="bg-[var(--color-brand-sky)]"
       />
 
@@ -55,26 +104,20 @@ export default function AboutPage() {
               Our Story
             </span>
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-[var(--color-brand-navy)] mb-8 leading-tight">
-              Why Anima Space exists.
+              {cms?.storyHeadline ?? "The Vision Behind Anima Space"}
             </h2>
             <div className="flex flex-col gap-5 text-lg text-[var(--color-brand-espresso)] leading-relaxed">
-              <p>
-                Prashanthi Simon founded Anima Space after years of working in clinical settings and noticing a gap: families needed more than sporadic appointments — they needed a consistent, warm, expert presence in their corner.
-              </p>
-              <p>
-                Anima Space was built to be exactly that. A practice small enough to know every family by name, and skilled enough to meet the full range of challenges children face today.
-              </p>
-              <p>
-                The name says it all: <em>Anima</em> — the soul, the inner life. A space for that.
-              </p>
+              {storyParagraphs.map((para, i) => (
+                <p key={i}>{para}</p>
+              ))}
             </div>
           </div>
 
           {/* Illustration */}
           <div className="relative w-full aspect-[4/3] bg-[var(--color-brand-pink)] rounded-[2.5rem] overflow-hidden border-4 border-[var(--color-brand-navy)] shadow-[8px_8px_0px_0px_var(--color-brand-navy)] flex items-center justify-center p-2">
-            <img 
-              src="/serene-space.jpg" 
-              alt="Anima Space serene & supportive therapy environment" 
+            <img
+              src="/serene-space.jpg"
+              alt="Anima Space serene & supportive therapy environment"
               className="w-full h-full object-cover rounded-[2rem]"
             />
             <div className="absolute top-6 right-6 w-10 h-10 rounded-full bg-[var(--color-brand-sky)] border-2 border-[var(--color-brand-navy)] z-10" />
@@ -91,11 +134,11 @@ export default function AboutPage() {
               What guides us
             </span>
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-[var(--color-brand-navy)]">
-              Our core values.
+              {cms?.coreValuesSectionTitle ?? "Our core values."}
             </h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {coreValues.map((value) => (
+            {coreValues.map((value: { icon: string; title: string; description: string; colorClass: string }) => (
               <div
                 key={value.title}
                 className={`${value.colorClass} rounded-[2rem] border-4 border-[var(--color-brand-navy)] p-8 shadow-[4px_4px_0px_0px_var(--color-brand-navy)]`}
@@ -114,22 +157,26 @@ export default function AboutPage() {
       </section>
 
       {/* Team / Prashanthi */}
-      <Team />
+      <Team member={teamMember} />
 
       {/* Approach Block */}
-      <ApproachBlock />
+      <ApproachBlock
+        headline={cms?.visionHeadline}
+        description={cms?.visionParagraphs?.join(" ")}
+      />
 
       {/* CTA */}
       <section className="py-24 px-6 bg-[var(--color-brand-off-white)] text-center">
         <div className="max-w-2xl mx-auto">
           <h2 className="font-heading text-4xl md:text-5xl font-bold text-[var(--color-brand-navy)] mb-6">
-            Ready to take the first step?
+            {cms?.ctaHeading ?? "Ready to take the first step?"}
           </h2>
           <p className="text-xl text-[var(--color-brand-espresso)] mb-10">
-            An introductory consultation session with Prashanthi Simon. No pressure, no commitment.
+            {cms?.ctaBody ??
+              "Whether you are looking for counselling, coaching, career guidance, or training — we are here to help."}
           </p>
           <Button href="/book" variant="primary">
-            Book Session
+            {cms?.ctaButtonText ?? "Book a Consultation"}
           </Button>
         </div>
       </section>

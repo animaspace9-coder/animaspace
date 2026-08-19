@@ -7,6 +7,10 @@ import { PillNav } from "@/app/components/ui/PillNav";
 export const Navbar = () => {
   const pathname = usePathname();
 
+  if (pathname?.startsWith("/studio")) {
+    return null;
+  }
+
   const navItems = [
     { label: "Home", href: "/" },
     { label: "About Us", href: "/about" },

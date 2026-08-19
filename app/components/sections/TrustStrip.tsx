@@ -1,10 +1,14 @@
 "use client";
 
 import React, { useRef, useLayoutEffect } from "react";
-import { trustStats } from "@/app/data/content";
+import { trustStats as defaultStats } from "@/app/data/content";
 import { animateStaggerFadeUp } from "@/app/lib/gsap";
 
-export const TrustStrip = () => {
+interface Stat { value: string; label: string }
+interface TrustStripProps { stats?: Stat[] }
+
+export const TrustStrip = ({ stats }: TrustStripProps) => {
+  const resolvedStats = stats ?? defaultStats;
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useLayoutEffect(() => {
@@ -16,7 +20,7 @@ export const TrustStrip = () => {
     <section className="py-12 bg-[var(--color-brand-charcoal)] border-y-4 border-[var(--color-brand-navy)]">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y-2 md:divide-y-0 md:divide-x-2 divide-[var(--color-brand-navy)]">
-          {trustStats.map((stat, i) => (
+          {resolvedStats.map((stat, i) => (
             <div
               key={stat.label}
               ref={(el) => { itemRefs.current[i] = el; }}

@@ -124,10 +124,17 @@ const HeartDoodle = () => (
   </span>
 );
 
+import { usePathname } from "next/navigation";
+
 export const Footer = () => {
+  const pathname = usePathname();
   const footerRef = useRef<HTMLElement>(null);
   const wordmarkRef = useRef<HTMLDivElement>(null);
   const [currentYear, setCurrentYear] = React.useState<number>(() => new Date().getFullYear());
+
+  if (pathname?.startsWith("/studio")) {
+    return null;
+  }
 
   useLayoutEffect(() => {
     if (wordmarkRef.current) {

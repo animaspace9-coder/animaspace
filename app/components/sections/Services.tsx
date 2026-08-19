@@ -2,10 +2,22 @@
 
 import React, { useRef, useLayoutEffect } from "react";
 import Link from "next/link";
-import { services } from "@/app/data/content";
+import { services as defaultServices } from "@/app/data/content";
 import { animateFadeUp, animateStaggerFadeUp } from "@/app/lib/gsap";
 
-export const Services = () => {
+interface ServiceItem {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  href: string;
+  colorClass: string;
+  bulletPoints?: string[];
+}
+interface ServicesProps { services?: ServiceItem[] }
+
+export const Services = ({ services }: ServicesProps) => {
+  const resolvedServices = services ?? defaultServices;
   const headerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -28,7 +40,7 @@ export const Services = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((service, i) => (
+          {resolvedServices.map((service, i) => (
             <div
               key={service.id}
               ref={(el) => { cardRefs.current[i] = el; }}

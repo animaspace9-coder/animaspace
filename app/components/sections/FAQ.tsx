@@ -1,10 +1,14 @@
 "use client";
 
 import React, { useState, useRef, useLayoutEffect } from "react";
-import { faqs } from "@/app/data/content";
+import { faqs as defaultFaqs } from "@/app/data/content";
 import { animateFadeUp, animateStaggerFadeUp } from "@/app/lib/gsap";
 
-export const FAQ = () => {
+interface FaqItem { question: string; answer: string }
+interface FAQProps { faqs?: FaqItem[] }
+
+export const FAQ = ({ faqs }: FAQProps) => {
+  const resolvedFaqs = faqs ?? defaultFaqs;
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const headerRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -29,7 +33,7 @@ export const FAQ = () => {
         </div>
 
         <div className="flex flex-col border-t border-[var(--color-brand-charcoal)]/20">
-          {faqs.map((faq, i) => {
+          {resolvedFaqs.map((faq, i) => {
             const isOpen = openIndex === i;
             return (
               <div 

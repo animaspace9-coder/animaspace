@@ -6,7 +6,20 @@ import { Button } from "@/app/components/ui/Button";
 import gsap from "gsap";
 import { Check, ShieldCheck, ArrowDownRight } from "lucide-react";
 
-export const Hero = () => {
+interface HeroData {
+  headline?: string;
+  subHeadline?: string;
+  badgeText?: string;
+  ctaText?: string;
+  heroCardItems?: string[];
+}
+
+export const Hero = ({ data }: { data?: HeroData }) => {
+  const headline = data?.headline ?? heroContent.headline;
+  const subHeadline = data?.subHeadline ?? heroContent.subHeadline;
+  const badgeText = data?.badgeText ?? heroContent.badgeText;
+  const ctaText = data?.ctaText ?? heroContent.ctaText;
+  const heroCardItems = data?.heroCardItems ?? heroContent.heroCardItems;
   const containerRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -49,27 +62,27 @@ export const Hero = () => {
             className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-gray-200/90 shadow-sm text-xs sm:text-sm font-semibold text-[var(--color-brand-olive)]"
           >
             <ShieldCheck className="w-4 h-4 text-[var(--color-brand-olive)]" />
-            <span>Convenient, proven care for a brighter future</span>
+            <span>{badgeText}</span>
           </div>
 
           <h1
             ref={titleRef}
             className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[var(--color-brand-navy)] leading-[1.1] tracking-tight"
           >
-            Your Partner in Child Counseling &amp; Parenting Support
+            {headline}
           </h1>
 
           <p
             ref={textRef}
             className="text-lg md:text-xl text-[var(--color-brand-espresso)] leading-relaxed max-w-2xl"
           >
-            Connect with a trusted child &amp; adolescent psychologist for gentle counselling tailored for ages 8–18 and parent guidance.
+            {subHeadline}
           </p>
 
           {/* Call to Action Buttons */}
           <div ref={btnRef} className="pt-2 flex flex-wrap items-center gap-4">
             <Button href="/book" variant="primary">
-              {heroContent.ctaText}
+              {ctaText}
             </Button>
             <a
               href="#how-it-works"
@@ -113,24 +126,14 @@ export const Hero = () => {
               We take care of
             </p>
             <ul className="space-y-1.5 text-xs sm:text-sm font-bold text-[var(--color-brand-navy)] mb-3">
-              <li className="flex items-center gap-2">
-                <span className="w-4 h-4 rounded-full bg-[var(--color-brand-sky)]/60 text-[var(--color-brand-olive)] flex items-center justify-center flex-shrink-0">
-                  <Check className="w-3 h-3 stroke-[3]" />
-                </span>
-                <span>Big Emotions</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-4 h-4 rounded-full bg-[var(--color-brand-sky)]/60 text-[var(--color-brand-olive)] flex items-center justify-center flex-shrink-0">
-                  <Check className="w-3 h-3 stroke-[3]" />
-                </span>
-                <span>Knowing Your Child</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-4 h-4 rounded-full bg-[var(--color-brand-sky)]/60 text-[var(--color-brand-olive)] flex items-center justify-center flex-shrink-0">
-                  <Check className="w-3 h-3 stroke-[3]" />
-                </span>
-                <span>Being a Better Parent</span>
-              </li>
+              {heroCardItems.map((item, i) => (
+                <li key={i} className="flex items-center gap-2">
+                  <span className="w-4 h-4 rounded-full bg-[var(--color-brand-sky)]/60 text-[var(--color-brand-olive)] flex items-center justify-center flex-shrink-0">
+                    <Check className="w-3 h-3 stroke-[3]" />
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))}
             </ul>
 
             {/* Therapist Avatar Row */}
