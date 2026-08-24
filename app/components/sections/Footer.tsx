@@ -249,20 +249,20 @@ export const Footer = () => {
                   </Link>
                 </li>
                 <li>
-                  <a
-                    href="#legal"
+                  <Link
+                    href="/privacy"
                     className="hover:text-[var(--color-brand-mauve)] transition-colors"
                   >
-                    Legal Info
-                  </a>
+                    Privacy Policy
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="#disclaimer"
+                  <Link
+                    href="/disclaimer"
                     className="hover:text-[var(--color-brand-mauve)] transition-colors"
                   >
                     Disclaimer
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -320,13 +320,13 @@ export const Footer = () => {
 
         {/* Right: Legal links */}
         <div className="flex gap-4 items-center justify-center md:justify-end w-full">
-          <a href="#privacy" className="hover:text-[var(--color-brand-navy)] transition-colors">
+          <Link href="/privacy" className="hover:text-[var(--color-brand-navy)] transition-colors">
             Privacy Policy
-          </a>
+          </Link>
           <span className="opacity-30">•</span>
-          <a href="#disclaimer" className="hover:text-[var(--color-brand-navy)] transition-colors">
+          <Link href="/disclaimer" className="hover:text-[var(--color-brand-navy)] transition-colors">
             Disclaimer
-          </a>
+          </Link>
         </div>
       </div>
     </footer>

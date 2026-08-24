@@ -9,6 +9,7 @@
  * tsx auto-loads .env.local — no need for dotenv.
  */
 
+import 'dotenv/config'
 import { createClient } from '@sanity/client'
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
