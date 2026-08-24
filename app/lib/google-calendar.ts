@@ -24,7 +24,7 @@ export function generateGoogleCalendarUrl(details: MeetingDetails): string {
 
   const locationText = details.isOnline 
     ? "Google Meet Video Call" 
-    : (details.location || "Anima Space Child Psychology Center, Jubilee Hills, Hyderabad");
+    : (details.location || "Anima Space, Hyderabad (By Appointment)");
 
   const params = new URLSearchParams({
     action: "TEMPLATE",

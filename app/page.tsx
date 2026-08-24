@@ -3,21 +3,18 @@ import { client } from "@/sanity/lib/client";
 import { homePageQuery, siteSettingsQuery } from "@/sanity/lib/queries";
 import { Hero } from "@/app/components/sections/Hero";
 import { TrustStrip } from "@/app/components/sections/TrustStrip";
-import { Services } from "@/app/components/sections/Services";
-import { HowItWorks } from "@/app/components/sections/HowItWorks";
-import { ApproachBlock } from "@/app/components/sections/ApproachBlock";
 import { Team } from "@/app/components/sections/Team";
-import { Testimonials } from "@/app/components/sections/Testimonials";
-import { FAQ } from "@/app/components/sections/FAQ";
+import { ApproachBlock } from "@/app/components/sections/ApproachBlock";
+import { AgeGroups } from "@/app/components/sections/AgeGroups";
+import { Services } from "@/app/components/sections/Services";
+import { SpaceToGrow } from "@/app/components/sections/SpaceToGrow";
 import {
   heroContent,
   trustStats,
   services,
-  ageGroups,
-  approachBlock,
   team,
-  testimonials,
-  faqs,
+  visionBlock,
+  approachBlock,
 } from "@/app/data/content";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -33,12 +30,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  // Fetch from Sanity; fall back to static content.ts if unavailable
   const cms = await client
     .fetch(homePageQuery, {}, { next: { revalidate: 60 } })
     .catch(() => null);
 
-  // Merge CMS data with fallbacks
   const heroData = {
     headline: cms?.heroHeadline ?? heroContent.headline,
     subHeadline: cms?.heroSubHeadline ?? heroContent.subHeadline,
@@ -49,61 +44,30 @@ export default async function Home() {
 
   const statsData = cms?.trustStats ?? trustStats;
 
-  const offeringsData = cms?.offerings
-    ? cms.offerings.map((o: { title: string; description: string; icon: string; slug: string; colorKey: string; bulletPoints: string[] }) => ({
-        id: o.slug,
-        title: o.title,
-        description: o.description,
-        icon: o.icon,
-        href: `/services/${o.slug}`,
-        colorKey: o.colorKey,
-        bulletPoints: o.bulletPoints ?? [],
-        // map colorKey to Tailwind class
-        colorClass: colorKeyToClass(o.colorKey),
-      }))
-    : services;
-
-  const approachData = {
-    headline: cms?.approachHeadline ?? approachBlock.headline,
-    description: cms?.approachDescription ?? approachBlock.description,
-  };
-
   const teamData = cms?.teamMember
     ? {
         name: cms.teamMember.name,
         role: cms.teamMember.role,
         bio: cms.teamMember.bio,
-        experience: cms.teamMember.experience,
         image: cms.teamMember.imageUrl ?? team[0].image,
-        qualifications: cms.teamMember.qualifications ?? [],
-        specialties: cms.teamMember.specialties ?? [],
+        qualifications: cms.teamMember.qualifications ?? team[0].qualifications,
       }
     : team[0];
 
-  const testimonialsData = cms?.testimonials ?? testimonials;
-  const faqsData = cms?.faqs ?? faqs;
+  const visionData = {
+    headline: cms?.approachHeadline ?? visionBlock.headline,
+    description: cms?.approachDescription ?? approachBlock.description,
+  };
 
   return (
     <>
       <Hero data={heroData} />
       <TrustStrip stats={statsData} />
-      <Services services={offeringsData} />
-      <HowItWorks />
-      <ApproachBlock headline={approachData.headline} description={approachData.description} />
       <Team member={teamData} />
-      <Testimonials testimonials={testimonialsData} />
-      <FAQ faqs={faqsData} />
+      <ApproachBlock headline={visionData.headline} description={visionData.description} />
+      <AgeGroups />
+      <Services services={services} />
+      <SpaceToGrow />
     </>
   );
-}
-
-function colorKeyToClass(key: string): string {
-  const map: Record<string, string> = {
-    sky: "bg-[var(--color-brand-sky)]",
-    pink: "bg-[var(--color-brand-pink)]",
-    rose: "bg-[var(--color-brand-rose)]",
-    mauve: "bg-[var(--color-brand-mauve)]/20",
-    olive: "bg-[var(--color-brand-sky)]/30",
-  };
-  return map[key] ?? "bg-[var(--color-brand-sky)]";
 }

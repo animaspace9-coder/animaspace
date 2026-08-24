@@ -29,7 +29,6 @@ export const Hero = ({ data }: { data?: HeroData }) => {
   const overlayCardRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    // Smooth entry on mount without ScrollTrigger delay for Hero elements
     const ctx = gsap.context(() => {
       gsap.fromTo(
         [
@@ -85,10 +84,10 @@ export const Hero = ({ data }: { data?: HeroData }) => {
               {ctaText}
             </Button>
             <a
-              href="#how-it-works"
+              href="#about-prashanthi"
               className="inline-flex items-center gap-1.5 text-sm sm:text-base font-bold text-[var(--color-brand-navy)] hover:text-[var(--color-brand-mauve)] transition-colors group"
             >
-              <span>How does it work?</span>
+              <span>Meet Prashanthi Simon</span>
               <ArrowDownRight className="w-4 h-4 text-[var(--color-brand-olive)] group-hover:translate-x-0.5 group-hover:translate-y-0.5 transition-transform" />
             </a>
           </div>
@@ -114,7 +113,7 @@ export const Hero = ({ data }: { data?: HeroData }) => {
             </video>
 
             {/* Accent Shapes */}
-            <div className="absolute top-5 right-5 md:top-6 md:right-6 w-7 h-7 md:w-8 md:h-8 rounded-full bg-[var(--color-brand-pink)] border-2 border-[var(--color-brand-navy)] z-10 pointer-events-none shadow-sm"></div>
+            <div className="absolute top-5 right-5 md:top-6 md:right-6 w-7 h-7 md:w-8 md:h-8 rounded-full bg-[var(--color-brand-pink)] border-2 border-[var(--color-brand-navy)] z-10 pointer-events-none shadow-sm" />
           </div>
 
           {/* Floating Overlay Card */}
@@ -123,9 +122,9 @@ export const Hero = ({ data }: { data?: HeroData }) => {
             className="absolute -bottom-6 -left-2 sm:-left-6 bg-white p-4 sm:p-5 rounded-2xl border-2 border-[var(--color-brand-navy)] shadow-[5px_5px_0px_0px_var(--color-brand-navy)] z-20 max-w-[270px] sm:max-w-[300px]"
           >
             <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-brand-mauve)] mb-2">
-              We take care of
+              What We Can Help With
             </p>
-            <ul className="space-y-1.5 text-xs sm:text-sm font-bold text-[var(--color-brand-navy)] mb-3">
+            <ul className="space-y-1.5 text-xs sm:text-sm font-bold text-[var(--color-brand-navy)]">
               {heroCardItems.map((item, i) => (
                 <li key={i} className="flex items-center gap-2">
                   <span className="w-4 h-4 rounded-full bg-[var(--color-brand-sky)]/60 text-[var(--color-brand-olive)] flex items-center justify-center flex-shrink-0">
@@ -135,33 +134,6 @@ export const Hero = ({ data }: { data?: HeroData }) => {
                 </li>
               ))}
             </ul>
-
-            {/* Therapist Avatar Row */}
-            <div className="flex items-center gap-2 pt-1 border-t border-gray-100">
-              <div className="flex -space-x-2">
-                <img
-                  src="https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-1.png?width=32&height=32&format=auto"
-                  alt="Specialist"
-                  className="w-7 h-7 rounded-full border-2 border-white object-cover"
-                />
-                <img
-                  src="https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-2.png?width=32&height=32&format=auto"
-                  alt="Specialist"
-                  className="w-7 h-7 rounded-full border-2 border-white object-cover"
-                />
-                <img
-                  src="https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-3.png?width=32&height=32&format=auto"
-                  alt="Specialist"
-                  className="w-7 h-7 rounded-full border-2 border-white object-cover"
-                />
-                <div className="w-7 h-7 rounded-full bg-[var(--color-brand-navy)] text-white font-bold text-xs flex items-center justify-center border-2 border-white">
-                  +
-                </div>
-              </div>
-              <span className="text-[11px] font-semibold text-gray-500">
-                Registered Specialists
-              </span>
-            </div>
           </div>
         </div>
       </div>

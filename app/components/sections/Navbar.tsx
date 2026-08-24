@@ -21,7 +21,7 @@ export const Navbar = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-[var(--color-brand-off-white)]/95 backdrop-blur-md border-b border-[var(--color-brand-charcoal)]/10">
+    <header className="sticky top-0 z-40 w-full bg-[var(--color-brand-off-white)]/95 backdrop-blur-md border-b border-[var(--color-brand-charcoal)]/10">
       <PillNav
         logo="/logo.svg"
         logoAlt="Anima Space — Heal | Grow | Explore"

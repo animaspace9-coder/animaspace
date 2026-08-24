@@ -2,84 +2,129 @@
 
 import React, { useRef, useLayoutEffect } from "react";
 import Link from "next/link";
-import { services as defaultServices } from "@/app/data/content";
-import { animateFadeUp, animateStaggerFadeUp } from "@/app/lib/gsap";
+import { services as defaultServices, whatWeCanHelpWith } from "@/app/data/content";
+import { animateStaggerFadeUp } from "@/app/lib/gsap";
+import { Check } from "lucide-react";
 
 interface ServiceItem {
   id: string;
   title: string;
+  shortTitle?: string;
+  tagline?: string;
+  homeSummary?: string;
   description: string;
+  colorClass: string;
   icon: string;
   href: string;
-  colorClass: string;
   bulletPoints?: string[];
+  closingText?: string;
 }
-interface ServicesProps { services?: ServiceItem[] }
 
-export const Services = ({ services }: ServicesProps) => {
-  const resolvedServices = services ?? defaultServices;
-  const headerRef = useRef<HTMLDivElement>(null);
+export const Services = ({ services }: { services?: ServiceItem[] }) => {
+  const items = services ?? defaultServices;
+  const containerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useLayoutEffect(() => {
-    animateFadeUp(headerRef.current);
-    const validRefs = cardRefs.current.filter((r): r is HTMLDivElement => r !== null);
-    animateStaggerFadeUp(validRefs, 0.2);
+    const validCards = cardRefs.current.filter((c): c is HTMLDivElement => c !== null);
+    animateStaggerFadeUp(validCards, 0.15);
   }, []);
 
   return (
-    <section id="services" className="py-24 px-6 bg-white">
-      <div className="max-w-7xl mx-auto">
-        <div ref={headerRef} className="text-center mb-16">
-          <h2 className="font-heading text-4xl md:text-5xl font-bold text-[var(--color-brand-navy)] mb-6">
-            Our Services
-          </h2>
-          <p className="text-xl text-[var(--color-brand-espresso)] max-w-2xl mx-auto">
-            Comprehensive psychological support using evidence-based approaches tailored for your child&apos;s unique needs.
-          </p>
+    <section id="services" className="py-20 md:py-28 px-6 bg-[var(--color-brand-off-white)]">
+      <div className="max-w-7xl mx-auto" ref={containerRef}>
+        
+        {/* What We Can Help With Banner */}
+        <div className="bg-white rounded-[2.5rem] border-3 border-[var(--color-brand-navy)] p-8 sm:p-12 mb-20 shadow-[6px_6px_0px_0px_var(--color-brand-navy)]">
+          <div className="max-w-4xl mx-auto text-center">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-[var(--color-brand-mauve)] mb-3">
+              Areas of Focus
+            </span>
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-[var(--color-brand-navy)] mb-8">
+              {whatWeCanHelpWith.headline}
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-left">
+              {whatWeCanHelpWith.items.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-center gap-3 p-3.5 bg-[var(--color-brand-sky)]/30 rounded-2xl border border-[var(--color-brand-navy)]/20"
+                >
+                  <span className="w-6 h-6 rounded-full bg-[var(--color-brand-navy)] text-white flex items-center justify-center flex-shrink-0 text-xs font-bold">
+                    ✓
+                  </span>
+                  <span className="font-semibold text-sm sm:text-base text-[var(--color-brand-navy)]">
+                    {item}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {resolvedServices.map((service, i) => (
+        {/* Section Title */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <span className="inline-block text-xs font-bold uppercase tracking-widest text-[var(--color-brand-mauve)] mb-3">
+            Our Services
+          </span>
+          <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--color-brand-navy)]">
+            Professional Guidance &amp; Support
+          </h2>
+        </div>
+
+        {/* Services Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {items.map((service, index) => (
             <div
               key={service.id}
-              ref={(el) => { cardRefs.current[i] = el; }}
-              className="h-full"
+              ref={(el) => {
+                cardRefs.current[index] = el;
+              }}
+              className={`${service.colorClass} rounded-[2.5rem] border-3 border-[var(--color-brand-navy)] p-8 sm:p-10 shadow-[6px_6px_0px_0px_var(--color-brand-navy)] flex flex-col justify-between hover:-translate-y-1 transition-transform duration-300`}
             >
-              <Link
-                href={service.href}
-                className={`group flex flex-col h-full ${service.colorClass} rounded-[2rem] border-4 border-[var(--color-brand-navy)] p-8 shadow-[4px_4px_0px_0px_var(--color-brand-navy)] transition-all duration-300 hover:shadow-[8px_8px_0px_0px_var(--color-brand-navy)] hover:-translate-y-1`}
-              >
-                <span className="text-4xl mb-5 block">{service.icon}</span>
-                <h3 className="font-heading text-xl font-bold text-[var(--color-brand-navy)] mb-3">
+              <div>
+                <span className="text-5xl mb-6 block">{service.icon}</span>
+                <h3 className="font-heading text-2xl sm:text-3xl font-bold text-[var(--color-brand-navy)] mb-2">
                   {service.title}
                 </h3>
-                <p className="text-[var(--color-brand-espresso)] text-sm leading-relaxed flex-grow">
-                  {service.description}
+                {service.tagline && (
+                  <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[var(--color-brand-mauve)] mb-4">
+                    {service.tagline}
+                  </p>
+                )}
+                <p className="text-base text-[var(--color-brand-espresso)] leading-relaxed mb-6">
+                  {service.homeSummary ?? service.description}
                 </p>
-                <span className="mt-6 inline-flex items-center gap-2 text-[var(--color-brand-navy)] font-bold text-xs uppercase tracking-widest group-hover:gap-4 transition-all duration-200">
-                  Learn more
-                  <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </span>
-              </Link>
+
+                {service.bulletPoints && service.bulletPoints.length > 0 && (
+                  <ul className="space-y-2 mb-6 pt-4 border-t border-[var(--color-brand-navy)]/10 text-xs sm:text-sm font-medium text-[var(--color-brand-espresso)]">
+                    {service.bulletPoints.slice(0, 4).map((pt, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-[var(--color-brand-navy)] shrink-0 mt-0.5" />
+                        <span>{pt}</span>
+                      </li>
+                    ))}
+                    {service.bulletPoints.length > 4 && (
+                      <li className="text-xs font-bold text-[var(--color-brand-navy)]/70">
+                        + more areas
+                      </li>
+                    )}
+                  </ul>
+                )}
+              </div>
+
+              <div className="pt-4 border-t border-[var(--color-brand-navy)]/10">
+                <Link
+                  href={service.href}
+                  className="inline-flex items-center gap-2 font-bold text-sm text-[var(--color-brand-navy)] hover:text-[var(--color-brand-mauve)] transition-colors group"
+                >
+                  <span>Learn more about {service.shortTitle ?? service.title}</span>
+                  <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
+                </Link>
+              </div>
             </div>
           ))}
         </div>
 
-        {/* Link to full services page */}
-        <div className="text-center mt-14">
-          <Link
-            href="/services"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-[var(--color-brand-navy)] text-[var(--color-brand-navy)] font-semibold hover:bg-[var(--color-brand-navy)] hover:text-white transition-colors"
-          >
-            View all services
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </Link>
-        </div>
       </div>
     </section>
   );

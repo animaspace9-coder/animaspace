@@ -21,7 +21,7 @@ export default function BlogPage() {
       <section className="py-24 px-6 bg-[var(--color-brand-off-white)]">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post) => (
+            {blogPosts.map((post: { id: string; title: string; excerpt: string; date: string; readTime: string; category: string; colorClass: string }) => (
               <article
                 key={post.id}
                 className="group flex flex-col bg-white rounded-[2rem] border-4 border-[var(--color-brand-navy)] shadow-[4px_4px_0px_0px_var(--color-brand-navy)] overflow-hidden hover:shadow-[8px_8px_0px_0px_var(--color-brand-navy)] hover:-translate-y-1 transition-all duration-300"

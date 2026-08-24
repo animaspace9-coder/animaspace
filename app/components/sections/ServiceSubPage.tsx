@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState, useRef, useLayoutEffect } from "react";
+import React, { useRef, useLayoutEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/app/components/ui/Button";
 import { serviceSubNav } from "@/app/data/content";
-import { animateFadeUp, animateStaggerFadeUp } from "@/app/lib/gsap";
+import { animateFadeUp } from "@/app/lib/gsap";
+import { Check } from "lucide-react";
 
 interface ServicePageData {
   slug: string;
@@ -15,170 +16,119 @@ interface ServicePageData {
   icon: string;
   intro: string;
   bulletPoints?: string[];
-  whatToExpect: string[];
-  whoItsFor: string;
-  faqs: { question: string; answer: string }[];
+  whoItsFor?: string;
 }
 
 export const ServiceSubPage = ({ data }: { data: ServicePageData }) => {
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const stepRefs = useRef<(HTMLLIElement | null)[]>([]);
 
   useLayoutEffect(() => {
     animateFadeUp(titleRef.current, 0.05);
     animateFadeUp(contentRef.current, 0.15);
-    const validRefs = stepRefs.current.filter((r): r is HTMLLIElement => r !== null);
-    animateStaggerFadeUp(validRefs, 0.12);
   }, []);
 
   return (
     <>
       {/* Hero Banner */}
-      <section className={`${data.colorClass} pt-16 pb-24 px-6`}>
+      <section className={`${data.colorClass} pt-16 pb-24 px-6 border-b border-[var(--color-brand-navy)]/10`}>
         <div className="max-w-4xl mx-auto">
-          <div className="flex flex-wrap gap-3 mb-8">
+          {/* Breadcrumb Nav */}
+          <div className="flex flex-wrap items-center gap-3 mb-8 text-xs sm:text-sm font-semibold">
             <Link
               href="/services"
-              className="text-sm font-semibold text-[var(--color-brand-navy)]/60 hover:text-[var(--color-brand-navy)] transition-colors"
+              className="text-[var(--color-brand-navy)]/70 hover:text-[var(--color-brand-navy)] transition-colors"
             >
-              ← All Services
+              &larr; Our Services
             </Link>
             <span className="text-[var(--color-brand-navy)]/30">/</span>
             {serviceSubNav.map((s) => (
               <Link
                 key={s.href}
                 href={s.href}
-                className={`text-sm font-semibold transition-colors ${
+                className={`transition-colors px-2.5 py-1 rounded-full ${
                   s.href === `/services/${data.slug}`
-                    ? "text-[var(--color-brand-navy)]"
-                    : "text-[var(--color-brand-navy)]/50 hover:text-[var(--color-brand-navy)]"
+                    ? "bg-white/80 text-[var(--color-brand-navy)] font-bold shadow-xs"
+                    : "text-[var(--color-brand-navy)]/60 hover:text-[var(--color-brand-navy)]"
                 }`}
               >
                 {s.name}
               </Link>
             ))}
           </div>
+
           <span className="text-5xl mb-6 block">{data.icon}</span>
           <h1
             ref={titleRef}
-            className="font-heading text-5xl md:text-6xl lg:text-7xl font-bold text-[var(--color-brand-navy)] leading-[1.05] tracking-tight mb-4"
+            className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[var(--color-brand-navy)] leading-[1.05] tracking-tight mb-4"
           >
             {data.title}
           </h1>
-          <p className="font-heading text-2xl md:text-3xl text-[var(--color-brand-navy)]/70 font-medium italic">
-            &ldquo;{data.tagline}&rdquo;
-          </p>
+          {data.tagline && (
+            <p className="font-heading text-xl sm:text-2xl text-[var(--color-brand-navy)]/80 font-medium">
+              {data.tagline}
+            </p>
+          )}
         </div>
       </section>
 
-      {/* Intro + What to Expect */}
-      <section className="py-24 px-6 bg-[var(--color-brand-off-white)]">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
-          {/* Intro */}
-          <div ref={contentRef}>
-            <span className="inline-block text-sm font-bold uppercase tracking-widest text-[var(--color-brand-mauve)] mb-6">
-              About this service
+      {/* Intro + Bullet Points Focus Areas */}
+      <section className="py-20 md:py-28 px-6 bg-[var(--color-brand-off-white)]">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          
+          {/* Left / Main Intro */}
+          <div ref={contentRef} className="lg:col-span-7 flex flex-col gap-6">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-[var(--color-brand-mauve)]">
+              About This Pathway
             </span>
-            <p className="text-xl text-[var(--color-brand-espresso)] leading-relaxed mb-6">
+            <p className="text-lg sm:text-xl text-[var(--color-brand-espresso)] leading-relaxed">
               {data.intro}
             </p>
-            {data.bulletPoints && data.bulletPoints.length > 0 && (
-              <ul className="mb-8 flex flex-col gap-2">
+            {data.whoItsFor && (
+              <div className="p-6 bg-white rounded-2xl border-2 border-[var(--color-brand-navy)] shadow-sm">
+                <h3 className="font-heading font-bold text-sm text-[var(--color-brand-navy)] mb-2 uppercase tracking-wide">
+                  Who It&apos;s For
+                </h3>
+                <p className="text-sm text-[var(--color-brand-espresso)] leading-relaxed">
+                  {data.whoItsFor}
+                </p>
+              </div>
+            )}
+          </div>
+
+          {/* Right Column: Key Areas of Support */}
+          {data.bulletPoints && data.bulletPoints.length > 0 && (
+            <div className="lg:col-span-5 bg-white p-6 sm:p-8 rounded-[2rem] border-3 border-[var(--color-brand-navy)] shadow-[6px_6px_0px_0px_var(--color-brand-navy)]">
+              <span className="text-xs font-bold uppercase tracking-widest text-[var(--color-brand-mauve)] block mb-4">
+                What We Address
+              </span>
+              <ul className="space-y-3">
                 {data.bulletPoints.map((point, i) => (
-                  <li key={i} className="flex items-start gap-3 text-[var(--color-brand-espresso)]">
-                    <span className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-[var(--color-brand-navy)] text-white flex items-center justify-center text-xs">✓</span>
+                  <li key={i} className="flex items-start gap-3 text-sm sm:text-base font-medium text-[var(--color-brand-navy)]">
+                    <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-[var(--color-brand-sky)] border border-[var(--color-brand-navy)] text-[var(--color-brand-navy)] flex items-center justify-center text-xs font-bold">
+                      <Check className="w-3.5 h-3.5" />
+                    </span>
                     <span>{point}</span>
                   </li>
                 ))}
               </ul>
-            )}
-            <div className="p-6 bg-[var(--color-brand-sky)]/30 border-2 border-[var(--color-brand-navy)] rounded-2xl">
-              <h3 className="font-heading font-bold text-[var(--color-brand-navy)] mb-3">Who this is for</h3>
-              <p className="text-[var(--color-brand-espresso)]">{data.whoItsFor}</p>
             </div>
-          </div>
+          )}
 
-          {/* What to Expect */}
-          <div>
-            <span className="inline-block text-sm font-bold uppercase tracking-widest text-[var(--color-brand-mauve)] mb-6">
-              What to expect
-            </span>
-            <ol className="flex flex-col gap-4">
-              {data.whatToExpect.map((step, i) => (
-                <li
-                  key={i}
-                  ref={(el) => { stepRefs.current[i] = el; }}
-                  className="flex gap-4 items-start"
-                >
-                  <span className="flex-shrink-0 w-9 h-9 rounded-full bg-[var(--color-brand-navy)] text-white font-bold flex items-center justify-center text-sm">
-                    {i + 1}
-                  </span>
-                  <p className="text-[var(--color-brand-espresso)] leading-relaxed pt-1">{step}</p>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQs */}
-      <section className="py-24 px-6 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-14">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-[var(--color-brand-navy)]">
-              Common questions
-            </h2>
-          </div>
-          <div className="flex flex-col border-t border-[var(--color-brand-charcoal)]/20">
-            {data.faqs.map((faq, i) => {
-              const isOpen = openFaq === i;
-              return (
-                <div
-                  key={i}
-                  className="border-b border-[var(--color-brand-charcoal)]/20 py-6"
-                >
-                  <button
-                    onClick={() => setOpenFaq(isOpen ? null : i)}
-                    className="w-full flex items-center justify-between text-left focus:outline-none"
-                  >
-                    <h3 className="font-heading text-xl font-bold text-[var(--color-brand-navy)] pr-8">
-                      {faq.question}
-                    </h3>
-                    <div
-                      className={`flex-shrink-0 w-8 h-8 rounded-full border-2 border-[var(--color-brand-navy)] flex items-center justify-center transition-colors ${
-                        isOpen ? "bg-[var(--color-brand-navy)] text-white" : "text-[var(--color-brand-navy)]"
-                      }`}
-                    >
-                      <span className="text-xl leading-none">{isOpen ? "−" : "+"}</span>
-                    </div>
-                  </button>
-                  <div
-                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                      isOpen ? "max-h-48 mt-4" : "max-h-0"
-                    }`}
-                  >
-                    <p className="text-[var(--color-brand-espresso)] pr-12">{faq.answer}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
         </div>
       </section>
 
       {/* CTA Strip */}
-      <section className="py-20 px-6 bg-[var(--color-brand-mauve)]">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-6">
-            Ready to get started with {data.title}?
+      <section className="py-20 px-6 bg-[var(--color-brand-navy)] text-white text-center">
+        <div className="max-w-3xl mx-auto flex flex-col items-center">
+          <h2 className="font-heading text-3xl sm:text-4xl font-bold mb-4">
+            Book a Consultation to explore our services
           </h2>
-          <p className="text-white/80 text-xl mb-10">
-            Book an introductory consultation session — Prashanthi Simon will make sure this is the right fit for your child.
+          <p className="text-base sm:text-lg text-[var(--color-brand-sky)] mb-8 max-w-2xl">
+            Whether you are looking for counselling, coaching, healing, career guidance, or training, Anima Space offers a safe space to understand where you are and develop the tools to move forward.
           </p>
-          <Button href="/book" variant="outline">
-            Book Session
+          <Button href="/book" variant="outline" className="text-white border-white hover:bg-white hover:text-[var(--color-brand-navy)]">
+            Book a Consultation
           </Button>
         </div>
       </section>

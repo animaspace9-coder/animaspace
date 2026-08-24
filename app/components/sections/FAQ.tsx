@@ -33,7 +33,7 @@ export const FAQ = ({ faqs }: FAQProps) => {
         </div>
 
         <div className="flex flex-col border-t border-[var(--color-brand-charcoal)]/20">
-          {resolvedFaqs.map((faq, i) => {
+          {resolvedFaqs.map((faq: FaqItem, i: number) => {
             const isOpen = openIndex === i;
             return (
               <div 

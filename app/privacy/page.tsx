@@ -16,7 +16,7 @@ export default function PrivacyPolicyPage() {
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--color-brand-sky)]/15 text-[var(--color-brand-navy)] text-xs font-bold tracking-wide uppercase mb-4">
             <ShieldCheck className="w-4 h-4 text-[var(--color-brand-navy)]" />
-            Legal & Data Protection
+            Legal &amp; Data Protection
           </div>
           <h1 className="font-heading text-4xl sm:text-5xl font-black text-[var(--color-brand-navy)] tracking-tight">
             Privacy Policy
@@ -45,12 +45,12 @@ export default function PrivacyPolicyPage() {
               1. Who We Are
             </h2>
             <p className="text-[var(--color-brand-espresso)]/85 mb-4">
-              This Privacy Policy explains how <strong>Anima Space</strong>, founded by <strong>Prashanthi Simon</strong>, collects, uses, stores, discloses, and protects personal data when you visit our website (<Link href="/" className="text-[var(--color-brand-navy)] font-semibold underline underline-offset-2">animaspace.vercel.app</Link>), submit an enquiry or booking request, communicate via phone, email, or WhatsApp, or participate in online or in-clinic psychological and coaching services.
+              This Privacy Policy explains how <strong>Anima Space</strong>, founded by <strong>Prashanthi Simon</strong>, collects, uses, stores, discloses, and protects personal data when you visit our website, submit an enquiry or booking request, communicate via phone, email, or WhatsApp, or participate in online or in-person psychological and coaching services.
             </p>
             <div className="bg-[var(--color-brand-cream)]/70 rounded-2xl p-5 border border-[var(--color-brand-charcoal)]/10 text-sm space-y-2">
               <div className="flex items-center gap-3">
                 <MapPin className="w-4 h-4 text-[var(--color-brand-navy)] shrink-0" />
-                <span><strong>Address:</strong> Anima Space Child Psychology Center, Plot 104, Road No. 36, Jubilee Hills, Hyderabad, Telangana 500033, India</span>
+                <span><strong>Location:</strong> Hyderabad, Telangana, India (Consultations by appointment)</span>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-[var(--color-brand-navy)] shrink-0" />
@@ -77,7 +77,7 @@ export default function PrivacyPolicyPage() {
               This policy applies to data collected through website contact and booking forms, phone calls, WhatsApp messages, emails, and online video sessions.
             </p>
             <p className="text-[var(--color-brand-espresso)]/85">
-              It does not replace specific clinical informed-consent agreements provided prior to commencing therapy or counselling. Third-party platforms (such as Google Meet, WhatsApp, and Google Maps) operate under their respective independent privacy terms.
+              It does not replace specific clinical informed-consent agreements provided prior to commencing therapy or counselling. Third-party platforms (such as Google Meet and WhatsApp) operate under their respective independent privacy terms.
             </p>
           </section>
 
@@ -100,13 +100,13 @@ export default function PrivacyPolicyPage() {
                 <tbody className="divide-y divide-[var(--color-brand-charcoal)]/10 text-[var(--color-brand-espresso)]/80">
                   <tr>
                     <td className="py-3 px-3 font-semibold text-[var(--color-brand-navy)]">Contact Form</td>
-                    <td className="py-3 px-3">Parent/guardian name, email, phone, age group, primary concern, message</td>
+                    <td className="py-3 px-3">Name, email, phone, area of interest, message</td>
                     <td className="py-3 px-3">To respond to queries and evaluate preliminary support options.</td>
                   </tr>
                   <tr>
                     <td className="py-3 px-3 font-semibold text-[var(--color-brand-navy)]">Booking Request</td>
-                    <td className="py-3 px-3">Name, contact details, selected service, modality (online/in-clinic), preferred slot</td>
-                    <td className="py-3 px-3">To schedule consultations and send appointment details.</td>
+                    <td className="py-3 px-3">First name, last name, email, phone, service, date, time, mode, message</td>
+                    <td className="py-3 px-3">To schedule consultations and confirm appointment details.</td>
                   </tr>
                   <tr>
                     <td className="py-3 px-3 font-semibold text-[var(--color-brand-navy)]">Direct Comms</td>
@@ -131,15 +131,15 @@ export default function PrivacyPolicyPage() {
           {/* Section 4 */}
           <section>
             <h2 className="font-heading text-2xl font-black text-[var(--color-brand-navy)] mb-4">
-              4. Children & Adolescent Information
+              4. Children &amp; Adolescent Information
             </h2>
             <p className="text-[var(--color-brand-espresso)]/85 mb-3">
-              Anima Space provides specialized psychological support for children and adolescents (ages 8–18). For individuals under 18 years of age:
+              Anima Space provides psychological support for children, adolescents, and adults. For individuals under 18 years of age:
             </p>
             <ul className="list-disc list-inside space-y-2 text-[var(--color-brand-espresso)]/85">
               <li>Enquiries and booking requests must be submitted by a parent or lawful guardian.</li>
               <li>We will not use children&apos;s data for behavioural tracking, commercial profiling, or targeted advertising.</li>
-              <li>Confidentiality and session sharing with parents are balanced in accordance with clinical best practices, safeguarding standards, and Indian law.</li>
+              <li>Confidentiality and session sharing with parents are balanced in accordance with clinical best practices and safeguarding standards.</li>
             </ul>
           </section>
 
@@ -165,13 +165,13 @@ export default function PrivacyPolicyPage() {
           {/* Section 6 */}
           <section>
             <h2 className="font-heading text-2xl font-black text-[var(--color-brand-navy)] mb-4">
-              6. Your Rights & Grievance Redressal
+              6. Your Rights &amp; Grievance Redressal
             </h2>
             <p className="text-[var(--color-brand-espresso)]/85 mb-4">
               Under the DPDP Act 2023, you have the right to request access, correction, updating, or erasure of your personal data, as well as the right to withdraw consent or register a grievance.
             </p>
             <div className="bg-[var(--color-brand-cream)]/70 rounded-2xl p-5 border border-[var(--color-brand-charcoal)]/10 space-y-2 text-sm">
-              <p><strong>Grievance Contact:</strong> Prashanthi Simon, Founder & Lead Psychologist</p>
+              <p><strong>Grievance Contact:</strong> Prashanthi Simon, Founder &amp; Lead Psychologist</p>
               <p><strong>Email:</strong> <a href="mailto:animaspace9@gmail.com" className="text-[var(--color-brand-navy)] font-semibold underline">animaspace9@gmail.com</a> (Subject: <em>Privacy Request — Anima Space</em>)</p>
               <p><strong>Response Timeline:</strong> Acknowledgement within 48 hours; resolution within 30 days.</p>
             </div>
@@ -185,7 +185,7 @@ export default function PrivacyPolicyPage() {
               href="/disclaimer"
               className="text-[var(--color-brand-navy)] hover:text-[var(--color-brand-mauve)] transition-colors underline underline-offset-4"
             >
-              &larr; View Website & Services Disclaimer
+              &larr; View Website &amp; Services Disclaimer
             </Link>
             <Link
               href="/book"

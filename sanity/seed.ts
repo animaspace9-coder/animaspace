@@ -9,7 +9,9 @@
  * tsx auto-loads .env.local — no need for dotenv.
  */
 
-import 'dotenv/config'
+import dotenv from 'dotenv'
+dotenv.config({ path: '.env.local' })
+dotenv.config()
 import { createClient } from '@sanity/client'
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
@@ -824,7 +826,7 @@ async function seed() {
     email: 'animaspace9@gmail.com',
     address: 'Online & In-person consultations by appointment, Hyderabad',
     hours: 'Mon – Sat: 9:00 AM – 6:00 PM (By appointment)',
-    googleMapsUrl: 'https://maps.google.com/?q=Jubilee+Hills+Hyderabad',
+    googleMapsUrl: 'https://maps.google.com/?q=Hyderabad+Telangana',
 
     ctaHeading: 'Ready to start your journey?',
     ctaBody:

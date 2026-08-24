@@ -1,258 +1,127 @@
 import type { Metadata } from "next";
-import { client } from "@/sanity/lib/client";
-import { contactPageQuery } from "@/sanity/lib/queries";
+import { siteSettings } from "@/app/data/content";
 import { Button } from "@/app/components/ui/Button";
-import { PageHero } from "@/app/components/sections/PageHero";
-import { contactInfo as defaultContactInfo } from "@/app/data/content";
-import { clinicDetails } from "@/app/data/booking";
-import { FAQ } from "@/app/components/sections/FAQ";
+import { ContactForm } from "@/app/components/contact/ContactForm";
+import { Phone, Mail, MessageCircle } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Contact Us — Anima Space",
-  description: "Reach out to Prashanthi Simon at Anima Space. Book a consultation for psychological counselling, coaching, career guidance, and training.",
+  description:
+    "Get in touch with Prashanthi Simon at Anima Space. Psychological Consulting & Counselling Centre.",
 };
 
-export default async function ContactPage() {
-  const cms = await client
-    .fetch(contactPageQuery, {}, { next: { revalidate: 60 } })
-    .catch(() => null);
-
-  const contactInfo = {
-    phone: cms?.phone ?? defaultContactInfo.phone,
-    email: cms?.email ?? defaultContactInfo.email,
-    address: cms?.address ?? defaultContactInfo.address,
-    hours: cms?.hours ?? defaultContactInfo.hours,
-  };
-
-  const pageHeroTitle = cms?.pageHeroTitle ?? "Contact Us & Clinic Directions.";
-  const pageHeroSubtitle = cms?.pageHeroSubtitle ?? "Have questions or looking for guidance? Connect directly with Prashanthi Simon and the Anima Space team.";
-
+export default function ContactPage() {
   return (
     <>
-      <PageHero
-        title={pageHeroTitle}
-        subtitle={pageHeroSubtitle}
-        colorClass="bg-[var(--color-brand-sky)]/30"
-      />
+      {/* Header Banner */}
+      <section className="py-16 md:py-24 px-6 bg-[var(--color-brand-sky)] border-b border-[var(--color-brand-navy)]/10">
+        <div className="max-w-4xl mx-auto text-center">
+          <span className="inline-block text-xs md:text-sm font-bold uppercase tracking-widest text-[var(--color-brand-navy)]/70 mb-3 px-4 py-1.5 rounded-full bg-white/60 border border-[var(--color-brand-navy)]/20">
+            Get in Touch
+          </span>
+          <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold text-[var(--color-brand-navy)] leading-[1.15] tracking-tight mb-4">
+            Contact Us
+          </h1>
+          <p className="text-base sm:text-xl text-[var(--color-brand-espresso)] leading-relaxed max-w-2xl mx-auto font-medium">
+            Have questions or ready to explore our services? Reach out directly to Prashanthi Simon.
+          </p>
+        </div>
+      </section>
 
-      <section className="py-16 sm:py-24 px-6 bg-[var(--color-brand-off-white)]">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+      {/* Main Content */}
+      <section className="py-16 md:py-24 px-6 bg-[var(--color-brand-off-white)]">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
-          {/* Left Column: Inquiry Form (7 cols) */}
-          <div className="lg:col-span-7">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-[var(--color-brand-mauve)] mb-4">
-              Send Direct Message
-            </span>
-            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-[var(--color-brand-navy)] mb-6">
-              How can we help your family?
-            </h2>
-
-            <form className="flex flex-col gap-5 bg-white p-6 sm:p-8 rounded-[2rem] border-3 border-[var(--color-brand-navy)] shadow-[6px_6px_0px_0px_var(--color-brand-navy)]">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div className="flex flex-col gap-2">
-                  <label className="text-sm font-bold text-[var(--color-brand-navy)]" htmlFor="contact-name">
-                    Parent / Guardian Name *
-                  </label>
-                  <input
-                    id="contact-name"
-                    type="text"
-                    required
-                    placeholder="Jane Smith"
-                    className="px-4 py-3.5 rounded-xl border-2 border-[var(--color-brand-navy)] bg-white focus:outline-none focus:border-[var(--color-brand-mauve)] transition-colors text-[var(--color-brand-navy)] text-sm"
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <label className="text-sm font-bold text-[var(--color-brand-navy)]" htmlFor="contact-phone">
-                    Phone Number *
-                  </label>
-                  <input
-                    id="contact-phone"
-                    type="tel"
-                    required
-                    placeholder="+91 98664 10936"
-                    className="px-4 py-3.5 rounded-xl border-2 border-[var(--color-brand-navy)] bg-white focus:outline-none focus:border-[var(--color-brand-mauve)] transition-colors text-[var(--color-brand-navy)] text-sm"
-                  />
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-bold text-[var(--color-brand-navy)]" htmlFor="contact-email">
-                  Email Address *
-                </label>
-                <input
-                  id="contact-email"
-                  type="email"
-                  required
-                  placeholder="you@example.com"
-                  className="px-4 py-3.5 rounded-xl border-2 border-[var(--color-brand-navy)] bg-white focus:outline-none focus:border-[var(--color-brand-mauve)] transition-colors text-[var(--color-brand-navy)] text-sm"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div className="flex flex-col gap-2">
-                  <label className="text-sm font-bold text-[var(--color-brand-navy)]" htmlFor="contact-age">
-                    Age Group / Target *
-                  </label>
-                  <select
-                    id="contact-age"
-                    required
-                    className="px-4 py-3.5 rounded-xl border-2 border-[var(--color-brand-navy)] bg-white focus:outline-none focus:border-[var(--color-brand-mauve)] transition-colors text-[var(--color-brand-navy)] text-sm"
-                  >
-                    <option value="">Select age group</option>
-                    <option value="8-12">Children (8 – 12 yrs)</option>
-                    <option value="13-18">Teenagers (13 – 18 yrs)</option>
-                    <option value="parent">Parenting &amp; Family Guidance</option>
-                  </select>
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <label className="text-sm font-bold text-[var(--color-brand-navy)]" htmlFor="contact-concern">
-                    Primary Concern *
-                  </label>
-                  <select
-                    id="contact-concern"
-                    required
-                    className="px-4 py-3.5 rounded-xl border-2 border-[var(--color-brand-navy)] bg-white focus:outline-none focus:border-[var(--color-brand-mauve)] transition-colors text-[var(--color-brand-navy)] text-sm"
-                  >
-                    <option value="">Select primary concern</option>
-                    <option value="anxiety">Anxiety &amp; Big Emotions</option>
-                    <option value="behavior">Behavioral Difficulties &amp; Tantrums</option>
-                    <option value="school">Learning &amp; Exam Stress</option>
-                    <option value="parenting">Parenting &amp; Family Connection</option>
-                    <option value="assessment">Child Psychological Assessment</option>
-                    <option value="general">General Inquiry</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-bold text-[var(--color-brand-navy)]" htmlFor="contact-message">
-                  Your Message
-                </label>
-                <textarea
-                  id="contact-message"
-                  rows={4}
-                  placeholder="Tell us a bit about your child, your family goals, or any specific questions..."
-                  className="px-4 py-3.5 rounded-xl border-2 border-[var(--color-brand-navy)] bg-white focus:outline-none focus:border-[var(--color-brand-mauve)] transition-colors text-[var(--color-brand-navy)] text-sm resize-none"
-                />
-              </div>
-
-              <div>
-                <Button variant="primary" type="submit" className="w-full sm:w-auto">
-                  Send Message
-                </Button>
-                <p className="text-xs text-[var(--color-brand-espresso)]/70 mt-3 font-medium">
-                  ⚡ We respond within 4 hours during business days.
-                </p>
-              </div>
-            </form>
-          </div>
-
-          {/* Right Column: Clinic Info & Direct Contact (5 cols) */}
+          {/* Left Column: Direct Contact Details & WhatsApp (5 cols) */}
           <div className="lg:col-span-5 flex flex-col gap-6">
             
-            {/* Direct WhatsApp Box */}
-            <div className="bg-[var(--color-brand-sky)]/30 p-6 sm:p-8 rounded-[2rem] border-3 border-[var(--color-brand-navy)] shadow-[6px_6px_0px_0px_var(--color-brand-navy)] flex flex-col items-start gap-4">
+            {/* Phone Card */}
+            <a
+              href={`tel:${siteSettings.phone.replace(/\s+/g, "")}`}
+              className="p-6 bg-white rounded-[2rem] border-3 border-[var(--color-brand-navy)] shadow-[5px_5px_0px_0px_var(--color-brand-navy)] flex items-center gap-4 hover:-translate-y-0.5 transition-transform"
+            >
+              <div className="w-14 h-14 rounded-2xl bg-[var(--color-brand-sky)] border-2 border-[var(--color-brand-navy)] flex items-center justify-center text-[var(--color-brand-navy)] flex-shrink-0">
+                <Phone className="w-6 h-6" />
+              </div>
+              <div>
+                <span className="text-xs font-bold uppercase tracking-widest text-[var(--color-brand-mauve)] block mb-1">
+                  Call Directly
+                </span>
+                <p className="font-heading text-xl sm:text-2xl font-bold text-[var(--color-brand-navy)]">
+                  {siteSettings.phone}
+                </p>
+              </div>
+            </a>
+
+            {/* Email Card */}
+            <a
+              href={`mailto:${siteSettings.email}`}
+              className="p-6 bg-white rounded-[2rem] border-3 border-[var(--color-brand-navy)] shadow-[5px_5px_0px_0px_var(--color-brand-navy)] flex items-center gap-4 hover:-translate-y-0.5 transition-transform"
+            >
+              <div className="w-14 h-14 rounded-2xl bg-[var(--color-brand-pink)] border-2 border-[var(--color-brand-navy)] flex items-center justify-center text-[var(--color-brand-navy)] flex-shrink-0">
+                <Mail className="w-6 h-6" />
+              </div>
+              <div>
+                <span className="text-xs font-bold uppercase tracking-widest text-[var(--color-brand-mauve)] block mb-1">
+                  Email
+                </span>
+                <p className="font-heading text-lg sm:text-xl font-bold text-[var(--color-brand-navy)] break-all">
+                  {siteSettings.email}
+                </p>
+              </div>
+            </a>
+
+            {/* WhatsApp Box */}
+            <div className="p-6 sm:p-8 bg-[var(--color-brand-sky)]/40 rounded-[2rem] border-3 border-[var(--color-brand-navy)] shadow-[5px_5px_0px_0px_var(--color-brand-navy)] flex flex-col gap-4">
               <span className="text-xs font-bold uppercase tracking-widest text-[var(--color-brand-mauve)]">
                 Instant Chat
               </span>
-              <h3 className="font-heading text-2xl font-bold text-[var(--color-brand-navy)] leading-snug">
-                Connect directly on WhatsApp
+              <h3 className="font-heading text-2xl font-bold text-[var(--color-brand-navy)]">
+                Connect on WhatsApp
               </h3>
               <p className="text-sm text-[var(--color-brand-espresso)] leading-relaxed">
-                Chat with Prashanthi Simon directly for quick questions or immediate scheduling.
+                Chat with Prashanthi Simon directly for quick questions, scheduling inquiries, or training workshops.
               </p>
               <a
-                href="https://wa.me/919866410936?text=Hi%20Prashanthi%20Simon,%20I%20would%20like%20to%20inquire%20about%20a%20child%20psychology%20session."
+                href="https://wa.me/919866410936?text=Hi%20Prashanthi%20Simon,%20I%20would%20like%20to%20inquire%20about%20Anima%20Space%20services."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-3 px-6 py-3.5 rounded-full bg-[#60D66A] text-black border-2 border-black font-bold text-base hover:bg-[#52c45b] transition-all duration-300 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#60D66A] text-black font-bold text-base border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:bg-[#52c45b] transition-all"
               >
-                <img src="/whatsapp-icon.svg" alt="WhatsApp" className="w-6 h-6 object-contain" />
-                <span>Chat on WhatsApp (+91 98664 10936)</span>
+                <MessageCircle className="w-5 h-5" />
+                <span>Chat on WhatsApp</span>
               </a>
             </div>
 
-            {/* Offline Clinic Address Card */}
-            <div className="p-6 bg-white rounded-[2rem] border-3 border-[var(--color-brand-navy)] shadow-[6px_6px_0px_0px_var(--color-brand-navy)] flex flex-col gap-4">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-widest text-[var(--color-brand-mauve)]">
-                  📍 In-Clinic Consultation Center
-                </span>
-                <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-[var(--color-brand-sky)] border border-[var(--color-brand-navy)]">
-                  Jubilee Hills
-                </span>
-              </div>
-
-              <div>
-                <h4 className="font-heading text-xl font-bold text-[var(--color-brand-navy)] mb-1">
-                  {clinicDetails.name}
-                </h4>
-                <p className="text-sm text-[var(--color-brand-espresso)] leading-relaxed">
-                  {clinicDetails.address}
-                </p>
-                <p className="text-xs text-gray-500 mt-2 font-medium">
-                  📍 Landmark: {clinicDetails.landmark}
-                </p>
-                <p className="text-xs text-gray-500 font-medium">
-                  🚗 Parking: {clinicDetails.parking}
-                </p>
-              </div>
-
-              <a
-                href={clinicDetails.googleMapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-[var(--color-brand-pink)]/40 text-[var(--color-brand-navy)] font-bold text-sm border-2 border-[var(--color-brand-navy)] hover:bg-[var(--color-brand-pink)] transition-colors shadow-sm"
-              >
-                <span>🗺️ Open Directions in Google Maps →</span>
-              </a>
+            {/* Booking Callout */}
+            <div className="p-6 bg-[var(--color-brand-rose)]/20 rounded-[2rem] border-3 border-[var(--color-brand-navy)] text-center flex flex-col items-center gap-3">
+              <h4 className="font-heading text-lg font-bold text-[var(--color-brand-navy)]">
+                Looking to schedule a consultation?
+              </h4>
+              <p className="text-xs sm:text-sm text-[var(--color-brand-espresso)]">
+                Use our consultation booking form to select your preferred service, date, and mode.
+              </p>
+              <Button href="/book" variant="primary" className="text-xs py-2.5 px-5">
+                Go to Booking Form &rarr;
+              </Button>
             </div>
 
-            {/* Direct Contact Links */}
-            <div className="flex flex-col gap-4">
-              <a
-                href={`tel:${contactInfo.phone.replace(/\s+/g, "")}`}
-                className="flex items-center gap-4 p-5 bg-white rounded-2xl border-2 border-[var(--color-brand-navy)] shadow-[4px_4px_0px_0px_var(--color-brand-navy)] hover:-translate-y-0.5 transition-transform"
-              >
-                <span className="text-2xl p-2.5 rounded-xl bg-[var(--color-brand-sky)]/40 border border-[var(--color-brand-navy)]">
-                  📞
-                </span>
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-brand-mauve)]">
-                    Call Directly
-                  </p>
-                  <p className="font-heading text-base sm:text-lg font-bold text-[var(--color-brand-navy)]">
-                    {contactInfo.phone}
-                  </p>
-                </div>
-              </a>
+          </div>
 
-              <a
-                href={`mailto:${contactInfo.email}`}
-                className="flex items-center gap-4 p-5 bg-white rounded-2xl border-2 border-[var(--color-brand-navy)] shadow-[4px_4px_0px_0px_var(--color-brand-navy)] hover:-translate-y-0.5 transition-transform"
-              >
-                <span className="text-2xl p-2.5 rounded-xl bg-[var(--color-brand-pink)]/40 border border-[var(--color-brand-navy)]">
-                  ✉️
-                </span>
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-brand-mauve)]">
-                    Send Email
-                  </p>
-                  <p className="font-heading text-base sm:text-lg font-bold text-[var(--color-brand-navy)] break-all">
-                    {contactInfo.email}
-                  </p>
-                </div>
-              </a>
-            </div>
+          {/* Right Column: Direct Message Form (7 cols) */}
+          <div className="lg:col-span-7 bg-white p-8 sm:p-10 md:p-12 rounded-[2.5rem] border-4 border-[var(--color-brand-navy)] shadow-[8px_8px_0px_0px_var(--color-brand-navy)]">
+            <span className="text-xs font-bold uppercase tracking-widest text-[var(--color-brand-mauve)] block mb-2">
+              Send Message
+            </span>
+            <h2 className="font-heading text-2xl sm:text-3xl font-bold text-[var(--color-brand-navy)] mb-6">
+              How can we support you?
+            </h2>
 
+            <ContactForm />
           </div>
 
         </div>
       </section>
-
-      {/* FAQ Section */}
-      <FAQ />
     </>
   );
 }

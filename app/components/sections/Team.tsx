@@ -1,23 +1,26 @@
 "use client";
 
 import React, { useRef, useLayoutEffect } from "react";
-import { team as defaultTeam } from "@/app/data/content";
+import { meetPrashanthi } from "@/app/data/content";
 import { Button } from "@/app/components/ui/Button";
 import gsap from "gsap";
 
 interface TeamMember {
-  name: string;
-  role: string;
-  bio: string;
-  experience?: string;
+  name?: string;
+  title?: string;
+  role?: string;
+  bio1?: string;
+  bio2?: string;
+  bio?: string;
   image?: string;
   qualifications?: string[];
   specialties?: string[];
 }
-interface TeamProps { member?: TeamMember }
+interface TeamProps {
+  member?: TeamMember;
+}
 
 export const Team = ({ member }: TeamProps) => {
-  const expert = member ?? defaultTeam[0];
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -34,96 +37,93 @@ export const Team = ({ member }: TeamProps) => {
     return () => ctx.revert();
   }, []);
 
+  const role = member?.role ?? meetPrashanthi.role;
+  const bio1 = member?.bio1 ?? meetPrashanthi.bio1;
+  const bio2 = member?.bio2 ?? meetPrashanthi.bio2;
+  const image = member?.image ?? meetPrashanthi.image;
+  const qualifications = member?.qualifications ?? meetPrashanthi.qualifications;
 
   return (
-    <section ref={containerRef} className="py-20 md:py-28 px-6 bg-[var(--color-brand-sky)] overflow-hidden">
+    <section
+      id="about-prashanthi"
+      ref={containerRef}
+      className="py-20 md:py-28 px-6 bg-[var(--color-brand-sky)] overflow-hidden border-t border-[var(--color-brand-navy)]/10"
+    >
       <div className="max-w-5xl mx-auto">
         {/* Section Header */}
         <div ref={titleRef} className="text-center mb-12 md:mb-16">
           <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--color-brand-off-white)] border-2 border-[var(--color-brand-navy)] text-xs md:text-sm font-bold uppercase tracking-wider text-[var(--color-brand-navy)] mb-4 shadow-sm">
-            Clinical Leadership
+            About the Founder
           </span>
           <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold text-[var(--color-brand-navy)] tracking-tight">
-            Meet Our Expert
+            Meet Prashanthi Simon
           </h2>
         </div>
 
-        {/* High Authoritative Centered Profile Card */}
+        {/* Profile Card */}
         <div
           ref={cardRef}
           className="bg-[var(--color-brand-off-white)] rounded-[2.5rem] md:rounded-[3rem] border-4 border-[var(--color-brand-navy)] shadow-[8px_8px_0px_0px_var(--color-brand-navy)] md:shadow-[12px_12px_0px_0px_var(--color-brand-navy)] overflow-hidden p-6 sm:p-10 md:p-14"
         >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center">
-            {/* Left/Top: High Authority Profile Photo Frame */}
+            {/* Left Column: Photo Frame */}
             <div className="lg:col-span-5 flex flex-col items-center">
               <div className="relative w-full max-w-sm aspect-[4/5] rounded-[2rem] bg-white border-4 border-[var(--color-brand-navy)] shadow-[6px_6px_0px_0px_var(--color-brand-navy)] overflow-hidden group">
                 <img
-                  src={expert.image}
-                  alt={expert.name}
+                  src={image}
+                  alt="Prashanthi Simon"
                   className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
                 />
-
-                {/* Corner Accent Pills */}
+                {/* Corner Accent Shapes */}
                 <div className="absolute top-4 right-4 w-7 h-7 rounded-full bg-[var(--color-brand-sky)] border-2 border-[var(--color-brand-navy)] shadow-sm" />
                 <div className="absolute bottom-4 left-4 w-7 h-7 rotate-12 bg-[var(--color-brand-rose)] border-2 border-[var(--color-brand-navy)] rounded-md shadow-sm" />
               </div>
 
-              {/* Experience Badge */}
               <div className="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--color-brand-navy)] text-white text-xs sm:text-sm font-bold shadow-sm">
                 <span>⭐</span>
-                <span>{expert.experience || "15+ Years Clinical Experience"}</span>
+                <span>15+ Years Experience</span>
               </div>
             </div>
 
-            {/* Right/Bottom: High-Authority Bio & Credentials */}
+            {/* Right Column: Bio & Role */}
             <div className="lg:col-span-7 flex flex-col items-start text-left">
-              {/* Role Tag */}
-              <span className="text-sm font-extrabold uppercase tracking-widest text-[var(--color-brand-mauve)] mb-2">
-                {expert.role}
-              </span>
-
-              {/* Name */}
-              <h3 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--color-brand-navy)] mb-4 tracking-tight">
-                {expert.name}
-              </h3>
-
-              {/* Bio Paragraph */}
-              <p className="text-base sm:text-lg text-[var(--color-brand-espresso)] leading-relaxed mb-6">
-                {expert.bio}
+              {/* Role Title */}
+              <p className="text-sm sm:text-base font-extrabold text-[var(--color-brand-mauve)] mb-3 leading-snug">
+                {role}
               </p>
 
-              {/* Qualifications */}
-              <div className="w-full mb-6 pt-4 border-t-2 border-[var(--color-brand-charcoal)]/10">
-                <h4 className="text-xs font-bold uppercase tracking-widest text-[var(--color-brand-navy)] mb-3">
-                  Credentials & Clinical Expertise
-                </h4>
-                <ul className="flex flex-col gap-2.5">
-                  {expert.qualifications?.map((qual, idx) => (
-                    <li key={idx} className="flex items-center gap-3 text-sm sm:text-base font-semibold text-[var(--color-brand-navy)]">
-                      <span className="w-6 h-6 rounded-full bg-[var(--color-brand-sky)] border border-[var(--color-brand-navy)] flex items-center justify-center text-xs flex-shrink-0">
-                        ✓
-                      </span>
-                      <span>{qual}</span>
-                    </li>
-                  ))}
-                </ul>
+              <h3 className="font-heading text-3xl sm:text-4xl font-bold text-[var(--color-brand-navy)] mb-5 tracking-tight">
+                Prashanthi Simon
+              </h3>
+
+              {/* Bio Paragraphs */}
+              <div className="flex flex-col gap-4 text-base sm:text-lg text-[var(--color-brand-espresso)] leading-relaxed mb-6">
+                <p>{bio1}</p>
+                <p>{bio2}</p>
               </div>
 
-              {/* Specialties Pills */}
-              <div className="flex flex-wrap gap-2 mb-8">
-                {expert.specialties?.map((spec, idx) => (
-                  <span
-                    key={idx}
-                    className="py-1.5 px-3.5 bg-[var(--color-brand-sky)] border-2 border-[var(--color-brand-navy)] text-[var(--color-brand-navy)] text-xs sm:text-sm font-bold rounded-full"
-                  >
-                    {spec}
-                  </span>
-                ))}
-              </div>
+              {/* Qualifications */}
+              {qualifications && qualifications.length > 0 && (
+                <div className="w-full mb-8 pt-4 border-t-2 border-[var(--color-brand-charcoal)]/10">
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    {qualifications.map((qual, idx) => (
+                      <li
+                        key={idx}
+                        className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-[var(--color-brand-navy)]"
+                      >
+                        <span className="w-5 h-5 rounded-full bg-[var(--color-brand-sky)] border border-[var(--color-brand-navy)] flex items-center justify-center text-xs flex-shrink-0">
+                          ✓
+                        </span>
+                        <span>{qual}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
               {/* CTA Button */}
               <Button href="/book" variant="primary">
-                Book Session with Prashanthi
+                Book a Consultation
               </Button>
             </div>
           </div>

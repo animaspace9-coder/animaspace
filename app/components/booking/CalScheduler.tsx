@@ -223,10 +223,10 @@ export function CalScheduler() {
                     <span className="text-3xl">📍</span>
                     <div>
                       <h4 className="font-heading text-base font-bold text-[var(--color-brand-navy)]">
-                        In-Clinic Consultation
+                        In-Person Consultation
                       </h4>
                       <p className="text-xs text-[var(--color-brand-espresso)]">
-                        Anima Space Center, Jubilee Hills, Hyderabad
+                        Anima Space, Hyderabad (By Appointment)
                       </p>
                     </div>
                   </div>

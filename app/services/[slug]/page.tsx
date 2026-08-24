@@ -6,11 +6,10 @@ import { ServiceSubPage } from "@/app/components/sections/ServiceSubPage";
 import { servicePages } from "@/app/data/content";
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
-  // Try to get slugs from Sanity; fallback to content.ts keys
   const slugs = await client
     .fetch(allServiceSlugsQuery, {}, { next: { revalidate: 3600 } })
     .catch(() => null);
@@ -23,11 +22,12 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
   const cms = await client
-    .fetch(servicePageQuery, { slug: params.slug }, { next: { revalidate: 60 } })
+    .fetch(servicePageQuery, { slug }, { next: { revalidate: 60 } })
     .catch(() => null);
 
-  const fallback = servicePages[params.slug];
+  const fallback = servicePages[slug];
   const title = cms?.title ?? fallback?.title ?? "Service";
   const description = cms?.tagline ?? fallback?.tagline ?? "Anima Space professional services.";
 
@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ServicePage({ params }: Props) {
-  const { slug } = params;
+  const { slug } = await params;
 
   // Fetch from Sanity
   const cms = await client
@@ -71,9 +71,7 @@ export default async function ServicePage({ params }: Props) {
     icon: cms?.icon ?? fallback?.icon ?? "💬",
     intro: cms?.intro ?? fallback?.intro ?? "",
     bulletPoints: cms?.bulletPoints ?? fallback?.bulletPoints ?? [],
-    whatToExpect: cms?.whatToExpect ?? fallback?.whatToExpect ?? [],
     whoItsFor: cms?.whoItsFor ?? fallback?.whoItsFor ?? "",
-    faqs: cms?.faqs ?? fallback?.faqs ?? [],
   };
 
   return <ServiceSubPage data={data} />;

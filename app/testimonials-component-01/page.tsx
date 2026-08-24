@@ -29,7 +29,7 @@ const testimonials: TestimonialItem[] = [
   {
     name: 'Vikram K.',
     role: 'Father of 16-year-old',
-    company: 'Jubilee Hills',
+    company: 'Hyderabad',
     avatar: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-4.png?width=40&height=40&format=auto',
     rating: 5,
     content: "Finding a child psychologist who teens actually trust is rare. Prashanthi helped my son navigate exam anxiety with immense confidence."
