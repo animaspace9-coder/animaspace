@@ -87,7 +87,7 @@ export const Services = ({ services }: { services?: ServiceItem[] }) => {
                   {service.title}
                 </h3>
                 {service.tagline && (
-                  <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[var(--color-brand-mauve)] mb-4">
+                  <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[var(--color-brand-navy)]/90 mb-4">
                     {service.tagline}
                   </p>
                 )}

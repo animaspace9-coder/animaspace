@@ -152,12 +152,12 @@ export const Footer = () => {
       className="bg-[var(--color-brand-off-white)] text-[var(--color-brand-navy)] pt-20 sm:pt-28 pb-8 overflow-hidden flex flex-col justify-between border-t border-[var(--color-brand-charcoal)]/10"
     >
       {/* ── Top Section ── */}
-      <div className="max-w-7xl mx-auto px-6 w-full">
+      <div className="max-w-7xl mx-auto px-6 w-full relative z-20">
         <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-12 lg:gap-16">
           
           {/* Left Side: Full Logo + Contact Email */}
           <div className="flex flex-col items-start max-w-xl">
-            <Link href="/" className="inline-block mb-4 group">
+            <Link href="/" className="inline-block mb-4 group cursor-pointer">
               <img
                 src="/logo.svg"
                 alt="Anima Space — Heal | Grow | Explore"
@@ -169,7 +169,7 @@ export const Footer = () => {
             </span>
             <a
               href={`mailto:${contactInfo.email}`}
-              className="font-heading font-black text-2xl sm:text-4xl md:text-5xl tracking-tight text-[var(--color-brand-navy)] hover:text-[var(--color-brand-mauve)] transition-colors leading-tight break-all"
+              className="font-heading font-black text-2xl sm:text-4xl md:text-5xl tracking-tight text-[var(--color-brand-navy)] hover:text-[var(--color-brand-mauve)] hover:underline underline-offset-8 transition-colors leading-tight break-all cursor-pointer"
             >
               {contactInfo.email}
             </a>
@@ -185,12 +185,12 @@ export const Footer = () => {
               <h4 className="text-gray-400 font-medium text-xs tracking-wider uppercase mb-4">
                 AnimaSpace
               </h4>
-              <ul className="flex flex-col gap-2.5 font-semibold">
+              <ul className="flex flex-col gap-1.5 font-semibold">
                 {navigation.map((item) => (
                   <li key={item.name}>
                     <Link
                       href={item.href}
-                      className="hover:text-[var(--color-brand-mauve)] transition-colors"
+                      className="inline-block py-1 hover:text-[var(--color-brand-mauve)] hover:underline underline-offset-4 transition-colors cursor-pointer"
                     >
                       {item.name}
                     </Link>
@@ -199,7 +199,7 @@ export const Footer = () => {
                 <li>
                   <Link
                     href="/book"
-                    className="hover:text-[var(--color-brand-mauve)] transition-colors"
+                    className="inline-block py-1 hover:text-[var(--color-brand-mauve)] hover:underline underline-offset-4 transition-colors cursor-pointer"
                   >
                     Book Appointment
                   </Link>
@@ -212,12 +212,12 @@ export const Footer = () => {
               <h4 className="text-gray-400 font-medium text-xs tracking-wider uppercase mb-4">
                 Services
               </h4>
-              <ul className="flex flex-col gap-2.5 font-semibold">
+              <ul className="flex flex-col gap-1.5 font-semibold">
                 {serviceSubNav.map((item) => (
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="hover:text-[var(--color-brand-mauve)] transition-colors"
+                      className="inline-block py-1 hover:text-[var(--color-brand-mauve)] hover:underline underline-offset-4 transition-colors cursor-pointer"
                     >
                       {item.name}
                     </Link>
@@ -231,11 +231,11 @@ export const Footer = () => {
               <h4 className="text-gray-400 font-medium text-xs tracking-wider uppercase mb-4">
                 Connect & Info
               </h4>
-              <ul className="flex flex-col gap-2.5 font-semibold">
+              <ul className="flex flex-col gap-1.5 font-semibold">
                 <li>
                   <a
                     href={`tel:${contactInfo.phone.replace(/\s+/g, "")}`}
-                    className="hover:text-[var(--color-brand-mauve)] transition-colors"
+                    className="inline-block py-1 hover:text-[var(--color-brand-mauve)] hover:underline underline-offset-4 transition-colors cursor-pointer"
                   >
                     {contactInfo.phone}
                   </a>
@@ -243,7 +243,7 @@ export const Footer = () => {
                 <li>
                   <Link
                     href="/blog"
-                    className="hover:text-[var(--color-brand-mauve)] transition-colors"
+                    className="inline-block py-1 hover:text-[var(--color-brand-mauve)] hover:underline underline-offset-4 transition-colors cursor-pointer"
                   >
                     Blog & Articles
                   </Link>
@@ -251,7 +251,7 @@ export const Footer = () => {
                 <li>
                   <Link
                     href="/privacy"
-                    className="hover:text-[var(--color-brand-mauve)] transition-colors"
+                    className="inline-block py-1 hover:text-[var(--color-brand-mauve)] hover:underline underline-offset-4 transition-colors cursor-pointer"
                   >
                     Privacy Policy
                   </Link>
@@ -259,7 +259,7 @@ export const Footer = () => {
                 <li>
                   <Link
                     href="/disclaimer"
-                    className="hover:text-[var(--color-brand-mauve)] transition-colors"
+                    className="inline-block py-1 hover:text-[var(--color-brand-mauve)] hover:underline underline-offset-4 transition-colors cursor-pointer"
                   >
                     Disclaimer
                   </Link>

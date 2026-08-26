@@ -55,10 +55,10 @@ export default async function ServicesPage() {
                 )}
 
                 <Link
-                  href={service.href}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[var(--color-brand-navy)] text-white font-bold text-sm shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)] hover:bg-[var(--color-brand-mauve)] transition-all"
+                  href={(service as any).ctaButtonText ? "/book" : service.href}
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[var(--color-brand-navy)] text-white font-bold text-sm shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)] hover:bg-[var(--color-brand-mauve)] hover:shadow-none hover:translate-x-0.5 transition-all"
                 >
-                  <span>Explore {service.shortTitle ?? service.title}</span>
+                  <span>{(service as any).ctaButtonText ?? `Explore ${service.shortTitle ?? service.title}`}</span>
                   <span>&rarr;</span>
                 </Link>
               </div>

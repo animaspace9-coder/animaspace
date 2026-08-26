@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { bookingServiceOptions } from "@/app/data/content";
+import { bookingServiceOptions, consultationTimeSlots } from "@/app/data/content";
 import { generateGoogleCalendarUrl } from "@/app/lib/google-calendar";
 import { Button } from "@/app/components/ui/Button";
 import { CheckCircle2, Calendar, Globe, MapPin, Send } from "lucide-react";
@@ -143,7 +143,7 @@ export function ConsultationForm() {
       {/* Mode Switcher */}
       <div className="flex flex-col gap-2">
         <label className="text-xs font-bold uppercase tracking-wider text-[var(--color-brand-navy)]">
-          8. Mode *
+          Mode *
         </label>
         <div className="grid grid-cols-2 gap-3 p-1.5 rounded-2xl bg-[var(--color-brand-off-white)] border-2 border-[var(--color-brand-navy)]">
           <button
@@ -173,11 +173,11 @@ export function ConsultationForm() {
         </div>
       </div>
 
-      {/* 1. First Name & 2. Last Name */}
+      {/* First Name & Last Name */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div className="flex flex-col gap-1.5">
           <label className="text-xs font-bold uppercase tracking-wider text-[var(--color-brand-navy)]" htmlFor="firstName">
-            1. First name *
+            First Name *
           </label>
           <input
             id="firstName"
@@ -185,31 +185,29 @@ export function ConsultationForm() {
             required
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
-            placeholder="Jane"
             className="px-4 py-3 rounded-xl border-2 border-[var(--color-brand-navy)] text-sm focus:outline-none focus:border-[var(--color-brand-mauve)]"
           />
         </div>
 
         <div className="flex flex-col gap-1.5">
           <label className="text-xs font-bold uppercase tracking-wider text-[var(--color-brand-navy)]" htmlFor="lastName">
-            2. Last name
+            Last Name
           </label>
           <input
             id="lastName"
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-            placeholder="Smith"
             className="px-4 py-3 rounded-xl border-2 border-[var(--color-brand-navy)] text-sm focus:outline-none focus:border-[var(--color-brand-mauve)]"
           />
         </div>
       </div>
 
-      {/* 3. Email & 4. Phone */}
+      {/* Email & Phone */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div className="flex flex-col gap-1.5">
           <label className="text-xs font-bold uppercase tracking-wider text-[var(--color-brand-navy)]" htmlFor="email">
-            3. Email *
+            Email *
           </label>
           <input
             id="email"
@@ -217,14 +215,13 @@ export function ConsultationForm() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="jane@example.com"
             className="px-4 py-3 rounded-xl border-2 border-[var(--color-brand-navy)] text-sm focus:outline-none focus:border-[var(--color-brand-mauve)]"
           />
         </div>
 
         <div className="flex flex-col gap-1.5">
           <label className="text-xs font-bold uppercase tracking-wider text-[var(--color-brand-navy)]" htmlFor="phone">
-            4. Phone *
+            Phone *
           </label>
           <input
             id="phone"
@@ -232,16 +229,15 @@ export function ConsultationForm() {
             required
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            placeholder="+91 98664 10936"
             className="px-4 py-3 rounded-xl border-2 border-[var(--color-brand-navy)] text-sm focus:outline-none focus:border-[var(--color-brand-mauve)]"
           />
         </div>
       </div>
 
-      {/* 5. Service */}
+      {/* Service */}
       <div className="flex flex-col gap-1.5">
         <label className="text-xs font-bold uppercase tracking-wider text-[var(--color-brand-navy)]" htmlFor="service">
-          5. Service *
+          Service *
         </label>
         <select
           id="service"
@@ -259,11 +255,11 @@ export function ConsultationForm() {
         </select>
       </div>
 
-      {/* 6. Date & 7. Time */}
+      {/* Date & Time */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div className="flex flex-col gap-1.5">
           <label className="text-xs font-bold uppercase tracking-wider text-[var(--color-brand-navy)]" htmlFor="date">
-            6. Date (mm/dd/yyyy) *
+            Date (MM/DD/YYYY) *
           </label>
           <div className="relative">
             <input
@@ -279,40 +275,44 @@ export function ConsultationForm() {
 
         <div className="flex flex-col gap-1.5">
           <label className="text-xs font-bold uppercase tracking-wider text-[var(--color-brand-navy)]" htmlFor="time">
-            7. Time
+            Preferred Time
           </label>
           <div className="relative">
-            <input
+            <select
               id="time"
-              type="text"
               value={time}
               onChange={(e) => setTime(e.target.value)}
-              placeholder="e.g. 10:30 AM or Flexible"
-              className="w-full px-4 py-3 rounded-xl border-2 border-[var(--color-brand-navy)] text-sm focus:outline-none focus:border-[var(--color-brand-mauve)]"
-            />
+              className="w-full px-4 py-3 rounded-xl border-2 border-[var(--color-brand-navy)] bg-white text-sm focus:outline-none focus:border-[var(--color-brand-mauve)]"
+            >
+              <option value="" disabled>Select a time slot...</option>
+              {consultationTimeSlots.map((slot) => (
+                <option key={slot} value={slot}>
+                  {slot}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
       </div>
 
-      {/* 9. Your Message */}
+      {/* Your Message */}
       <div className="flex flex-col gap-1.5">
         <label className="text-xs font-bold uppercase tracking-wider text-[var(--color-brand-navy)]" htmlFor="message">
-          9. Your message
+          Your Message
         </label>
         <textarea
           id="message"
           rows={3}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="Briefly describe what you'd like to explore or any questions you have..."
           className="px-4 py-3 rounded-xl border-2 border-[var(--color-brand-navy)] text-sm focus:outline-none focus:border-[var(--color-brand-mauve)] resize-none"
         />
       </div>
 
-      {/* 10. Submit Button */}
+      {/* Submit Button */}
       <Button type="submit" variant="primary" className="w-full justify-center py-4 text-base mt-2">
         <Send className="w-5 h-5 mr-2" />
-        10. Submit Consultation Request
+        Submit Consultation Request
       </Button>
     </form>
   );

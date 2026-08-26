@@ -23,6 +23,9 @@ import servicesPage from './documents/servicesPage'
 import servicePage from './documents/servicePage'
 import bookPage from './documents/bookPage'
 import contactPage from './documents/contactPage'
+import blogsPage from './documents/blogsPage'
+import blogPost from './documents/blogPost'
+import subscriber from './documents/subscriber'
 
 // Legacy generic page document
 import page from './documents/page'
@@ -35,12 +38,15 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     teamMember,
     seo,
 
-    // ── Page documents (primary — shown in Studio nav) ─────────────────────
+    // ── Page & Data documents (primary — shown in Studio nav) ───────────────
     siteSettings,
     homePage,
     aboutPage,
     servicesPage,
     servicePage,
+    blogsPage,
+    blogPost,
+    subscriber,
     bookPage,
     contactPage,
 

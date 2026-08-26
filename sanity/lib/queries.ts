@@ -157,6 +157,84 @@ export const contactPageQuery = defineQuery(`
   }
 `)
 
+// ── Blogs Overview Page & Post List ──────────────────────────────────────────
+export const blogsPageQuery = defineQuery(`
+  {
+    "page": *[_type == "blogsPage"][0] {
+      pageHeroTitle,
+      pageHeroSubtitle,
+      newsletterHeading,
+      newsletterSubtext,
+    },
+    "posts": *[_type == "blogPost"] | order(publishedAt desc) {
+      _id,
+      title,
+      "slug": slug.current,
+      category,
+      publishedAt,
+      readTime,
+      author,
+      colorKey,
+      excerpt,
+      "imageUrl": mainImage.asset->url,
+      reflectionQuote,
+    }
+  }
+`)
+
+// ── Single Blog Post Detail by Slug ──────────────────────────────────────────
+export const blogPostBySlugQuery = defineQuery(`
+  {
+    "post": *[_type == "blogPost" && slug.current == $slug][0] {
+      _id,
+      title,
+      "slug": slug.current,
+      category,
+      publishedAt,
+      readTime,
+      author,
+      colorKey,
+      excerpt,
+      "imageUrl": mainImage.asset->url,
+      body,
+      reflectionQuote,
+      infographic {
+        title,
+        summary,
+        steps[] {
+          stepNumber,
+          title,
+          description
+        },
+        altText
+      },
+      "infographicImageUrl": infographicImage.asset->url,
+      "infographicImageAlt": infographicImage.alt,
+      seo {
+        metaTitle,
+        metaDescription
+      }
+    },
+    "relatedPosts": *[_type == "blogPost" && slug.current != $slug] | order(publishedAt desc)[0...3] {
+      _id,
+      title,
+      "slug": slug.current,
+      category,
+      publishedAt,
+      readTime,
+      author,
+      colorKey,
+      excerpt,
+      "imageUrl": mainImage.asset->url
+    }
+  }
+`)
+
+// ── All Blog Slugs (for generateStaticParams) ────────────────────────────────
+export const allBlogSlugsQuery = defineQuery(`
+  *[_type == "blogPost"] { "slug": slug.current }
+`)
+
 // ── Legacy generic page query (kept for backwards compat) ─────────────────────
 export const pageQuery = defineQuery(`
   *[_type == "page" && slug.current == $slug][0] {

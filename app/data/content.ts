@@ -170,6 +170,7 @@ export const services = [
     colorClass: "bg-[var(--color-brand-sky)]",
     icon: "💬",
     href: "/services/counselling",
+    ctaButtonText: "Book Your Counselling Session Now",
     bulletPoints: [
       "Anxiety and stress management",
       "Emotional and behavioural concerns",
@@ -191,6 +192,7 @@ export const services = [
     colorClass: "bg-[var(--color-brand-mauve)]/20",
     icon: "🧭",
     href: "/services/career-counselling",
+    ctaButtonText: "Book Your Career Counselling Session Now",
     bulletPoints: [
       "Career exploration",
       "Academic and course selection",
@@ -213,6 +215,7 @@ export const services = [
     colorClass: "bg-[var(--color-brand-pink)]",
     icon: "🎯",
     href: "/services/coaching",
+    ctaButtonText: "Book Your Coaching Session Now",
     bulletPoints: [
       "Personal development",
       "Well-being coaching",
@@ -235,6 +238,7 @@ export const services = [
     colorClass: "bg-[var(--color-brand-sky)]/30",
     icon: "📚",
     href: "/services/training",
+    ctaButtonText: "Register Now",
     bulletPoints: [
       "Mental health and psychological well-being",
       "Emotional intelligence",
@@ -260,6 +264,7 @@ export const services = [
     colorClass: "bg-[var(--color-brand-rose)]",
     icon: "🌿",
     href: "/services/healing",
+    ctaButtonText: "Register Now",
     bulletPoints: [
       "Emotional healing",
       "Self-discovery and self-awareness",
@@ -283,7 +288,7 @@ export const spaceToGrowBlock = {
 
 export const aboutPageContent = {
   subtitle: "Well-being, Psychological Consulting & Counselling Centre",
-  headline: "Where Understanding Begins, Growth Unfolds.",
+  headline: "A Safe Space to Understand, Heal, and Grow.",
   welcomeHeadline: "Welcome to Anima Space",
   welcomeParagraphs: [
     "Anima means life, and Space represents what we strive to create: a safe, confidential, compassionate, and non-judgemental space where you can speak freely, be heard, and feel understood.",
@@ -466,7 +471,20 @@ export const bookingServiceOptions = [
   "Couple Counselling",
   "Life Coaching",
   "Parental Guidance",
+  "Healing Services",
   "Training services",
+];
+
+export const consultationTimeSlots = [
+  "09:00 AM – 10:00 AM",
+  "10:00 AM – 11:00 AM",
+  "11:00 AM – 12:00 PM",
+  "12:00 PM – 01:00 PM",
+  "02:00 PM – 03:00 PM",
+  "03:00 PM – 04:00 PM",
+  "04:00 PM – 05:00 PM",
+  "05:00 PM – 06:00 PM",
+  "Flexible / Any Time",
 ];
 
 export const bookingContent = {
@@ -514,33 +532,6 @@ export const faqs = [
   },
 ];
 
-export const blogPosts = [
-  {
-    id: "understanding-anxiety-in-children",
-    title: "Understanding Anxiety in Children: What Parents Need to Know",
-    excerpt: "Anxiety is one of the most common challenges children face today. Learn how to spot the signs, respond with empathy, and know when to seek professional support.",
-    date: "12 July 2026",
-    readTime: "5 min read",
-    category: "Anxiety",
-    colorClass: "bg-[var(--color-brand-sky)]",
-  },
-  {
-    id: "screen-time-and-mental-health",
-    title: "Screen Time & Mental Health: Finding the Right Balance",
-    excerpt: "With screens ever-present in family life, what does the research actually say? We break down the evidence and share practical strategies for healthy boundaries.",
-    date: "28 June 2026",
-    readTime: "7 min read",
-    category: "Wellbeing",
-    colorClass: "bg-[var(--color-brand-pink)]",
-  },
-  {
-    id: "talking-to-your-child-about-big-feelings",
-    title: "Talking to Your Child About Big Feelings",
-    excerpt: "Many parents feel at a loss when their child is overwhelmed by emotion. Here's a simple framework that helps children name, understand, and manage what they feel.",
-    date: "5 June 2026",
-    readTime: "4 min read",
-    category: "Parenting",
-    colorClass: "bg-[var(--color-brand-rose)]",
-  },
-];
+export { blogPosts, blogsPageContent } from "./blogs";
+export type { BlogPostData, BlogSection, BlogInfographic, BlogStep } from "./blogs";
 

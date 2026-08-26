@@ -3,6 +3,7 @@
 import React, { useRef, useLayoutEffect } from "react";
 import { trustStats as defaultStats } from "@/app/data/content";
 import { animateStaggerFadeUp } from "@/app/lib/gsap";
+import { StatNumber } from "@/app/components/ui/StatNumber";
 
 interface Stat { value: string; label: string }
 interface TrustStripProps { stats?: Stat[] }
@@ -27,7 +28,7 @@ export const TrustStrip = ({ stats }: TrustStripProps) => {
               className="py-4 md:py-0 px-4 flex flex-col justify-center items-center gap-2"
             >
               <p className="font-heading text-4xl lg:text-5xl font-black text-[var(--color-brand-off-white)]">
-                {stat.value}
+                <StatNumber value={stat.value} duration={1.5} />
               </p>
               <p className="text-[var(--color-brand-sky)] font-medium text-lg uppercase tracking-wider">
                 {stat.label}

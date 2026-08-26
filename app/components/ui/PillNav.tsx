@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { gsap } from "gsap";
 import { Menu, X } from "lucide-react";
+import { ServiceSearchBar } from "@/app/components/ui/ServiceSearchBar";
 import "./PillNav.css";
 
 export interface PillNavItem {
@@ -238,56 +239,69 @@ export const PillNav = ({
           </span>
         </Link>
 
-        {/* Floating Pill Nav Bar on the Right */}
-        <nav className={`pill-nav ${className}`} aria-label="Primary" style={cssVars}>
-          <div className="pill-nav-items desktop-only" ref={navItemsRef}>
-            <ul className="pill-list" role="menubar">
-              {items.map((item, i) => {
-                const isActive = activeHref === item.href;
-
-                return (
-                  <li key={item.href || `item-${i}`} role="none">
-                    <Link
-                      role="menuitem"
-                      href={item.href}
-                      className={`pill${isActive ? " is-active" : ""}${item.isCta ? " pill-cta" : ""}`}
-                      aria-label={item.ariaLabel || item.label}
-                      onMouseEnter={() => handleEnter(i)}
-                      onMouseLeave={() => handleLeave(i)}
-                    >
-                      <span
-                        className="hover-circle"
-                        aria-hidden="true"
-                        ref={(el) => {
-                          circleRefs.current[i] = el;
-                        }}
-                      />
-                      <span className="label-stack">
-                        <span className="pill-label">{item.label}</span>
-                        <span className="pill-label-hover" aria-hidden="true">
-                          {item.label}
-                        </span>
-                      </span>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
+        {/* Center / Right Nav Controls */}
+        <div className="flex items-center gap-3 sm:gap-4">
+          {/* Service Search Bar in Navbar */}
+          <div className="hidden md:block">
+            <ServiceSearchBar compact />
           </div>
 
-          <button
-            className="mobile-menu-button mobile-only flex items-center justify-center w-10 h-10 rounded-full bg-[var(--color-brand-navy)] text-white shadow-md border border-white/20 active:scale-95 transition-transform"
-            onClick={toggleMobileMenu}
-            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-            ref={hamburgerRef}
-          >
-            {isMobileMenuOpen ? (
-              <X className="w-5 h-5 text-white stroke-[2.5]" />
-            ) : (
-              <Menu className="w-5 h-5 text-white stroke-[2.5]" />
-            )}
-          </button>
-        </nav>
+          {/* Floating Pill Nav Bar on the Right */}
+          <nav className={`pill-nav ${className}`} aria-label="Primary" style={cssVars}>
+            <div className="pill-nav-items desktop-only" ref={navItemsRef}>
+              <ul className="pill-list" role="menubar">
+                {items.map((item, i) => {
+                  const isActive = activeHref === item.href;
+
+                  return (
+                    <li key={item.href || `item-${i}`} role="none">
+                      <Link
+                        role="menuitem"
+                        href={item.href}
+                        className={`pill${isActive ? " is-active" : ""}${item.isCta ? " pill-cta" : ""}`}
+                        aria-label={item.ariaLabel || item.label}
+                        onMouseEnter={() => handleEnter(i)}
+                        onMouseLeave={() => handleLeave(i)}
+                      >
+                        <span
+                          className="hover-circle"
+                          aria-hidden="true"
+                          ref={(el) => {
+                            circleRefs.current[i] = el;
+                          }}
+                        />
+                        <span className="label-stack">
+                          <span className="pill-label">{item.label}</span>
+                          <span className="pill-label-hover" aria-hidden="true">
+                            {item.label}
+                          </span>
+                        </span>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+
+            <button
+              className="mobile-menu-button mobile-only flex items-center justify-center w-10 h-10 rounded-full bg-[var(--color-brand-navy)] text-white shadow-md border border-white/20 active:scale-95 transition-transform"
+              onClick={toggleMobileMenu}
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              ref={hamburgerRef}
+            >
+              {isMobileMenuOpen ? (
+                <X className="w-5 h-5 text-white stroke-[2.5]" />
+              ) : (
+                <Menu className="w-5 h-5 text-white stroke-[2.5]" />
+              )}
+            </button>
+          </nav>
+        </div>
+      </div>
+
+      {/* Mobile Top-Center Search Bar (outside the nav menu) */}
+      <div className="md:hidden w-full px-4 pb-2.5 pt-1 flex justify-center border-t border-[var(--color-brand-charcoal)]/5">
+        <ServiceSearchBar compact />
       </div>
 
       {/* Mobile Menu Popover */}

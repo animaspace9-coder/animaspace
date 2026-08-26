@@ -8,7 +8,7 @@ import { Button } from "@/app/components/ui/Button";
 export const metadata: Metadata = {
   title: "About Us — Anima Space",
   description:
-    "Well-being, Psychological Consulting & Counselling Centre — Where Understanding Begins, Growth Unfolds.",
+    "Well-being, Psychological Consulting & Counselling Centre — A Safe Space to Understand, Heal, and Grow.",
 };
 
 export default async function AboutPage() {

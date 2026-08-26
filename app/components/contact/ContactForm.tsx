@@ -59,7 +59,6 @@ export function ContactForm() {
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Jane Smith"
             className="px-4 py-3 rounded-xl border-2 border-[var(--color-brand-navy)] text-sm focus:outline-none focus:border-[var(--color-brand-mauve)]"
           />
         </div>
@@ -74,7 +73,6 @@ export function ContactForm() {
             required
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            placeholder="+91 98664 10936"
             className="px-4 py-3 rounded-xl border-2 border-[var(--color-brand-navy)] text-sm focus:outline-none focus:border-[var(--color-brand-mauve)]"
           />
         </div>
@@ -90,7 +88,6 @@ export function ContactForm() {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="you@example.com"
           className="px-4 py-3 rounded-xl border-2 border-[var(--color-brand-navy)] text-sm focus:outline-none focus:border-[var(--color-brand-mauve)]"
         />
       </div>
@@ -124,7 +121,6 @@ export function ContactForm() {
           required
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="Share a few details or questions..."
           className="px-4 py-3 rounded-xl border-2 border-[var(--color-brand-navy)] text-sm focus:outline-none focus:border-[var(--color-brand-mauve)] resize-none"
         />
       </div>

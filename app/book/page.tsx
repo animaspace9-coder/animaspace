@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ConsultationForm } from "@/app/components/booking/ConsultationForm";
 import { trustStats } from "@/app/data/content";
+import { StatNumber } from "@/app/components/ui/StatNumber";
 
 export const metadata: Metadata = {
   title: "Book Your Consultation — Anima Space",
@@ -32,7 +33,7 @@ export default function BookPage() {
           {trustStats.map((stat, idx) => (
             <div key={idx} className="p-4 rounded-2xl bg-[var(--color-brand-off-white)] border-2 border-[var(--color-brand-navy)]">
               <span className="font-heading text-3xl sm:text-4xl font-extrabold text-[var(--color-brand-navy)] block mb-1">
-                {stat.value}
+                <StatNumber value={stat.value} duration={1.5} />
               </span>
               <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[var(--color-brand-mauve)]">
                 {stat.label}

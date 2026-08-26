@@ -68,6 +68,7 @@ async function seed() {
       'Couple Counselling',
       'Life Coaching',
       'Parental Guidance',
+      'Healing Services',
       'Training Services',
     ],
     whatsappNumber: '919866410936',
@@ -341,7 +342,7 @@ async function seed() {
     _id: 'aboutPage',
     _type: 'aboutPage',
 
-    pageHeroTitle: 'Where Understanding Begins, Growth Unfolds.',
+    pageHeroTitle: 'A Safe Space to Understand, Heal, and Grow.',
     pageHeroSubtitle:
       'Anima Space was founded with the vision to create a safe space where psychological well-being, personal growth, and purposeful living come together.',
 
@@ -831,6 +832,301 @@ async function seed() {
     ctaHeading: 'Ready to start your journey?',
     ctaBody:
       'Ready to start your journey towards a healthier and happier life? Take the first step now. Fill the form, talk to our experts.',
+  })
+
+  // ── blogsPage ───────────────────────────────────────────────────────────────
+  await upsert({
+    _id: 'blogsPage',
+    _type: 'blogsPage',
+    pageHeroTitle: 'Insights for Parents & Families.',
+    pageHeroSubtitle:
+      'Practical guidance, research-backed perspectives, and real-world tools — written by Prashanthi Simon.',
+    newsletterHeading: 'More articles coming soon. Want to be notified?',
+    newsletterSubtext:
+      'Subscribe to receive new insights and practical tools for your family.',
+  })
+
+  // ── Helper to convert sections to Portable Text ─────────────────────────────
+  function toPortableText(sections: { heading?: string; paragraphs: string[] }[]) {
+    const blocks: any[] = []
+    let keyIdx = 0
+    for (const sec of sections) {
+      if (sec.heading) {
+        blocks.push({
+          _key: `h_${++keyIdx}`,
+          _type: 'block',
+          style: 'h2',
+          children: [{ _key: `s_${keyIdx}`, _type: 'span', text: sec.heading }],
+        })
+      }
+      for (const p of sec.paragraphs) {
+        blocks.push({
+          _key: `p_${++keyIdx}`,
+          _type: 'block',
+          style: 'normal',
+          children: [{ _key: `s_${keyIdx}`, _type: 'span', text: p }],
+        })
+      }
+    }
+    return blocks
+  }
+
+  // ── blogPost 1: Understanding Anxiety in Children ───────────────────────────
+  await upsert({
+    _id: 'blogPost-understanding-anxiety-in-children',
+    _type: 'blogPost',
+    title: 'Understanding Anxiety in Children: What Parents Need to Know',
+    slug: { _type: 'slug', current: 'understanding-anxiety-in-children' },
+    category: 'Anxiety',
+    publishedAt: '2026-08-26',
+    readTime: '3 min read',
+    author: 'Prashanthi Simon',
+    colorKey: 'sky',
+    excerpt:
+      'Anxiety is one of the most common challenges children face today. Learn how to spot the signs, respond with empathy, and know when to seek professional support.',
+    body: toPortableText([
+      {
+        paragraphs: [
+          'Children do not always say, “I feel anxious.” Instead, anxiety may appear as stomach aches before school, repeated questions about what might happen, difficulty sleeping, irritability, tears, avoidance, or a sudden need to stay close to a parent. One difficult day does not automatically mean that a child has an anxiety disorder. Anxiety is a human response to uncertainty or perceived danger. It becomes important to look more closely when the worry is persistent, unusually intense, or begins to interfere with school, friendships, family life, sleep, or ordinary activities.',
+        ],
+      },
+      {
+        heading: 'Look beyond the behaviour',
+        paragraphs: [
+          'A child who refuses to attend a birthday party may not be trying to be difficult. They may be worried about being judged, getting separated from a caregiver, or not knowing what will happen. A child who becomes angry when homework begins may be overwhelmed by fear of making mistakes. Behaviour is often the visible part of an emotional experience that the child does not yet have words for.',
+          'Notice patterns rather than jumping to conclusions. Ask yourself: When does the worry appear? What seems to make it stronger? What helps the child feel safer? Tracking these details for a few days can help parents respond with understanding instead of reacting only to the surface behaviour.',
+        ],
+      },
+      {
+        heading: 'Respond with connection first',
+        paragraphs: [
+          'Start by getting physically and emotionally close. Use a calm voice and simple language: “I can see that this feels scary,” or “Something about tomorrow is worrying you.” Validation does not mean agreeing that something terrible will happen. It means showing the child that their feelings make sense from their point of view.',
+          'Then help the child separate the feeling from the prediction. You might say, “Your worry is telling you that you will not manage. Let us look at what you can do if the worry arrives.” This gently builds confidence without demanding that the child stop feeling anxious immediately.',
+          'Small, predictable steps are usually more helpful than sudden pressure. If school drop-off is difficult, a consistent morning routine, a brief goodbye ritual, and a planned check-in may provide more support than a long negotiation. Praise brave effort, not just a successful outcome: “You felt worried and still took one step.”',
+        ],
+      },
+      {
+        heading: 'When to seek support',
+        paragraphs: [
+          'Consider professional guidance when anxiety lasts for weeks, keeps returning, causes frequent physical complaints, disrupts sleep, prevents participation in age-appropriate activities, or places significant strain on the child or family. A qualified professional can help identify what is maintaining the anxiety and teach the child and caregivers practical coping strategies.',
+          'The goal is not to remove every worry from childhood. It is to help children understand what they feel, experience safe support, and gradually discover that difficult feelings can be managed. With patience, predictable routines, and the right help when needed, anxiety can become a signal to listen to rather than a force that runs the whole family’s life.',
+        ],
+      },
+    ]),
+    reflectionQuote:
+      'A child does not need a perfect parent. They need a steady adult who is willing to pause, listen, and help them take the next manageable step.',
+    infographic: {
+      _type: 'infographic',
+      title: 'When Worry Speaks',
+      summary: 'A calm four-step flow for families: Notice → Name → Nurture → Next step',
+      steps: [
+        {
+          _key: 'st1',
+          stepNumber: '01',
+          title: 'Notice Patterns',
+          description:
+            'Observe body cues (tummy aches, sleep changes, clinginess) and note triggers without jumping to immediate conclusions.',
+        },
+        {
+          _key: 'st2',
+          stepNumber: '02',
+          title: 'Name & Validate',
+          description:
+            "Use calm words: 'I can see this feels scary.' Help separate the anxious feeling from catastrophic predictions.",
+        },
+        {
+          _key: 'st3',
+          stepNumber: '03',
+          title: 'Nurture Connection',
+          description:
+            'Listen without rushing and provide steady reassurance before trying to jump into problem-solving mode.',
+        },
+        {
+          _key: 'st4',
+          stepNumber: '04',
+          title: 'Small Next Steps',
+          description:
+            'Take one manageable step together, praise brave efforts, and consult a professional if worry persistently limits life.',
+        },
+      ],
+      altText:
+        'Infographic showing how parents can respond to childhood anxiety: notice patterns, name and validate feelings, offer a small predictable step, and seek professional support when needed.',
+    },
+  })
+
+  // ── blogPost 2: Screen Time & Mental Health ─────────────────────────────────
+  await upsert({
+    _id: 'blogPost-screen-time-and-mental-health',
+    _type: 'blogPost',
+    title: 'Screen Time & Mental Health: Finding the Right Balance',
+    slug: { _type: 'slug', current: 'screen-time-and-mental-health' },
+    category: 'Wellbeing',
+    publishedAt: '2026-08-26',
+    readTime: '3 min read',
+    author: 'Prashanthi Simon',
+    colorKey: 'pink',
+    excerpt:
+      'With screens ever-present in family life, what does the research actually say? We break down the evidence and share practical strategies for healthy boundaries.',
+    body: toPortableText([
+      {
+        paragraphs: [
+          'Screens are part of everyday life. Children and adolescents use them to learn, communicate, create, relax, and maintain friendships. That means the most useful question is rarely “Are screens good or bad?” A better question is: What is this screen use doing in this child’s life?',
+          'Research describes a mixed picture. Digital activities can offer connection and support, while problematic use can also be linked with sleep disruption, reduced participation in offline life, and difficulty controlling use. The relationship often works in both directions: emotional difficulties may lead to more technology use, and certain patterns of technology use may then make well-being harder to protect.',
+        ],
+      },
+      {
+        heading: 'Focus on function, not only minutes',
+        paragraphs: [
+          'Two children may spend the same amount of time online and have very different experiences. One may be completing homework or talking to a trusted friend. Another may be scrolling late into the night, feeling worse after comparing themselves with others, or becoming distressed whenever the device is put away.',
+          'Watch for the function and the after-effects. Does screen use leave the child restored, connected, and ready to return to daily life? Or does it regularly replace sleep, movement, meals, schoolwork, family conversations, and in-person relationships? Problematic use often appears through loss of control, withdrawal-like distress, neglect of offline activities, and friction in family life.',
+        ],
+      },
+      {
+        heading: 'Build boundaries together',
+        paragraphs: [
+          'Rules are easier to follow when children understand the reason behind them and have some voice in shaping them. Start with a family conversation rather than a sudden confiscation. Agree on a few visible boundaries: devices away during meals, a charging place outside the bedroom, a wind-down period before sleep, and protected time for schoolwork, movement, hobbies, and face-to-face connection.',
+          'Be specific about transitions. Give a ten-minute reminder, finish at a natural stopping point where possible, and name what comes next: “The game ends after this round, then we are having dinner.” Adults also need to model the boundaries they expect. A family digital plan works best when it protects everyone’s attention, not only the child’s.',
+          'Avoid treating every difficult reaction as proof of addiction. Children may protest a limit because stopping an enjoyable activity is hard. Look for the broader pattern over time. If a child repeatedly cannot reduce use, loses sleep, abandons important activities, or experiences significant distress, a conversation with a qualified professional may help.',
+        ],
+      },
+      {
+        heading: 'Aim for balance, not perfection',
+        paragraphs: [
+          'Healthy digital well-being is not a screen-free childhood. It is a life in which technology has a place without crowding out sleep, relationships, learning, play, and emotional recovery. Ask regularly: “Is this helping you feel connected or more drained?” and “What do you want your screen routine to make room for?”',
+          'Small changes are meaningful. One device-free meal, one earlier charging time, or one shared outdoor activity can begin to reset the rhythm of a household. The goal is not to win a daily battle over screens. It is to help young people develop the awareness and skills to use technology without letting technology make every decision for them.',
+        ],
+      },
+    ]),
+    reflectionQuote:
+      'Boundaries are most effective when they protect connection rather than punish children for needing it.',
+    infographic: {
+      _type: 'infographic',
+      title: 'A Balanced Digital Day',
+      summary: 'Technology should support life, not replace it.',
+      steps: [
+        {
+          _key: 'st1',
+          stepNumber: '01',
+          title: 'Protect Sleep',
+          description:
+            'Keep chargers outside the bedroom and build a 30–60 minute screen-free wind-down buffer before bedtime.',
+        },
+        {
+          _key: 'st2',
+          stepNumber: '02',
+          title: 'Mealtime Connection',
+          description:
+            'Designate family mealtimes as device-free zones to preserve attention, presence, and open conversation.',
+        },
+        {
+          _key: 'st3',
+          stepNumber: '03',
+          title: 'Offline Life First',
+          description:
+            'Ensure physical movement, schoolwork, creative play, and face-to-face friendships have protected time daily.',
+        },
+        {
+          _key: 'st4',
+          stepNumber: '04',
+          title: 'Evaluate the After-Effect',
+          description:
+            'Regularly ask whether screen activities leave your child feeling energized or drained and irritable.',
+        },
+      ],
+      altText:
+        'Infographic presenting a balanced digital day, balancing technology with sleep, connection, movement, learning, and offline enjoyment.',
+    },
+  })
+
+  // ── blogPost 3: Talking to Your Child About Big Feelings ─────────────────────
+  await upsert({
+    _id: 'blogPost-talking-to-your-child-about-big-feelings',
+    _type: 'blogPost',
+    title: 'Talking to Your Child About Big Feelings',
+    slug: { _type: 'slug', current: 'talking-to-your-child-about-big-feelings' },
+    category: 'Parenting',
+    publishedAt: '2026-08-26',
+    readTime: '3 min read',
+    author: 'Prashanthi Simon',
+    colorKey: 'rose',
+    excerpt:
+      "Many parents feel at a loss when their child is overwhelmed by emotion. Here's a simple framework that helps children name, understand, and manage what they feel.",
+    body: toPortableText([
+      {
+        paragraphs: [
+          'When children are overwhelmed, adults often want to stop the crying, anger, fear, or frustration as quickly as possible. We may say, “Calm down,” “It is not a big deal,” or “There is nothing to be upset about.” These phrases usually come from care, but they can leave a child feeling misunderstood. Before children can manage a strong emotion, they often need help recognising what is happening inside them.',
+          'A useful conversation can follow four gentle steps: Name, Notice, Need, Next.',
+        ],
+      },
+      {
+        heading: '1. Name the feeling',
+        paragraphs: [
+          'Begin with an observation rather than an accusation. “Your fists are tight and your voice is loud. I wonder if you are feeling angry.” You can offer a few possibilities without insisting that you are right: “Is it anger, disappointment, or worry?”',
+          'Children may not know the exact word. That is okay. Start with basic language such as happy, sad, angry, scared, disappointed, embarrassed, or frustrated. A feelings chart can help, but your tone matters more than the perfect label.',
+        ],
+      },
+      {
+        heading: '2. Notice what the feeling is doing',
+        paragraphs: [
+          'Help the child connect emotion with body sensations, thoughts, and actions. Ask, “Where do you feel it in your body?” or “What happened just before the feeling became bigger?” This teaches the child that emotions have signals and patterns. It also creates a small pause between the feeling and the behaviour.',
+          'Keep the conversation short during the peak of a meltdown. A dysregulated child may not be ready for a long explanation. First offer safety, space, water, a slower voice, or a quiet presence. Reflection can happen later, when the child’s body is calmer.',
+        ],
+      },
+      {
+        heading: '3. Discover the need',
+        paragraphs: [
+          'Every feeling carries information, even when the behaviour needs a limit. Anger may point to unfairness or frustration. Sadness may need comfort. Fear may need reassurance and a clear plan. Overwhelm may need fewer words and a break.',
+          'Try asking, “What would help your body feel a little safer right now?” The answer may be a hug, quiet time, help with a task, or simply knowing that an adult will stay nearby. If physical aggression or unsafe behaviour occurs, hold the boundary calmly: “I will not let you hit. I will help you be safe.”',
+        ],
+      },
+      {
+        heading: '4. Choose the next small step',
+        paragraphs: [
+          'Do not expect a child to solve the entire problem while upset. Offer two manageable choices: “Would you like to sit here or take three slow breaths with me?” Later, help the child plan what to try next time. Praise the repair as well as the calm: “You were very upset, and you came back to talk. That took courage.”',
+          'Children learn emotional regulation through repeated experiences with safe, steady adults. The aim is not to make difficult feelings disappear. It is to show that feelings can be named, listened to, and expressed without harming themselves or others.',
+          'If intense emotions are frequent, last a long time, cause significant impairment, or are accompanied by safety concerns, professional support is appropriate. Seeking help is not a sign that a family has failed. It is one way of giving a child more tools and giving caregivers more support.',
+        ],
+      },
+    ]),
+    reflectionQuote:
+      'Connection comes before correction. When a child feels understood, learning becomes easier.',
+    infographic: {
+      _type: 'infographic',
+      title: "The Four N's for Big Feelings",
+      summary: 'Name → Notice → Need → Next',
+      steps: [
+        {
+          _key: 'st1',
+          stepNumber: '01',
+          title: '1. Name',
+          description:
+            "Put gentle words to the emotion: 'I wonder if you are feeling angry, sad, scared, or disappointed.'",
+        },
+        {
+          _key: 'st2',
+          stepNumber: '02',
+          title: '2. Notice',
+          description:
+            'Identify body sensations (tight chest, clenched fists, stomach) and what triggered the surge.',
+        },
+        {
+          _key: 'st3',
+          stepNumber: '03',
+          title: '3. Need',
+          description:
+            'Explore the underlying need: comfort, quiet time, help, reassurance, or a safe and steady limit.',
+        },
+        {
+          _key: 'st4',
+          stepNumber: '04',
+          title: '4. Next',
+          description:
+            'Choose one small safe step together: deep breaths, a sip of water, or a quiet pause before re-engaging.',
+        },
+      ],
+      altText:
+        'Infographic showing a four-step framework for supporting children with big emotions: Name, Notice, Need, and Next.',
+    },
   })
 
   console.log('\n✅  All done! Open Sanity Studio to see your pre-filled content.\n')

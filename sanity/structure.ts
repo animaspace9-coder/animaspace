@@ -33,8 +33,15 @@ export const structure: StructureResolver = (S) =>
       // Service Sub-Pages (Counselling, Coaching, Healing, Career Counselling, Training)
       S.documentTypeListItem('servicePage').title('📂 Service Sub-Pages (5 Services)'),
 
+      // Blogs Section
+      singletonListItem(S, 'blogsPage', '📰 Blogs Overview Page'),
+      S.documentTypeListItem('blogPost').title('📝 Blog Articles (Write & Publish)'),
+
       singletonListItem(S, 'bookPage', '📅 Book a Consultation Page'),
       singletonListItem(S, 'contactPage', '📍 Contact & Clinic Page'),
 
       S.divider(),
+
+      // Form Submissions & Email Collection
+      S.documentTypeListItem('subscriber').title('📬 Newsletter Subscribers'),
     ])
