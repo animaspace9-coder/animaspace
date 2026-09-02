@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { spaceToGrowBlock } from "@/app/data/content";
-import { Button } from "@/app/components/ui/Button";
-import { Phone, MessageCircle } from "lucide-react";
+import { Phone, MessageCircle, CalendarCheck } from "lucide-react";
 
 const WHATSAPP_URL =
   "https://wa.me/919866410936?text=Hi%20Prashanthi%20Simon,%20I%20would%20like%20to%20inquire%20about%20a%20session%20at%20Anima%20Space.";
@@ -29,29 +29,40 @@ export const SpaceToGrow = ({ headline, paragraph1, paragraph2, ctaText }: Space
           <p>{paragraph1 ?? spaceToGrowBlock.paragraph1}</p>
           <p>{paragraph2 ?? spaceToGrowBlock.paragraph2}</p>
         </div>
-        <div className="flex flex-wrap justify-center items-center gap-3">
-          <Button href="/book" variant="outline" id="grow-book-cta" className="text-white border-white hover:bg-white hover:text-[var(--color-brand-navy)]">
-            {ctaText ?? spaceToGrowBlock.ctaText}
-          </Button>
+        <div className="flex flex-wrap justify-center items-center gap-4">
+          {/* Primary — Book a Consultation */}
+          <Link
+            href="/book"
+            id="grow-book-cta"
+            aria-label="Book a Consultation at Anima Space"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-[var(--color-brand-navy)] font-bold text-base hover:bg-[var(--color-brand-off-white)] active:scale-95 transition-all duration-200 shadow-[0_4px_20px_rgba(0,0,0,0.15)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            <CalendarCheck className="w-5 h-5 flex-shrink-0" aria-hidden="true" />
+            <span>{ctaText ?? spaceToGrowBlock.ctaText}</span>
+          </Link>
+
+          {/* WhatsApp Us */}
           <a
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="WhatsApp Us at Anima Space"
             id="grow-whatsapp-cta"
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-full border-2 border-white/60 text-white font-bold text-sm hover:bg-white/10 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            className="inline-flex items-center gap-2 px-6 py-4 rounded-full bg-transparent border-2 border-white/70 text-white font-bold text-base hover:bg-white/15 active:scale-95 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
-            <MessageCircle className="w-4 h-4" aria-hidden="true" />
-            WhatsApp Us
+            <MessageCircle className="w-5 h-5 flex-shrink-0" aria-hidden="true" />
+            <span>WhatsApp Us</span>
           </a>
+
+          {/* Call Us */}
           <a
             href="tel:+919866410936"
             aria-label="Call Us at Anima Space — +91 98664 10936"
             id="grow-call-cta"
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-full border-2 border-white/60 text-white font-bold text-sm hover:bg-white/10 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            className="inline-flex items-center gap-2 px-6 py-4 rounded-full bg-transparent border-2 border-white/70 text-white font-bold text-base hover:bg-white/15 active:scale-95 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
-            <Phone className="w-4 h-4" aria-hidden="true" />
-            Call Us
+            <Phone className="w-5 h-5 flex-shrink-0" aria-hidden="true" />
+            <span>Call Us</span>
           </a>
         </div>
       </div>

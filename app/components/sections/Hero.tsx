@@ -78,33 +78,33 @@ export const Hero = ({ data }: { data?: HeroData }) => {
             {subHeadline}
           </p>
 
-          {/* Call to Action Buttons */}
-          <div ref={btnRef} className="pt-2 flex flex-col gap-4">
-            {/* Primary action */}
+          {/* Call to Action Buttons — all three in one prominent row */}
+          <div ref={btnRef} className="pt-2 flex flex-col gap-5">
             <div className="flex flex-wrap items-center gap-3">
+              {/* Primary — Book */}
               <Button href="/book" variant="primary" id="hero-book-cta">
                 {ctaText}
               </Button>
-            </div>
 
-            {/* Secondary contact actions */}
-            <div className="flex flex-wrap items-center gap-3">
+              {/* WhatsApp Us */}
               <a
                 href="https://wa.me/919866410936?text=Hi%20Prashanthi%20Simon,%20I%20would%20like%20to%20inquire%20about%20a%20session%20at%20Anima%20Space."
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp Us at Anima Space"
                 id="hero-whatsapp-cta"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border-2 border-[var(--color-brand-navy)] bg-white text-sm font-bold text-[var(--color-brand-navy)] hover:bg-[#25D366] hover:border-[#25D366] hover:text-white transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-navy)]"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-[var(--color-brand-navy)] bg-white text-sm font-bold text-[var(--color-brand-navy)] hover:bg-[#25D366] hover:border-[#25D366] hover:text-white transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-navy)]"
               >
                 <MessageCircle className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
                 <span>WhatsApp Us</span>
               </a>
+
+              {/* Call Us */}
               <a
                 href="tel:+919866410936"
                 aria-label="Call Us at Anima Space — +91 98664 10936"
                 id="hero-call-cta"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border-2 border-[var(--color-brand-navy)] bg-white text-sm font-bold text-[var(--color-brand-navy)] hover:bg-[var(--color-brand-navy)] hover:text-white transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-navy)]"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-[var(--color-brand-navy)] bg-white text-sm font-bold text-[var(--color-brand-navy)] hover:bg-[var(--color-brand-navy)] hover:text-white transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-navy)]"
               >
                 <Phone className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
                 <span>Call Us</span>
