@@ -10,7 +10,7 @@ import { Check } from "lucide-react";
 export const metadata: Metadata = {
   title: "Our Services — Anima Space",
   description:
-    "Explore our full range of services: Psychological Counselling, Coaching, Healing, Career Counselling, and Training for children, adolescents, and adults.",
+    "Explore our full range of services: Psychological Counselling, Coaching, Emotional Well-being & Personal Growth, Career Counselling, and Training for children, adolescents, and adults.",
 };
 
 export default async function ServicesPage() {

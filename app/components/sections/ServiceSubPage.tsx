@@ -125,7 +125,7 @@ export const ServiceSubPage = ({ data }: { data: ServicePageData }) => {
             Book a Consultation to explore our services
           </h2>
           <p className="text-base sm:text-lg text-[var(--color-brand-sky)] mb-8 max-w-2xl">
-            Whether you are looking for counselling, coaching, healing, career guidance, or training, Anima Space offers a safe space to understand where you are and develop the tools to move forward.
+            Whether you are looking for counselling, coaching, emotional well-being support, career guidance, or training, Anima Space offers a safe space to understand where you are and develop the tools to move forward.
           </p>
           <Button href="/book" variant="outline" className="text-white border-white hover:bg-white hover:text-[var(--color-brand-navy)]">
             Book a Consultation

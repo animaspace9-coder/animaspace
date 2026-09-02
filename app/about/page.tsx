@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { client } from "@/sanity/lib/client";
 import { aboutPageQuery } from "@/sanity/lib/queries";
-import { aboutPageContent } from "@/app/data/content";
+import { aboutPageContent, howWeCanSupportYou } from "@/app/data/content";
 import { Button } from "@/app/components/ui/Button";
 
 export const metadata: Metadata = {
@@ -127,6 +127,42 @@ export default async function AboutPage() {
                 >
                   Explore {offering.title} &rarr;
                 </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How We Can Support You */}
+      <section className="py-20 md:py-28 px-6 bg-[var(--color-brand-sky)]/30 border-t border-[var(--color-brand-navy)]/10">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-14">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-[var(--color-brand-mauve)] mb-4">
+              Areas of Focus
+            </span>
+            <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--color-brand-navy)]">
+              {howWeCanSupportYou.headline}
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            {howWeCanSupportYou.areas.map((area) => (
+              <div
+                key={area.title}
+                className={`${area.colorClass} rounded-[2rem] border-2 border-[var(--color-brand-navy)] p-8 shadow-[4px_4px_0px_0px_var(--color-brand-navy)] flex flex-col gap-3`}
+              >
+                <span className="text-3xl">{area.icon}</span>
+                <h3 className="font-heading text-xl font-bold text-[var(--color-brand-navy)]">
+                  {area.title}
+                </h3>
+                <p className="text-sm md:text-base text-[var(--color-brand-espresso)] leading-relaxed">
+                  {area.description}
+                </p>
+                {area.sub && (
+                  <p className="text-sm text-[var(--color-brand-espresso)]/80 leading-relaxed border-t border-[var(--color-brand-navy)]/10 pt-3">
+                    {area.sub}
+                  </p>
+                )}
               </div>
             ))}
           </div>

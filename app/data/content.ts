@@ -12,7 +12,7 @@ export const navigation = [
 export const serviceSubNav = [
   { name: "Counselling", href: "/services/counselling" },
   { name: "Coaching", href: "/services/coaching" },
-  { name: "Healing", href: "/services/healing" },
+  { name: "Emotional Well-being & Personal Growth", href: "/services/emotional-well-being" },
   { name: "Career Counselling", href: "/services/career-counselling" },
   { name: "Training", href: "/services/training" },
 ];
@@ -110,7 +110,7 @@ export const ageGroups = [
     services: [
       { label: "Counselling", href: "/services/counselling" },
       { label: "Coaching", href: "/services/coaching" },
-      { label: "Healing", href: "/services/healing" },
+      { label: "Emotional Well-being", href: "/services/emotional-well-being" },
       { label: "Career Counselling", href: "/services/career-counselling" },
     ],
   },
@@ -126,7 +126,7 @@ export const ageGroups = [
       { label: "Counselling", href: "/services/counselling" },
       { label: "Coaching", href: "/services/coaching" },
       { label: "Career Counselling", href: "/services/career-counselling" },
-      { label: "Healing", href: "/services/healing" },
+      { label: "Emotional Well-being", href: "/services/emotional-well-being" },
     ],
   },
   {
@@ -154,6 +154,70 @@ export const whatWeCanHelpWith = {
     "Anxiety, Stress & Coping Difficulties",
     "Academic & Career Guidance",
     "Personal Growth & Life Transitions",
+  ],
+};
+
+export const processSteps = [
+  {
+    number: "01",
+    title: "Schedule an Initial Consultation",
+    description: "Choose a convenient time to begin your conversation with us.",
+  },
+  {
+    number: "02",
+    title: "Share What Brings You Here",
+    description:
+      "The first session is a space to talk about what you are experiencing, your concerns, and what you hope to understand or work through.",
+  },
+  {
+    number: "03",
+    title: "Understand Your Needs",
+    description:
+      "Together, we explore your concerns and identify the kind of support that may be appropriate for you.",
+  },
+  {
+    number: "04",
+    title: "Plan Your Next Step",
+    description:
+      "Based on your needs and goals, we discuss possible ways forward and create a supportive path at a pace that feels comfortable.",
+  },
+];
+
+export const howWeCanSupportYou = {
+  headline: "How We Can Support You",
+  areas: [
+    {
+      title: "Emotional & Psychological Well-being",
+      description:
+        "Support for understanding emotions, managing stress, developing healthy coping strategies, and strengthening psychological well-being.",
+      sub: "Anxiety, Stress & Coping Difficulties — a supportive space to understand difficult emotions, manage everyday pressures, and develop healthier ways of coping.",
+      icon: "🌿",
+      colorClass: "bg-[var(--color-brand-pink)]",
+    },
+    {
+      title: "Child & Adolescent Concerns",
+      description:
+        "Age-appropriate support for emotional, behavioural, academic, social, and developmental concerns.",
+      sub: "",
+      icon: "🧒",
+      colorClass: "bg-[var(--color-brand-sky)]",
+    },
+    {
+      title: "Academic & Career Decisions",
+      description:
+        "Guidance for students and adults navigating academic choices, career decisions, transitions, and professional goals.",
+      sub: "",
+      icon: "🧭",
+      colorClass: "bg-[var(--color-brand-mauve)]/20",
+    },
+    {
+      title: "Personal Growth & Life Transitions",
+      description:
+        "Support in developing self-awareness, confidence, resilience, and clarity during periods of change.",
+      sub: "",
+      icon: "✨",
+      colorClass: "bg-[var(--color-brand-sky)]/30",
+    },
   ],
 };
 
@@ -253,26 +317,26 @@ export const services = [
       "Our training programmes are designed to create greater awareness, stronger communication, healthier environments, and more empowered individuals and teams.",
   },
   {
-    id: "healing",
-    title: "Healing",
-    shortTitle: "Healing",
-    tagline: "A holistic space for emotional healing, self-discovery, resilience, and inner well-being.",
+    id: "emotional-well-being",
+    title: "Emotional Well-being & Personal Growth",
+    shortTitle: "Emotional Well-being",
+    tagline: "A supportive space to understand yourself more deeply, strengthen emotional well-being, and develop healthier ways of responding to life's challenges.",
     homeSummary:
-      "A holistic space for emotional healing, self-discovery, resilience, and inner well-being, supporting individuals as they process experiences, reconnect with themselves, and develop healthier ways of moving forward.",
+      "A supportive space to understand yourself more deeply, strengthen emotional well-being, build resilience, and develop healthier ways of responding to life's challenges.",
     description:
-      "Healing creates space for individuals to process experiences, reconnect with themselves, and develop a deeper understanding of their emotional world. It encourages self-discovery, emotional resilience, and inner well-being while supporting healthier ways of navigating life's challenges. Every healing journey is personal, gradual, and individual.",
+      "Emotional Well-being & Personal Growth is a supportive space to understand yourself more deeply, strengthen emotional well-being, build resilience, and develop healthier ways of responding to life's challenges. This service focuses on self-awareness, emotional growth, personal strengths, coping skills, and meaningful personal development. It can support individuals who want to better understand their experiences, navigate periods of change, or work towards greater confidence, balance, and purposeful living.",
     colorClass: "bg-[var(--color-brand-rose)]",
     icon: "🌿",
-    href: "/services/healing",
-    ctaButtonText: "Register Now",
+    href: "/services/emotional-well-being",
+    ctaButtonText: "Book a Consultation",
     bulletPoints: [
-      "Emotional healing",
-      "Self-discovery and self-awareness",
-      "Emotional resilience",
-      "Inner well-being",
-      "Processing difficult experiences",
-      "Personal growth",
-      "Mindful living",
+      "Self-awareness and self-understanding",
+      "Emotional well-being",
+      "Healthy coping and resilience",
+      "Confidence and personal development",
+      "Life transitions and adjustment",
+      "Personal strengths and purposeful growth",
+      "Many more areas",
     ],
   },
 ];
@@ -314,10 +378,10 @@ export const aboutPageContent = {
       colorClass: "bg-[var(--color-brand-pink)]",
     },
     {
-      title: "Healing",
+      title: "Emotional Well-being & Personal Growth",
       description:
-        "A holistic space for emotional healing, self-discovery, resilience, and inner well-being, supporting individuals as they process experiences, reconnect with themselves, and develop healthier ways of moving forward.",
-      href: "/services/healing",
+        "A supportive space to understand yourself more deeply, strengthen emotional well-being, build resilience, and develop healthier ways of responding to life's challenges.",
+      href: "/services/emotional-well-being",
       icon: "🌿",
       colorClass: "bg-[var(--color-brand-rose)]",
     },
@@ -399,26 +463,48 @@ export const servicePages: Record<
     whoItsFor:
       "Individuals aiming to unlock potential, achieve meaningful goals, develop confidence, and enhance communication and personal effectiveness.",
   },
-  healing: {
-    slug: "healing",
-    title: "Healing",
-    tagline: "A holistic space for emotional healing, self-discovery, and inner well-being.",
+  "emotional-well-being": {
+    slug: "emotional-well-being",
+    title: "Emotional Well-being & Personal Growth",
+    tagline: "A supportive space to understand yourself more deeply, strengthen emotional well-being, and develop healthier ways of responding to life's challenges.",
     colorClass: "bg-[var(--color-brand-rose)]",
     bgAccent: "var(--color-brand-rose)",
     icon: "🌿",
     intro:
-      "Healing creates space for individuals to process experiences, reconnect with themselves, and develop a deeper understanding of their emotional world. It encourages self-discovery, emotional resilience, and inner well-being while supporting healthier ways of navigating life's challenges. Every healing journey is personal, gradual, and individual.",
+      "Emotional Well-being & Personal Growth is a supportive space to understand yourself more deeply, strengthen emotional well-being, build resilience, and develop healthier ways of responding to life's challenges. This service focuses on self-awareness, emotional growth, personal strengths, coping skills, and meaningful personal development. It can support individuals who want to better understand their experiences, navigate periods of change, or work towards greater confidence, balance, and purposeful living.",
     bulletPoints: [
-      "Emotional healing",
-      "Self-discovery and self-awareness",
-      "Emotional resilience",
-      "Inner well-being",
-      "Processing difficult experiences",
-      "Personal growth",
-      "Mindful living",
+      "Self-awareness and self-understanding",
+      "Emotional well-being",
+      "Healthy coping and resilience",
+      "Confidence and personal development",
+      "Life transitions and adjustment",
+      "Personal strengths and purposeful growth",
+      "Many more areas",
     ],
     whoItsFor:
-      "Anyone seeking a compassionate space for emotional healing, inner well-being, self-discovery, and personal transformation.",
+      "Individuals who want to better understand their experiences, navigate periods of change, or work towards greater confidence, balance, and purposeful living.",
+  },
+  // backward-compat alias — redirect is handled in next.config.ts
+  healing: {
+    slug: "healing",
+    title: "Emotional Well-being & Personal Growth",
+    tagline: "A supportive space to understand yourself more deeply, strengthen emotional well-being, and develop healthier ways of responding to life's challenges.",
+    colorClass: "bg-[var(--color-brand-rose)]",
+    bgAccent: "var(--color-brand-rose)",
+    icon: "🌿",
+    intro:
+      "Emotional Well-being & Personal Growth is a supportive space to understand yourself more deeply, strengthen emotional well-being, build resilience, and develop healthier ways of responding to life's challenges.",
+    bulletPoints: [
+      "Self-awareness and self-understanding",
+      "Emotional well-being",
+      "Healthy coping and resilience",
+      "Confidence and personal development",
+      "Life transitions and adjustment",
+      "Personal strengths and purposeful growth",
+      "Many more areas",
+    ],
+    whoItsFor:
+      "Individuals who want to better understand their experiences, navigate periods of change, or work towards greater confidence, balance, and purposeful living.",
   },
   "career-counselling": {
     slug: "career-counselling",
@@ -471,7 +557,7 @@ export const bookingServiceOptions = [
   "Couple Counselling",
   "Life Coaching",
   "Parental Guidance",
-  "Healing Services",
+  "Emotional Well-being & Personal Growth",
   "Training services",
 ];
 
@@ -515,20 +601,43 @@ export const testimonials = [
 
 export const faqs = [
   {
-    question: "What should I expect during the first session?",
-    answer: "The initial session is a conversation — a space to share your concerns, background, and goals. We listen carefully and work together to understand the best pathway forward for you or your child.",
+    question: "Who can seek counselling?",
+    answer:
+      "Counselling is for children, adolescents, adults, parents, and anyone seeking support with emotional, personal, or psychological concerns.",
   },
   {
-    question: "Do you offer online sessions?",
-    answer: "Yes, we offer secure online sessions for counselling, coaching, and career guidance. In-person sessions are also available by appointment in Hyderabad.",
+    question: "Do I need a diagnosis to seek counselling?",
+    answer:
+      "No. You do not need a diagnosis to seek counselling. You can reach out whenever you feel you need support, clarity, or guidance.",
   },
   {
-    question: "Is everything discussed kept confidential?",
-    answer: "Yes. We take confidentiality very seriously. All sessions are conducted in a safe, confidential, and non-judgemental space.",
+    question: "Are sessions confidential?",
+    answer:
+      "Yes. Sessions are private and confidential, subject to applicable professional and legal limits.",
   },
   {
-    question: "Who can benefit from Anima Space services?",
-    answer: "Our services support children, adolescents, and adults. Whether you are navigating emotional challenges, academic decisions, career transitions, or personal growth, we have a pathway that fits your needs.",
+    question: "How long is a session?",
+    answer: "A typical counselling session lasts around 45–60 minutes.",
+  },
+  {
+    question: "Are sessions online or in person?",
+    answer:
+      "Sessions may be available online or in person, depending on your needs and availability.",
+  },
+  {
+    question: "How do I book a session?",
+    answer:
+      "You can book a session by contacting us through the website, phone, or email. We will guide you through the next steps.",
+  },
+  {
+    question: "Can parents seek support regarding their child?",
+    answer:
+      "Yes. Parents can seek guidance regarding their child's emotional, behavioural, academic, or developmental concerns.",
+  },
+  {
+    question: "What happens during the first session?",
+    answer:
+      "The first session focuses on understanding your concerns, background, and goals. It is a safe space to talk openly and decide what kind of support may be helpful.",
   },
 ];
 

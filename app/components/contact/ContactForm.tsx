@@ -104,7 +104,7 @@ export function ContactForm() {
         >
           <option value="counselling">Psychological Counselling</option>
           <option value="coaching">Coaching</option>
-          <option value="healing">Healing</option>
+          <option value="emotional-well-being">Emotional Well-being &amp; Personal Growth</option>
           <option value="career">Career Counselling</option>
           <option value="training">Training Programmes</option>
           <option value="other">General Inquiry</option>

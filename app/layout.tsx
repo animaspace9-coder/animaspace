@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/app/components/sections/Navbar";
 import { Footer } from "@/app/components/sections/Footer";
 import { WhatsAppButton } from "@/app/components/ui/WhatsAppButton";
+import { MobileActionDock } from "@/app/components/ui/MobileActionDock";
 
 const fontHeading = Nunito({
   variable: "--font-heading",
@@ -37,11 +38,12 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col relative">
         <Navbar />
-        <main className="flex-grow">
+        <main className="flex-grow pb-16 md:pb-0">
           {children}
         </main>
         <Footer />
         <WhatsAppButton />
+        <MobileActionDock />
       </body>
     </html>
   );

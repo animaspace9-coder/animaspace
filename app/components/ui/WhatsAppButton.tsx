@@ -15,7 +15,7 @@ export const WhatsAppButton = () => {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with Prashanthi Simon on WhatsApp"
-      className="fixed bottom-6 right-6 z-[9999] w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center hover:scale-110 active:scale-95 transition-transform duration-300 drop-shadow-[0_8px_20px_rgba(0,0,0,0.15)] group cursor-pointer"
+      className="hidden md:flex fixed bottom-6 right-6 z-[9999] w-14 h-14 sm:w-16 sm:h-16 items-center justify-center hover:scale-110 active:scale-95 transition-transform duration-300 drop-shadow-[0_8px_20px_rgba(0,0,0,0.15)] group cursor-pointer"
     >
       <img
         src="/whatsapp-icon.svg"
