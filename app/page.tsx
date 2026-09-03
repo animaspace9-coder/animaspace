@@ -7,7 +7,7 @@ import { Team } from "@/app/components/sections/Team";
 import { ApproachBlock } from "@/app/components/sections/ApproachBlock";
 import { AgeGroups } from "@/app/components/sections/AgeGroups";
 import { Services } from "@/app/components/sections/Services";
-import { SpaceToGrow } from "@/app/components/sections/SpaceToGrow";
+
 import { FAQ } from "@/app/components/sections/FAQ";
 import { ProcessSection } from "@/app/components/sections/ProcessSection";
 import {
@@ -71,7 +71,6 @@ export default async function Home() {
       <AgeGroups />
       <Services services={services} />
       <FAQ />
-      <SpaceToGrow />
     </>
   );
 }
