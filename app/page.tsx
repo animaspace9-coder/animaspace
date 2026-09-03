@@ -9,6 +9,7 @@ import { AgeGroups } from "@/app/components/sections/AgeGroups";
 import { Services } from "@/app/components/sections/Services";
 
 import { FAQ } from "@/app/components/sections/FAQ";
+import { PhilosophyCard } from "@/app/components/sections/PhilosophyCard";
 import { ProcessSection } from "@/app/components/sections/ProcessSection";
 import {
   heroContent,
@@ -71,6 +72,7 @@ export default async function Home() {
       <AgeGroups />
       <Services services={services} />
       <FAQ />
+      <PhilosophyCard />
     </>
   );
 }

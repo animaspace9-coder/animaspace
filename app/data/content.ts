@@ -342,13 +342,11 @@ export const services = [
 ];
 
 export const spaceToGrowBlock = {
-  headline: "A Space to Understand. A Space to Grow.",
+  headline: "A Space for Life, Growth & Possibility",
   paragraph1:
-    "At Anima Space, we believe that seeking support is a step towards greater self-awareness, resilience, well-being, and purposeful living.",
-  paragraph2:
-    "Whether you are looking for psychological counselling, career guidance, coaching, or professional training, Anima Space offers a space to understand where you are, discover where you want to go, and develop the tools to move forward.",
-  ctaText: "Book a Consultation to explore our services",
+    "At Anima Space, every offering is centred around one simple idea: when people are given the right space to understand themselves, they can discover new possibilities for growth.",
 };
+
 
 export const aboutPageContent = {
   subtitle: "Well-being, Psychological Consulting & Counselling Centre",
