@@ -88,7 +88,7 @@ export const Hero = ({ data }: { data?: HeroData }) => {
 
               {/* WhatsApp Us */}
               <a
-                href="https://wa.me/919866410936?text=Hi%20Prashanthi%20Simon,%20I%20would%20like%20to%20inquire%20about%20a%20session%20at%20Anima%20Space."
+                href="https://wa.me/919866410936?text=Hi%20Prashanthi%20Simon%2C%20I%20would%20like%20to%20book%20a%20session%20with%20Psychology%20%26%20Counselling%20experts%20at%20Anima%20Space."
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp Us at Anima Space"

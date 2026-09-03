@@ -6,7 +6,7 @@ import { spaceToGrowBlock } from "@/app/data/content";
 import { Phone, MessageCircle, CalendarCheck } from "lucide-react";
 
 const WHATSAPP_URL =
-  "https://wa.me/919866410936?text=Hi%20Prashanthi%20Simon,%20I%20would%20like%20to%20inquire%20about%20a%20session%20at%20Anima%20Space.";
+  "https://wa.me/919866410936?text=Hi%20Prashanthi%20Simon%2C%20I%20would%20like%20to%20book%20a%20session%20with%20Psychology%20%26%20Counselling%20experts%20at%20Anima%20Space.";
 
 interface SpaceToGrowProps {
   headline?: string;

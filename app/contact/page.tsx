@@ -83,7 +83,7 @@ export default function ContactPage() {
                 Chat with Prashanthi Simon directly for quick questions, scheduling inquiries, or training workshops.
               </p>
               <a
-                href="https://wa.me/919866410936?text=Hi%20Prashanthi%20Simon,%20I%20would%20like%20to%20inquire%20about%20Anima%20Space%20services."
+                href="https://wa.me/919866410936?text=Hi%20Prashanthi%20Simon%2C%20I%20would%20like%20to%20book%20a%20session%20with%20Psychology%20%26%20Counselling%20experts%20at%20Anima%20Space."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#60D66A] text-black font-bold text-base border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:bg-[#52c45b] transition-all"
