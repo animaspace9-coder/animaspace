@@ -12,7 +12,7 @@ export const PhilosophyCard = () => {
   }, []);
 
   return (
-    <section className="py-16 px-6 bg-[var(--color-brand-off-white)]">
+    <section className="py-8 px-6 bg-[var(--color-brand-off-white)]">
       <div ref={ref} className="max-w-3xl mx-auto">
         <div className="rounded-[2rem] bg-[var(--color-brand-mauve)] px-10 py-12 text-center flex flex-col items-center gap-5 shadow-[6px_6px_0px_0px_var(--color-brand-navy)]">
           {/* Badge */}

@@ -10,6 +10,7 @@ import { Services } from "@/app/components/sections/Services";
 
 import { FAQ } from "@/app/components/sections/FAQ";
 import { PhilosophyCard } from "@/app/components/sections/PhilosophyCard";
+import { StillHaveQuestions } from "@/app/components/sections/StillHaveQuestions";
 import { ProcessSection } from "@/app/components/sections/ProcessSection";
 import {
   heroContent,
@@ -73,6 +74,7 @@ export default async function Home() {
       <Services services={services} />
       <FAQ />
       <PhilosophyCard />
+      <StillHaveQuestions />
     </>
   );
 }
