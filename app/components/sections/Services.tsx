@@ -86,11 +86,6 @@ export const Services = ({ services }: { services?: ServiceItem[] }) => {
                 <h3 className="font-heading text-2xl sm:text-3xl font-bold text-[var(--color-brand-navy)] mb-2">
                   {service.title}
                 </h3>
-                {service.tagline && (
-                  <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[var(--color-brand-navy)]/90 mb-4">
-                    {service.tagline}
-                  </p>
-                )}
                 <p className="text-base text-[var(--color-brand-espresso)] leading-relaxed mb-6">
                   {service.homeSummary ?? service.description}
                 </p>
