@@ -86,7 +86,7 @@ async function seed() {
       'Career Guidance & Coaching',
     ],
 
-    // 3. Age Groups
+    // 2. Age Groups
     ageGroupsTitle: 'Supporting Children, Adolescents & Adults',
     ageGroups: [
       {
@@ -136,7 +136,7 @@ async function seed() {
       },
     ],
 
-    // 4. Offerings
+    // 3. Offerings
     offeringsTitle: 'Our Offerings',
     offeringsSubtitle:
       'At Anima Space, every offering is centred around one simple idea: when people are given the right space to understand themselves, they can discover new possibilities for growth.',
@@ -237,12 +237,12 @@ async function seed() {
       },
     ],
 
-    // 5. Approach
+    // 4. Approach
     approachHeadline: 'Psychological Support. Personal Growth. Purposeful Living.',
     approachDescription:
       'At Anima Space, we believe that seeking support is a step towards greater self-awareness, resilience, well-being, and purposeful living. Whether you are looking for psychological counselling, career guidance, coaching, or professional training, Anima Space offers a space to understand where you are, discover where you want to go, and develop the tools to move forward.',
 
-    // 6. Team / Prashanthi
+    // 5. Team / Prashanthi
     teamSectionTitle: 'Meet Prashanthi',
     teamMember: {
       _type: 'teamMember',
@@ -265,7 +265,7 @@ async function seed() {
       ],
     },
 
-    // 7. Testimonials
+    // 6. Testimonials
     testimonialsSectionTitle: 'What Clients Say',
     testimonials: [
       {
@@ -291,7 +291,7 @@ async function seed() {
       },
     ],
 
-    // 8. FAQ
+    // 7. FAQ
     faqSectionTitle: 'Frequently Asked Questions',
     faqs: [
       {

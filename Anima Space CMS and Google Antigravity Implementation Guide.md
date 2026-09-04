@@ -38,8 +38,7 @@ The desired experience is that a person can open Sanity Studio, understand where
 1. Hero: “Where Understanding Begins, Growth Unfolds.”
 2. Primary calls to action: Book a Consultation, WhatsApp Us, Call Us.
 3. “What We Can Help With” summary cards.
-4. Experience, workshops, and review metrics.
-5. Founder section for Prashanthi Simon.
+4. Founder section for Prashanthi Simon.
 6. Four-step “How It Works” process.
 7. Vision and philosophy.
 8. Tailored care for Children, Adolescents, and Adults.
@@ -96,7 +95,6 @@ Organize the Studio sidebar into clear groups. Editors should not see a flat lis
 - Blog Posts
 - FAQs
 - Testimonials or Reviews
-- Statistics / Impact Metrics
 
 **Media**
 
@@ -181,10 +179,7 @@ Create a visual array or clearly separated field groups in this order:
 2. **Help Summary**
    - section heading
    - repeatable summary cards
-3. **Impact Metrics**
-   - repeatable metric rows: value, label, optional icon
-   - mark values as “needs confirmation” where the existing site currently shows `0+`
-4. **Founder Preview**
+3. **Founder Preview**
    - reference to Founder Profile
    - visible biography excerpt
    - CTA

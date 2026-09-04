@@ -85,7 +85,7 @@ export default defineType({
       ],
     }),
 
-    // ── 4. Offerings ─────────────────────────────────────────────────────────
+    // ── 3. Offerings ─────────────────────────────────────────────────────────
     defineField({
       name: 'offeringsTitle',
       title: 'Offerings — Section Title',
@@ -107,7 +107,7 @@ export default defineType({
       of: [{ type: 'serviceCard' }],
     }),
 
-    // ── 5. Approach Block ────────────────────────────────────────────────────
+    // ── 4. Approach Block ────────────────────────────────────────────────────
     defineField({
       name: 'approachHeadline',
       title: 'Approach — Headline',
@@ -122,7 +122,7 @@ export default defineType({
       group: 'approach',
     }),
 
-    // ── 6. Team / Prashanthi ─────────────────────────────────────────────────
+    // ── 5. Team / Prashanthi ─────────────────────────────────────────────────
     defineField({
       name: 'teamSectionTitle',
       title: 'Team — Section Label',
@@ -136,7 +136,7 @@ export default defineType({
       group: 'team',
     }),
 
-    // ── 7. Testimonials ──────────────────────────────────────────────────────
+    // ── 6. Testimonials ──────────────────────────────────────────────────────
     defineField({
       name: 'testimonialsSectionTitle',
       title: 'Testimonials — Section Title',
@@ -162,7 +162,7 @@ export default defineType({
       ],
     }),
 
-    // ── 8. FAQ ───────────────────────────────────────────────────────────────
+    // ── 7. FAQ ───────────────────────────────────────────────────────────────
     defineField({
       name: 'faqSectionTitle',
       title: 'FAQ — Section Title',

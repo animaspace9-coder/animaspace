@@ -26,7 +26,7 @@ export const structure: StructureResolver = (S) =>
       S.divider(),
 
       // ── Website Pages (Page-by-Page) ─────────────────────────────────────
-      singletonListItem(S, 'homePage', '🏠 Home Page (8 Sections)'),
+      singletonListItem(S, 'homePage', '🏠 Home Page (7 Sections)'),
       singletonListItem(S, 'aboutPage', '📖 About Us Page'),
       singletonListItem(S, 'servicesPage', '✨ Services Overview Page'),
 
