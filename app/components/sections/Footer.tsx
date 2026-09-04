@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useRef, useLayoutEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import Link from "next/link";
 import { navigation, serviceSubNav, contactInfo } from "@/app/data/content";
-import { animateFadeUp } from "@/app/lib/gsap";
+import { gsap } from "@/app/lib/gsap";
 import SkarCredit from "@/app/components/ui/SkarCredit";
 
 /* ─── Hand-Drawn Kid Doodle Character SVG ─── */
@@ -136,11 +136,26 @@ export const Footer = () => {
     return null;
   }
 
-  useLayoutEffect(() => {
-    if (wordmarkRef.current) {
-      animateFadeUp(wordmarkRef.current);
-    }
-  }, []);
+  useEffect(() => {
+    if (typeof window === "undefined" || !wordmarkRef.current) return;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
+    const ctx = gsap.context(() => {
+      gsap.from(wordmarkRef.current, {
+        y: 20,
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: wordmarkRef.current,
+          start: "top 98%",
+          once: true,
+        },
+      });
+    }, footerRef);
+
+    return () => ctx.revert();
+  }, [pathname]);
 
   React.useEffect(() => {
     setCurrentYear(new Date().getFullYear());
@@ -156,7 +171,7 @@ export const Footer = () => {
         <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-12 lg:gap-16">
           
           {/* Left Side: Full Logo + Contact Email */}
-          <div className="flex flex-col items-start max-w-xl">
+          <div className="flex flex-col items-start w-full lg:max-w-xl min-w-0">
             <Link href="/" className="inline-block mb-4 group cursor-pointer">
               <img
                 src="/logo.svg"
@@ -169,7 +184,8 @@ export const Footer = () => {
             </span>
             <a
               href={`mailto:${contactInfo.email}`}
-              className="font-heading font-black text-2xl sm:text-4xl md:text-5xl tracking-tight text-[var(--color-brand-navy)] hover:text-[var(--color-brand-mauve)] hover:underline underline-offset-8 transition-colors leading-tight break-all cursor-pointer"
+              className="font-heading font-black text-xl sm:text-2xl md:text-3xl lg:text-[1.75rem] xl:text-[2.25rem] tracking-tight text-[var(--color-brand-navy)] hover:text-[var(--color-brand-mauve)] hover:underline underline-offset-8 transition-colors leading-tight whitespace-nowrap break-keep cursor-pointer block max-w-full"
+              title={contactInfo.email}
             >
               {contactInfo.email}
             </a>

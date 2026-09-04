@@ -61,11 +61,11 @@ export default function ContactPage() {
               <div className="w-14 h-14 rounded-2xl bg-[var(--color-brand-pink)] border-2 border-[var(--color-brand-navy)] flex items-center justify-center text-[var(--color-brand-navy)] flex-shrink-0">
                 <Mail className="w-6 h-6" />
               </div>
-              <div>
+              <div className="min-w-0 flex-1">
                 <span className="text-xs font-bold uppercase tracking-widest text-[var(--color-brand-mauve)] block mb-1">
                   Email
                 </span>
-                <p className="font-heading text-lg sm:text-xl font-bold text-[var(--color-brand-navy)] break-all">
+                <p className="font-heading text-base sm:text-lg md:text-xl font-bold text-[var(--color-brand-navy)] break-words [overflow-wrap:anywhere] sm:whitespace-nowrap">
                   {siteSettings.email}
                 </p>
               </div>

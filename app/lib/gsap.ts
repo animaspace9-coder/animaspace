@@ -9,9 +9,13 @@ if (typeof window !== "undefined") {
 }
 
 // Reusable animation configurations according to `emil-design-eng` 
-// (subtle motion, no aggressive looping)
+// (subtle motion, no aggressive looping, respecting prefers-reduced-motion)
 export const animateFadeUp = (element: Element | null, delay = 0) => {
   if (!element) return;
+  if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    gsap.set(element, { opacity: 1, y: 0 });
+    return;
+  }
   gsap.fromTo(
     element,
     { opacity: 0, y: 30 },
@@ -32,6 +36,10 @@ export const animateFadeUp = (element: Element | null, delay = 0) => {
 
 export const animateStaggerFadeUp = (elements: Element[], delay = 0) => {
   if (!elements.length) return;
+  if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    gsap.set(elements, { opacity: 1, y: 0 });
+    return;
+  }
   gsap.fromTo(
     elements,
     { opacity: 0, y: 30 },
@@ -49,6 +57,12 @@ export const animateStaggerFadeUp = (elements: Element[], delay = 0) => {
       },
     }
   );
+};
+
+export const refreshScrollTrigger = () => {
+  if (typeof window !== "undefined") {
+    ScrollTrigger.refresh();
+  }
 };
 
 export { gsap, ScrollTrigger };
