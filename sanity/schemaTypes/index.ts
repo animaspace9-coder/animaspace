@@ -1,7 +1,6 @@
 import { type SchemaTypeDefinition } from 'sanity'
 
 // Shared object types
-import statItem from './objects/statItem'
 import serviceCard from './objects/serviceCard'
 import teamMember from './objects/teamMember'
 import seo from './objects/seo'
@@ -33,7 +32,6 @@ import page from './documents/page'
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     // ── Shared objects ─────────────────────────────────────────────────────
-    statItem,
     serviceCard,
     teamMember,
     seo,

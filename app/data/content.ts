@@ -39,11 +39,7 @@ export const heroContent = {
   ],
 };
 
-export const trustStats = [
-  { value: "15+", label: "Years Experience" },
-  { value: "300+", label: "Workshops Conducted" },
-  { value: "50+", label: "5 Star Reviews" },
-];
+
 
 export const meetPrashanthi = {
   title: "Meet Prashanthi Simon",
@@ -576,7 +572,6 @@ export const bookingContent = {
   tagline: "Book Appointment",
   subtitle:
     "Ready to start your journey towards a healthier and happier life…take the first step now.. Fill the form, talk to our experts",
-  stats: trustStats,
   services: bookingServiceOptions,
 };
 

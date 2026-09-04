@@ -4,7 +4,6 @@ import { defineQuery } from 'next-sanity'
 export const siteSettingsQuery = defineQuery(`
   *[_type == "siteSettings"][0] {
     tagline,
-    trustStats[] { value, label },
     phone,
     email,
     address,
@@ -22,7 +21,6 @@ export const homePageQuery = defineQuery(`
     heroBadgeText,
     heroCtaText,
     heroCardItems,
-    trustStats[] { value, label },
     ageGroupsTitle,
     ageGroups[] {
       id,

@@ -6,13 +6,12 @@ export default defineType({
   type: 'document',
   groups: [
     { name: 'hero', title: '1. Hero' },
-    { name: 'trustStrip', title: '2. Trust Strip' },
-    { name: 'ageGroups', title: '3. Age Groups' },
-    { name: 'offerings', title: '4. Our Offerings' },
-    { name: 'approach', title: '5. Approach Block' },
-    { name: 'team', title: '6. Meet Prashanthi' },
-    { name: 'testimonials', title: '7. Testimonials' },
-    { name: 'faq', title: '8. FAQ' },
+    { name: 'ageGroups', title: '2. Age Groups' },
+    { name: 'offerings', title: '3. Our Offerings' },
+    { name: 'approach', title: '4. Approach Block' },
+    { name: 'team', title: '5. Meet Prashanthi' },
+    { name: 'testimonials', title: '6. Testimonials' },
+    { name: 'faq', title: '7. FAQ' },
   ],
   fields: [
     // ── 1. Hero ──────────────────────────────────────────────────────────────
@@ -52,17 +51,7 @@ export default defineType({
       validation: (Rule) => Rule.max(3),
     }),
 
-    // ── 2. Trust Strip ───────────────────────────────────────────────────────
-    defineField({
-      name: 'trustStats',
-      title: 'Trust Strip — Stats',
-      type: 'array',
-      of: [{ type: 'statItem' }],
-      group: 'trustStrip',
-      validation: (Rule) => Rule.max(3),
-    }),
-
-    // ── 3. Age Groups ────────────────────────────────────────────────────────
+    // ── 2. Age Groups ────────────────────────────────────────────────────────
     defineField({
       name: 'ageGroupsTitle',
       title: 'Age Groups — Section Title',

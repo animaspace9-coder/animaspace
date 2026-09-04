@@ -52,11 +52,6 @@ async function seed() {
     _id: 'siteSettings',
     _type: 'siteSettings',
     tagline: 'Well-being, Psychological Consulting & Counselling Centre',
-    trustStats: [
-      { _key: 'ts1', _type: 'statItem', value: '15+', label: 'Years Experience' },
-      { _key: 'ts2', _type: 'statItem', value: '300+', label: 'Workshops Conducted' },
-      { _key: 'ts3', _type: 'statItem', value: '50+', label: '5 Star Reviews' },
-    ],
     phone: '+91 98664 10936',
     email: 'animaspace9@gmail.com',
     address: 'Online & In-person consultations by appointment',
@@ -89,13 +84,6 @@ async function seed() {
       'Emotional & Psychological Well-being',
       'Child & Adolescent Support',
       'Career Guidance & Coaching',
-    ],
-
-    // 2. Trust Strip
-    trustStats: [
-      { _key: 'hs1', _type: 'statItem', value: '15+', label: 'Years Experience' },
-      { _key: 'hs2', _type: 'statItem', value: '300+', label: 'Workshops Conducted' },
-      { _key: 'hs3', _type: 'statItem', value: '50+', label: '5 Star Reviews' },
     ],
 
     // 3. Age Groups

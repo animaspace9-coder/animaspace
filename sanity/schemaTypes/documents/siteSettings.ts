@@ -12,14 +12,6 @@ export default defineType({
       description: 'Displayed under the logo and in meta. E.g. "Well-being, Psychological Consulting & Counselling Centre"',
     }),
     defineField({
-      name: 'trustStats',
-      title: 'Trust Strip Stats',
-      description: 'The three headline statistics shown in the trust strip (e.g. 15+ Years Experience)',
-      type: 'array',
-      of: [{ type: 'statItem' }],
-      validation: (Rule) => Rule.max(3),
-    }),
-    defineField({
       name: 'phone',
       title: 'Phone Number',
       type: 'string',
