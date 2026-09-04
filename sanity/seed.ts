@@ -68,7 +68,7 @@ async function seed() {
       'Couple Counselling',
       'Life Coaching',
       'Parental Guidance',
-      'Healing Services',
+      'Emotional Well-being & Personal Growth',
       'Training Services',
     ],
     whatsappNumber: '919866410936',
@@ -193,11 +193,11 @@ async function seed() {
       {
         _key: 'of3',
         _type: 'serviceCard',
-        title: 'Healing',
+        title: 'Emotional Well-being & Personal Growth',
         description:
           'A holistic space for emotional healing, self-discovery, resilience, and inner well-being, supporting individuals as they process experiences, reconnect with themselves, and develop healthier ways of moving forward.',
         icon: '🌿',
-        slug: 'healing',
+        slug: 'emotional-well-being',
         colorKey: 'rose',
         bulletPoints: [
           'Emotional healing',
@@ -474,11 +474,11 @@ async function seed() {
       {
         _key: 'sv3',
         _type: 'serviceCard',
-        title: 'Healing',
+        title: 'Emotional Well-being & Personal Growth',
         description:
-          'Healing creates space for individuals to process experiences, reconnect with themselves, and develop a deeper understanding of their emotional world. It encourages self-discovery, emotional resilience, and inner well-being.',
+          'Emotional well-being & personal growth creates space for individuals to process experiences, reconnect with themselves, and develop a deeper understanding of their emotional world. It encourages self-discovery, emotional resilience, and inner well-being.',
         icon: '🌿',
-        slug: 'healing',
+        slug: 'emotional-well-being',
         colorKey: 'rose',
         bulletPoints: [
           'Emotional healing',
@@ -628,15 +628,15 @@ async function seed() {
   })
 
   await upsert({
-    _id: 'servicePage-healing',
+    _id: 'servicePage-emotional-well-being',
     _type: 'servicePage',
-    title: 'Healing',
-    slug: { _type: 'slug', current: 'healing' },
+    title: 'Emotional Well-being & Personal Growth',
+    slug: { _type: 'slug', current: 'emotional-well-being' },
     icon: '🌿',
     colorKey: 'rose',
-    tagline: 'A holistic space for emotional healing, self-discovery, and inner well-being.',
+    tagline: 'A holistic space for emotional well-being, self-discovery, and personal growth.',
     intro:
-      'Healing creates space for individuals to process experiences, reconnect with themselves, and develop a deeper understanding of their emotional world. It encourages self-discovery, emotional resilience, and inner well-being while supporting healthier ways of navigating life\'s challenges. Every healing journey is personal, gradual, and individual.',
+      'Emotional Well-being & Personal Growth creates space for individuals to process experiences, reconnect with themselves, and develop a deeper understanding of their emotional world. It encourages self-discovery, emotional resilience, and inner well-being while supporting healthier ways of navigating life\'s challenges. Every journey is personal, gradual, and individual.',
     bulletPoints: [
       'Emotional healing',
       'Self-discovery and self-awareness',
@@ -653,21 +653,21 @@ async function seed() {
       'A deeply personal and non-judgemental approach',
     ],
     whoItsFor:
-      'Individuals looking to process difficult experiences, develop greater self-awareness, reconnect with their inner life, and move towards emotional well-being and resilience.',
+      'Individuals looking to process difficult experiences, develop greater self-awareness, reconnect with their inner life, and move towards emotional well-being and personal growth.',
     faqs: [
       {
         _key: 'hq1',
         _type: 'faqItem',
-        question: 'How is healing different from counselling?',
+        question: 'How is Emotional Well-being & Personal Growth different from counselling?',
         answer:
-          'Counselling tends to focus on specific emotional or psychological concerns. The healing space is a broader, more holistic journey — focused on self-discovery, inner well-being, and personal transformation. Both can complement each other.',
+          'Counselling tends to focus on specific emotional or psychological concerns. The emotional well-being space is a broader, more holistic journey — focused on self-discovery, inner well-being, and personal transformation. Both can complement each other.',
       },
       {
         _key: 'hq2',
         _type: 'faqItem',
         question: 'Do I need to have a specific concern to start?',
         answer:
-          'No. Many individuals come to the healing space simply feeling stuck, disconnected, or in search of greater clarity and meaning. You are welcome wherever you are on your journey.',
+          'No. Many individuals come simply feeling stuck, disconnected, or in search of greater clarity and meaning. You are welcome wherever you are on your journey.',
       },
     ],
   })
@@ -838,7 +838,7 @@ async function seed() {
   await upsert({
     _id: 'blogsPage',
     _type: 'blogsPage',
-    pageHeroTitle: 'Insights for Parents & Families.',
+    pageHeroTitle: 'Blogs',
     pageHeroSubtitle:
       'Practical guidance, research-backed perspectives, and real-world tools — written by Prashanthi Simon.',
     newsletterHeading: 'More articles coming soon. Want to be notified?',

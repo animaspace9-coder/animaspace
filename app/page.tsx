@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
 import { homePageQuery, siteSettingsQuery } from "@/sanity/lib/queries";
 import { Hero } from "@/app/components/sections/Hero";
-import { TrustStrip } from "@/app/components/sections/TrustStrip";
 import { Team } from "@/app/components/sections/Team";
 import { ApproachBlock } from "@/app/components/sections/ApproachBlock";
 import { AgeGroups } from "@/app/components/sections/AgeGroups";
@@ -14,7 +13,6 @@ import { StillHaveQuestions } from "@/app/components/sections/StillHaveQuestions
 import { ProcessSection } from "@/app/components/sections/ProcessSection";
 import {
   heroContent,
-  trustStats,
   services,
   team,
   visionBlock,
@@ -46,7 +44,6 @@ export default async function Home() {
     heroCardItems: cms?.heroCardItems ?? heroContent.heroCardItems,
   };
 
-  const statsData = cms?.trustStats ?? trustStats;
 
   const teamData = cms?.teamMember
     ? {
@@ -66,7 +63,6 @@ export default async function Home() {
   return (
     <>
       <Hero data={heroData} />
-      <TrustStrip stats={statsData} />
       <Team member={teamData} />
       <ProcessSection />
       <ApproachBlock headline={visionData.headline} description={visionData.description} />

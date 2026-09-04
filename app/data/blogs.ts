@@ -38,7 +38,7 @@ export interface BlogPostData {
 }
 
 export const blogsPageContent = {
-  heroTitle: "Insights for Parents & Families.",
+  heroTitle: "Blogs",
   heroSubtitle:
     "Practical guidance, research-backed perspectives, and real-world tools — written by Prashanthi Simon.",
   newsletterHeading: "More articles coming soon. Want to be notified?",
