@@ -30,7 +30,7 @@ export const MobileActionDock = () => {
           className="flex-1 flex flex-col items-center justify-center gap-0.5 bg-[var(--color-brand-mauve)] text-white font-bold text-[11px] leading-tight px-2 min-h-[44px] hover:bg-[var(--color-brand-rose)] active:scale-95 transition-all duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         >
           <CalendarCheck className="w-5 h-5 flex-shrink-0" aria-hidden="true" />
-          <span>Book</span>
+          <span>Book Now</span>
         </Link>
 
         {/* Divider */}
