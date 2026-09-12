@@ -329,7 +329,7 @@ export const Footer = () => {
         <div className="flex justify-center w-full">
           <SkarCredit
             accentColor="#0A1C33"
-            words={["<3", "with love", "❤️", "care", "passion"]}
+            words={["<3", "love", "❤️", "care", "passion"]}
             className="py-0 text-[var(--color-brand-espresso)]/80 text-xs sm:text-sm font-medium"
           />
         </div>
