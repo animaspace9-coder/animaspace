@@ -52,6 +52,7 @@ export default async function Home() {
         bio: cms.teamMember.bio,
         image: cms.teamMember.imageUrl ?? team[0].image,
         qualifications: cms.teamMember.qualifications ?? team[0].qualifications,
+        experience: cms.teamMember.experience,
       }
     : team[0];
 

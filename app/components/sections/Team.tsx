@@ -15,6 +15,7 @@ interface TeamMember {
   image?: string;
   qualifications?: string[];
   specialties?: string[];
+  experience?: string;
 }
 interface TeamProps {
   member?: TeamMember;
@@ -42,6 +43,7 @@ export const Team = ({ member }: TeamProps) => {
   const bio2 = member?.bio2 ?? meetPrashanthi.bio2;
   const image = member?.image ?? meetPrashanthi.image;
   const qualifications = member?.qualifications ?? meetPrashanthi.qualifications;
+  const experience = member?.experience ?? "15+ Years Experience";
 
   return (
     <section
@@ -68,11 +70,11 @@ export const Team = ({ member }: TeamProps) => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center">
             {/* Left Column: Photo Frame */}
             <div className="lg:col-span-5 flex flex-col items-center">
-              <div className="relative w-full max-w-sm aspect-[4/5] rounded-[2rem] bg-white border-4 border-[var(--color-brand-navy)] shadow-[6px_6px_0px_0px_var(--color-brand-navy)] overflow-hidden group">
+              <div className="relative w-full max-w-sm rounded-[2rem] bg-[var(--color-brand-sky)] border-4 border-[var(--color-brand-navy)] shadow-[6px_6px_0px_0px_var(--color-brand-navy)] overflow-hidden group">
                 <img
                   src={image}
                   alt="Prashanthi Simon"
-                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
+                  className="w-full h-auto block hover:scale-105 transition-transform duration-500"
                 />
                 {/* Corner Accent Shapes */}
                 <div className="absolute top-4 right-4 w-7 h-7 rounded-full bg-[var(--color-brand-sky)] border-2 border-[var(--color-brand-navy)] shadow-sm" />
@@ -81,7 +83,7 @@ export const Team = ({ member }: TeamProps) => {
 
               <div className="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--color-brand-navy)] text-white text-xs sm:text-sm font-bold shadow-sm">
                 <span>⭐</span>
-                <span>15+ Years Experience</span>
+                <span>{experience}</span>
               </div>
             </div>
 
