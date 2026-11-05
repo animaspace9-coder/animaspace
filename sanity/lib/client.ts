@@ -5,5 +5,5 @@ export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: true, // fast, cached published-content reads
+  useCdn: false, // In Next.js App Router with ISR (revalidate), useCdn: false ensures fresh data from Sanity on every revalidation
 });
