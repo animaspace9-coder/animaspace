@@ -21,6 +21,7 @@ export function ConsultationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [confirmedBookingId, setConfirmedBookingId] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,6 +59,10 @@ export function ConsultationForm() {
         );
         setIsSubmitting(false);
         return;
+      }
+
+      if (result?.booking?.id) {
+        setConfirmedBookingId(result.booking.id);
       }
     } catch (err: any) {
       setErrorMessage("Could not connect to booking service. Please check your internet connection or reach out on WhatsApp (+91 98664 10936).");
@@ -120,12 +125,50 @@ export function ConsultationForm() {
         </div>
 
         {/* Session Summary Card */}
-        <div className="p-5 bg-[var(--color-brand-sky)]/30 rounded-2xl border-2 border-[var(--color-brand-navy)]/30 text-left text-sm text-[var(--color-brand-navy)] mb-6 flex flex-col gap-2">
-          <p><strong>Name:</strong> {firstName} {lastName}</p>
-          <p><strong>Service:</strong> {service}</p>
-          <p><strong>Mode:</strong> {mode === "Online" ? "Online Consultation (Google Meet)" : "In-Person Consultation (Hyderabad)"}</p>
-          <p><strong>Scheduled Slot:</strong> {formatDateDDMMYYYY(date)} {time ? `at ${timeLabel || time} IST` : ""}</p>
-          <p><strong>Contact:</strong> {phone} &bull; {email}</p>
+        <div className="p-6 bg-[var(--color-brand-off-white)] rounded-2xl border-2 border-[var(--color-brand-navy)] text-left text-sm text-[var(--color-brand-navy)] mb-6 shadow-xs flex flex-col gap-3">
+          <div className="flex items-center justify-between pb-3 border-b border-gray-200">
+            <span className="text-xs font-bold uppercase tracking-wider text-[var(--color-brand-mauve)]">
+              Customer Booking Receipt
+            </span>
+            {confirmedBookingId && (
+              <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-gray-100 text-gray-700 font-semibold">
+                ID: {confirmedBookingId}
+              </span>
+            )}
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
+            <div>
+              <span className="text-gray-500 block text-[11px] uppercase font-bold">Client Name</span>
+              <span className="font-bold text-[var(--color-brand-navy)]">{firstName} {lastName}</span>
+            </div>
+            <div>
+              <span className="text-gray-500 block text-[11px] uppercase font-bold">Contact</span>
+              <span className="font-semibold text-[var(--color-brand-navy)]">{phone} &bull; {email}</span>
+            </div>
+            <div>
+              <span className="text-gray-500 block text-[11px] uppercase font-bold">Service Booked</span>
+              <span className="font-bold text-[var(--color-brand-navy)]">{service}</span>
+            </div>
+            <div>
+              <span className="text-gray-500 block text-[11px] uppercase font-bold">Consultation Mode</span>
+              <span className="font-semibold text-[var(--color-brand-navy)]">
+                {mode === "Online" ? "🌐 Online (Google Meet Video Room)" : "📍 In-Person (Hyderabad Clinic)"}
+              </span>
+            </div>
+            <div className="sm:col-span-2">
+              <span className="text-gray-500 block text-[11px] uppercase font-bold">Appointment Schedule (IST)</span>
+              <span className="font-bold text-base text-[var(--color-brand-navy)]">
+                🗓️ {formatDateDDMMYYYY(date)} at 🕒 {timeLabel || time} (Indian Standard Time)
+              </span>
+            </div>
+            {message && (
+              <div className="sm:col-span-2 p-3 bg-white rounded-xl border border-gray-200 text-xs">
+                <span className="text-gray-500 block text-[10px] uppercase font-bold mb-1">Client Notes / Concerns</span>
+                <p className="text-gray-800 italic">&ldquo;{message}&rdquo;</p>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Action Buttons: Google Calendar & WhatsApp */}
@@ -166,6 +209,7 @@ export function ConsultationForm() {
             setTimeLabel("");
             setMessage("");
             setErrorMessage("");
+            setConfirmedBookingId("");
           }}
           className="text-xs font-bold text-[var(--color-brand-mauve)] underline hover:text-[var(--color-brand-navy)]"
         >
