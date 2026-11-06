@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { bookingServiceOptions, consultationTimeSlots } from "@/app/data/content";
+import { bookingServiceOptions } from "@/app/data/content";
 import { generateGoogleCalendarUrl } from "@/app/lib/google-calendar";
 import { Button } from "@/app/components/ui/Button";
-import { CheckCircle2, Calendar, Globe, MapPin, Send } from "lucide-react";
+import { StepDateTime, todayIST, formatDateDDMMYYYY, getInitialWorkingDate } from "@/app/components/booking/StepDateTime";
+import { CheckCircle2, Calendar, Globe, MapPin, Send, AlertCircle, Mail } from "lucide-react";
 
 export function ConsultationForm() {
   const [firstName, setFirstName] = useState("");
@@ -12,24 +13,65 @@ export function ConsultationForm() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [service, setService] = useState("");
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(getInitialWorkingDate());
   const [time, setTime] = useState("");
+  const [timeLabel, setTimeLabel] = useState("");
   const [mode, setMode] = useState<"Online" | "Offline">("Online");
   const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!firstName || !email || !phone || !service || !date) {
-      alert("Please fill in all required fields.");
+    setErrorMessage("");
+
+    if (!firstName || !email || !phone || !service || !date || !time) {
+      setErrorMessage("Please complete all required fields and select an available appointment slot.");
       return;
     }
+
+    setIsSubmitting(true);
+
+    try {
+      // Server-side booking guard check
+      const response = await fetch("/api/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: `${firstName} ${lastName}`.trim(),
+          email,
+          phone,
+          service,
+          mode,
+          date,
+          time: timeLabel || time,
+          notes: message,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        setErrorMessage(
+          result.error || "Cannot book appointments in the past. Please select an upcoming slot."
+        );
+        setIsSubmitting(false);
+        return;
+      }
+    } catch (err: any) {
+      setErrorMessage("Could not connect to booking service. Please check your internet connection or reach out on WhatsApp (+91 98664 10936).");
+      setIsSubmitting(false);
+      return;
+    }
+
+    setIsSubmitting(false);
     setIsSubmitted(true);
   };
 
   if (isSubmitted) {
     const waText = encodeURIComponent(
-      `Hi Prashanthi Simon, I have submitted a consultation request on Anima Space:\n\nName: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}\nService: ${service}\nMode: ${mode}\nDate: ${date}\nTime: ${time || "Flexible"}\nMessage: ${message || "N/A"}`
+      `Hi Prashanthi Simon, I have submitted a consultation request on Anima Space:\n\nName: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}\nService: ${service}\nMode: ${mode}\nDate: ${formatDateDDMMYYYY(date)}\nTime: ${timeLabel || time || "Flexible"}\nMessage: ${message || "N/A"}`
     );
 
     // Calculate appointment start date for Google Calendar
@@ -50,7 +92,7 @@ export function ConsultationForm() {
       title: `${service} Consultation — Anima Space`,
       description: `Consultation with Prashanthi Simon for ${firstName} ${lastName}.\nService: ${service}\nMode: ${mode}\nPhone: ${phone}`,
       startDate: isNaN(appointmentDate.getTime()) ? new Date() : appointmentDate,
-      durationMinutes: 50,
+      durationMinutes: 60,
       attendeeEmail: email,
       attendeeName: `${firstName} ${lastName}`,
       isOnline: mode === "Online",
@@ -63,21 +105,26 @@ export function ConsultationForm() {
           <CheckCircle2 className="w-10 h-10 stroke-[2.5]" />
         </div>
         <span className="inline-block text-xs font-bold uppercase tracking-widest text-emerald-600 mb-2">
-          Consultation Request Received
+          Consultation Request Confirmed
         </span>
-        <h3 className="font-heading text-2xl sm:text-3xl font-bold text-[var(--color-brand-navy)] mb-4">
+        <h3 className="font-heading text-2xl sm:text-3xl font-bold text-[var(--color-brand-navy)] mb-3">
           Thank you, {firstName}!
         </h3>
-        <p className="text-base text-[var(--color-brand-espresso)] leading-relaxed mb-6">
-          Your consultation request for <strong className="text-[var(--color-brand-navy)]">{service}</strong> ({mode}) has been recorded. Prashanthi Simon will connect with you to confirm your session.
+        <p className="text-base text-[var(--color-brand-espresso)] leading-relaxed mb-4">
+          Your consultation for <strong className="text-[var(--color-brand-navy)]">{service}</strong> ({mode}) has been confirmed.
         </p>
+
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 border border-emerald-300 text-xs sm:text-sm font-semibold text-emerald-800 mb-6">
+          <Mail className="w-4 h-4 text-emerald-600 shrink-0" />
+          <span>A confirmation email with calendar invite has been sent to <strong>{email}</strong></span>
+        </div>
 
         {/* Session Summary Card */}
         <div className="p-5 bg-[var(--color-brand-sky)]/30 rounded-2xl border-2 border-[var(--color-brand-navy)]/30 text-left text-sm text-[var(--color-brand-navy)] mb-6 flex flex-col gap-2">
           <p><strong>Name:</strong> {firstName} {lastName}</p>
           <p><strong>Service:</strong> {service}</p>
           <p><strong>Mode:</strong> {mode === "Online" ? "Online Consultation (Google Meet)" : "In-Person Consultation (Hyderabad)"}</p>
-          <p><strong>Preferred Date:</strong> {date} {time ? `at ${time}` : ""}</p>
+          <p><strong>Scheduled Slot:</strong> {formatDateDDMMYYYY(date)} {time ? `at ${timeLabel || time} IST` : ""}</p>
           <p><strong>Contact:</strong> {phone} &bull; {email}</p>
         </div>
 
@@ -114,9 +161,11 @@ export function ConsultationForm() {
             setEmail("");
             setPhone("");
             setService("");
-            setDate("");
+            setDate(todayIST());
             setTime("");
+            setTimeLabel("");
             setMessage("");
+            setErrorMessage("");
           }}
           className="text-xs font-bold text-[var(--color-brand-mauve)] underline hover:text-[var(--color-brand-navy)]"
         >
@@ -131,15 +180,6 @@ export function ConsultationForm() {
       onSubmit={handleSubmit}
       className="bg-white rounded-[2.5rem] border-4 border-[var(--color-brand-navy)] p-6 sm:p-10 md:p-12 shadow-[8px_8px_0px_0px_var(--color-brand-navy)] flex flex-col gap-6"
     >
-      <div className="border-b border-gray-100 pb-4">
-        <h3 className="font-heading text-2xl sm:text-3xl font-bold text-[var(--color-brand-navy)] mb-1">
-          Book Your Consultation
-        </h3>
-        <p className="text-xs sm:text-sm text-[var(--color-brand-espresso)]/80">
-          Fill the form below &bull; Talk to our experts
-        </p>
-      </div>
-
       {/* Mode Switcher */}
       <div className="flex flex-col gap-2">
         <label className="text-xs font-bold uppercase tracking-wider text-[var(--color-brand-navy)]">
@@ -173,8 +213,43 @@ export function ConsultationForm() {
         </div>
       </div>
 
+      {/* Service Selection */}
+      <div className="flex flex-col gap-1.5">
+        <label className="text-xs font-bold uppercase tracking-wider text-[var(--color-brand-navy)]" htmlFor="service">
+          Service *
+        </label>
+        <select
+          id="service"
+          required
+          value={service}
+          onChange={(e) => setService(e.target.value)}
+          className="px-4 py-3 rounded-xl border-2 border-[var(--color-brand-navy)] bg-white text-sm focus:outline-none focus:border-[var(--color-brand-mauve)]"
+        >
+          <option value="" disabled>Select a service...</option>
+          {bookingServiceOptions.map((opt) => (
+            <option key={opt} value={opt}>
+              {opt}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Date & Time Selection */}
+      <div className="flex flex-col gap-2 pt-2 border-t border-gray-100">
+        <StepDateTime
+          selectedDate={date}
+          selectedTime={time}
+          onSelect={(selectedDate, selectedTimeSlot, label) => {
+            setDate(selectedDate);
+            setTime(selectedTimeSlot);
+            setTimeLabel(label);
+            setErrorMessage("");
+          }}
+        />
+      </div>
+
       {/* First Name & Last Name */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-2 border-t border-gray-100">
         <div className="flex flex-col gap-1.5">
           <label className="text-xs font-bold uppercase tracking-wider text-[var(--color-brand-navy)]" htmlFor="firstName">
             First Name *
@@ -221,7 +296,7 @@ export function ConsultationForm() {
 
         <div className="flex flex-col gap-1.5">
           <label className="text-xs font-bold uppercase tracking-wider text-[var(--color-brand-navy)]" htmlFor="phone">
-            Phone *
+            Phone / WhatsApp *
           </label>
           <input
             id="phone"
@@ -234,71 +309,10 @@ export function ConsultationForm() {
         </div>
       </div>
 
-      {/* Service */}
-      <div className="flex flex-col gap-1.5">
-        <label className="text-xs font-bold uppercase tracking-wider text-[var(--color-brand-navy)]" htmlFor="service">
-          Service *
-        </label>
-        <select
-          id="service"
-          required
-          value={service}
-          onChange={(e) => setService(e.target.value)}
-          className="px-4 py-3 rounded-xl border-2 border-[var(--color-brand-navy)] bg-white text-sm focus:outline-none focus:border-[var(--color-brand-mauve)]"
-        >
-          <option value="" disabled>Select a service...</option>
-          {bookingServiceOptions.map((opt) => (
-            <option key={opt} value={opt}>
-              {opt}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {/* Date & Time */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-bold uppercase tracking-wider text-[var(--color-brand-navy)]" htmlFor="date">
-            Date (MM/DD/YYYY) *
-          </label>
-          <div className="relative">
-            <input
-              id="date"
-              type="date"
-              required
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border-2 border-[var(--color-brand-navy)] text-sm focus:outline-none focus:border-[var(--color-brand-mauve)]"
-            />
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-bold uppercase tracking-wider text-[var(--color-brand-navy)]" htmlFor="time">
-            Preferred Time
-          </label>
-          <div className="relative">
-            <select
-              id="time"
-              value={time}
-              onChange={(e) => setTime(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border-2 border-[var(--color-brand-navy)] bg-white text-sm focus:outline-none focus:border-[var(--color-brand-mauve)]"
-            >
-              <option value="" disabled>Select a time slot...</option>
-              {consultationTimeSlots.map((slot) => (
-                <option key={slot} value={slot}>
-                  {slot}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-      </div>
-
       {/* Your Message */}
       <div className="flex flex-col gap-1.5">
         <label className="text-xs font-bold uppercase tracking-wider text-[var(--color-brand-navy)]" htmlFor="message">
-          Your Message
+          Your Message (Optional)
         </label>
         <textarea
           id="message"
@@ -309,10 +323,23 @@ export function ConsultationForm() {
         />
       </div>
 
+      {/* Error Message Display */}
+      {errorMessage && (
+        <div className="flex items-center gap-2 p-3.5 bg-rose-50 border-2 border-rose-300 rounded-xl text-rose-800 text-xs font-semibold animate-in fade-in duration-150">
+          <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />
+          <span>{errorMessage}</span>
+        </div>
+      )}
+
       {/* Submit Button */}
-      <Button type="submit" variant="primary" className="w-full justify-center py-4 text-base mt-2">
+      <Button
+        type="submit"
+        variant="primary"
+        disabled={isSubmitting || !time}
+        className="w-full justify-center py-4 text-base mt-2"
+      >
         <Send className="w-5 h-5 mr-2" />
-        Submit Consultation Request
+        {isSubmitting ? "Booking Session..." : "Confirm & Book Consultation"}
       </Button>
     </form>
   );

@@ -571,7 +571,7 @@ export const bookingContent = {
   title: "Book Your Consultation",
   tagline: "Book Appointment",
   subtitle:
-    "Ready to start your journey towards a healthier and happier life…take the first step now.. Fill the form, talk to our experts",
+    "Take the first step towards emotional well-being and personal growth with Prashanthi Simon.",
   services: bookingServiceOptions,
 };
 

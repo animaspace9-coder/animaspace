@@ -9,6 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@coreui/coreui-pro": "^5.29.2",
+    "@coreui/react-pro": "^5.29.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "embla-carousel-autoplay": "^8.6.0",
@@ -19,6 +21,7 @@
     "motion": "^13.1.1",
     "next": "16.2.10",
     "next-sanity": "^13.3.3",
+    "nodemailer": "^10.3.1",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "sanity": "^6.10.1",
@@ -27,6 +30,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/nodemailer": "^8.0.2",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "dotenv": "^17.4.2",

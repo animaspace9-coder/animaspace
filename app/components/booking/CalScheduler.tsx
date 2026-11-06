@@ -4,6 +4,7 @@ import { useState } from "react";
 import { eventTypes, mockSlotsByMode, EventType, ConsultationMode, clinicDetails } from "@/app/data/booking";
 import { generateGoogleCalendarUrl, generateGoogleMeetLink, generateValidGoogleMeetUrl } from "@/app/lib/google-calendar";
 import { Button } from "@/app/components/ui/Button";
+import { currentMinsIST } from "./StepDateTime";
 
 // Helper to get days in month
 function getDaysInMonth(year: number, month: number) {
@@ -97,6 +98,25 @@ export function CalScheduler() {
   const isSunday = (day: number) => {
     const checkDate = new Date(currentYear, currentMonth, day);
     return checkDate.getDay() === 0;
+  };
+
+  // Check if slot has already passed today
+  const isSlotPast = (slotStr: string) => {
+    if (!selectedDate) return false;
+    const isSelectedToday =
+      selectedDate === today.getDate() &&
+      currentMonth === today.getMonth() &&
+      currentYear === today.getFullYear();
+    if (!isSelectedToday) return false;
+
+    const match = slotStr.match(/(\d+):(\d+)\s*(AM|PM)/i);
+    if (!match) return false;
+    let h = parseInt(match[1], 10);
+    const m = parseInt(match[2], 10);
+    const p = match[3]?.toUpperCase();
+    if (p === "PM" && h < 12) h += 12;
+    if (p === "AM" && h === 12) h = 0;
+    return h * 60 + m <= currentMinsIST();
   };
 
   // Get available slots for selected date & mode
@@ -390,13 +410,17 @@ export function CalScheduler() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[280px] overflow-y-auto pr-1">
                       {availableSlots.map((slot) => {
                         const isSelected = selectedTime === slot;
+                        const isPast = isSlotPast(slot);
                         return (
                           <button
                             key={slot}
                             type="button"
-                            onClick={() => setSelectedTime(slot)}
+                            disabled={isPast}
+                            onClick={() => !isPast && setSelectedTime(slot)}
                             className={`py-3 px-4 rounded-xl font-bold text-xs sm:text-sm border-2 transition-all flex items-center justify-between ${
-                              isSelected
+                              isPast
+                                ? "opacity-35 cursor-not-allowed bg-black/[0.04] text-black/35 border-black/[0.06] line-through"
+                                : isSelected
                                 ? "bg-[var(--color-brand-pink)] border-[var(--color-brand-navy)] text-[var(--color-brand-navy)] shadow-[3px_3px_0px_0px_var(--color-brand-navy)]"
                                 : "bg-white border-gray-200 text-[var(--color-brand-navy)] hover:border-[var(--color-brand-navy)]"
                             }`}

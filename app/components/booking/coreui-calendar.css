@@ -1,0 +1,208 @@
+/* Scoped Calendar Styles for Anima Space */
+.anima-coreui-calendar {
+  --cui-primary: #A67D76; /* Brand Mauve */
+  --cui-primary-rgb: 166, 125, 118;
+  --cui-body-color: #0A1C33; /* Brand Navy */
+  --cui-border-color: rgba(10, 28, 51, 0.12);
+  --cui-secondary-color: #3B2A1E; /* Brand Espresso */
+  --cui-tertiary-color: rgba(10, 28, 51, 0.35);
+  --cui-tertiary-bg: #C5E0F2; /* Brand Sky */
+  --cui-danger: #BC8E83; /* Brand Rose */
+  --cui-calendar-table-margin: 0.5rem auto;
+  --cui-calendar-table-cell-size: 2.6rem;
+  --cui-calendar-nav-padding: 0.75rem 0.5rem;
+  --cui-calendar-nav-border-color: rgba(10, 28, 51, 0.12);
+  --cui-calendar-nav-border: 1px solid var(--cui-calendar-nav-border-color);
+  --cui-calendar-nav-btn-padding-x: 0.5rem;
+  --cui-calendar-nav-btn-padding-y: 0.35rem;
+  --cui-calendar-nav-btn-font-size: 0.875rem;
+  --cui-calendar-nav-btn-bg: transparent;
+  --cui-calendar-nav-btn-border-width: 1px;
+  --cui-calendar-nav-btn-border-color: transparent;
+  --cui-calendar-nav-btn-border-radius: 0.75rem;
+  --cui-calendar-nav-btn-hover-bg: #C5E0F2;
+  --cui-calendar-nav-btn-hover-border-color: transparent;
+  --cui-calendar-nav-date-font-weight: 700;
+  --cui-calendar-nav-date-color: #0A1C33;
+  --cui-calendar-nav-date-hover-color: #A67D76;
+  --cui-calendar-nav-icon-width: 0.875rem;
+  --cui-calendar-nav-icon-height: 0.875rem;
+  --cui-calendar-nav-icon-color: #0A1C33;
+  --cui-calendar-nav-icon-hover-color: #A67D76;
+  --cui-calendar-cell-header-inner-font-weight: 700;
+  --cui-calendar-cell-header-inner-color: #A67D76;
+  --cui-calendar-cell-hover-color: #0A1C33;
+  --cui-calendar-cell-hover-bg: #FAD1CB;
+  --cui-calendar-cell-disabled-color: rgba(10, 28, 51, 0.25);
+  --cui-calendar-cell-selected-color: #ffffff;
+  --cui-calendar-cell-selected-bg: #A67D76;
+  --cui-calendar-cell-today-color: #0A1C33;
+  width: 100%;
+}
+
+.anima-coreui-calendar .calendars {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.anima-coreui-calendar .calendar {
+  width: 100%;
+  max-width: 100%;
+  background: #ffffff;
+  border-radius: 1.25rem;
+  border: 2px solid rgba(10, 28, 51, 0.15);
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+
+.anima-coreui-calendar .calendar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--cui-calendar-nav-padding);
+  border-bottom: 2px solid rgba(10, 28, 51, 0.08);
+  margin-bottom: 0.5rem;
+}
+
+.anima-coreui-calendar .calendar-nav-prev,
+.anima-coreui-calendar .calendar-nav-next {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.anima-coreui-calendar .calendar-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--cui-calendar-nav-date-color);
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 0.625rem;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+
+.anima-coreui-calendar .calendar-nav-btn:hover {
+  background-color: rgba(197, 224, 242, 0.4);
+  color: #A67D76;
+}
+
+.anima-coreui-calendar .calendar-nav-date {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.anima-coreui-calendar .calendar-nav-date .calendar-nav-btn {
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
+}
+
+.anima-coreui-calendar table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0.25rem;
+  margin: 0 auto;
+}
+
+.anima-coreui-calendar th {
+  text-align: center;
+  padding: 0.35rem 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #A67D76;
+}
+
+/* Sunday column header highlight */
+.anima-coreui-calendar th:first-child {
+  color: #BC8E83;
+}
+
+.anima-coreui-calendar td {
+  text-align: center;
+  padding: 0;
+}
+
+.anima-coreui-calendar .calendar-cell-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  margin: 0 auto;
+  border-radius: 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #0A1C33;
+  cursor: pointer;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.anima-coreui-calendar .calendar-cell:not(.disabled):hover .calendar-cell-inner {
+  background-color: rgba(197, 224, 242, 0.6);
+  color: #0A1C33;
+  transform: scale(1.06);
+}
+
+/* Today date styling */
+.anima-coreui-calendar .calendar-cell.today:not(.selected) .calendar-cell-inner {
+  background-color: #C5E0F2;
+  color: #0A1C33;
+  font-weight: 800;
+  border: 1.5px solid #0A1C33;
+}
+
+/* Selected date styling */
+.anima-coreui-calendar .calendar-cell.selected .calendar-cell-inner {
+  background-color: #A67D76 !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  box-shadow: 2px 2px 0px 0px #0A1C33;
+  transform: scale(1.05);
+}
+
+/* Past / Disabled / Non-working dates — strict protection */
+.anima-coreui-calendar .calendar-cell.disabled,
+.anima-coreui-calendar .calendar-row.disabled {
+  pointer-events: none !important;
+  cursor: not-allowed !important;
+}
+
+.anima-coreui-calendar .calendar-cell.disabled .calendar-cell-inner {
+  opacity: 0.28 !important;
+  color: #0A1C33 !important;
+  cursor: not-allowed !important;
+  background-color: rgba(0, 0, 0, 0.03) !important;
+}
+
+/* Sunday cells — non-working day indicator */
+.anima-coreui-calendar td:first-child .calendar-cell-inner {
+  color: #BC8E83;
+}
+
+/* Previous month days (past) are disabled */
+.anima-coreui-calendar .calendar-cell.previous .calendar-cell-inner {
+  opacity: 0.2 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+}
+
+/* Next month days (visible and selectable for 2-week window) */
+.anima-coreui-calendar .calendar-cell.next .calendar-cell-inner {
+  opacity: 0.75;
+}
+
+.anima-coreui-calendar .calendar-cell.next:not(.disabled):hover .calendar-cell-inner {
+  opacity: 1;
+  background-color: rgba(197, 224, 242, 0.6);
+}
+

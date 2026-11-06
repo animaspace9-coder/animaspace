@@ -4,7 +4,7 @@ import { ConsultationForm } from "@/app/components/booking/ConsultationForm";
 export const metadata: Metadata = {
   title: "Book Your Consultation — Anima Space",
   description:
-    "Ready to start your journey towards a healthier and happier life…take the first step now. Fill the form, talk to our experts at Anima Space.",
+    "Schedule your online or in-person consultation with Prashanthi Simon at Anima Space.",
 };
 
 export default function BookPage() {
@@ -20,14 +20,14 @@ export default function BookPage() {
             Book Your Consultation
           </h1>
           <p className="text-base sm:text-xl text-[var(--color-brand-espresso)] leading-relaxed max-w-2xl mx-auto font-medium">
-            Ready to start your journey towards a healthier and happier life…take the first step now.. Fill the form, talk to our experts
+            Ready to start your journey towards a healthier and happier life — take the first step now. Schedule your consultation with Prashanthi Simon.
           </p>
         </div>
       </section>
 
       {/* Form Section */}
       <section className="py-16 md:py-24 px-6 bg-[var(--color-brand-off-white)]">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <ConsultationForm />
         </div>
       </section>
