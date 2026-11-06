@@ -5,6 +5,27 @@ export const metadata: Metadata = {
   title: "Book Your Consultation — Anima Space",
   description:
     "Schedule your online or in-person consultation with Prashanthi Simon at Anima Space.",
+  openGraph: {
+    title: "Book Your Consultation — Anima Space",
+    description:
+      "Schedule your online or in-person consultation with Prashanthi Simon at Anima Space.",
+    url: "https://www.animaspace.net/book",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Book Your Consultation — Anima Space",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Book Your Consultation — Anima Space",
+    description:
+      "Schedule your online or in-person consultation with Prashanthi Simon at Anima Space.",
+    images: ["/opengraph-image"],
+  },
 };
 
 export default function BookPage() {

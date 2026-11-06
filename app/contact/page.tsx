@@ -8,6 +8,27 @@ export const metadata: Metadata = {
   title: "Contact Us — Anima Space",
   description:
     "Get in touch with Prashanthi Simon at Anima Space. Psychological Consulting & Counselling Centre.",
+  openGraph: {
+    title: "Contact Us — Anima Space",
+    description:
+      "Get in touch with Prashanthi Simon at Anima Space. Psychological Consulting & Counselling Centre.",
+    url: "https://www.animaspace.net/contact",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Contact Us — Anima Space",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact Us — Anima Space",
+    description:
+      "Get in touch with Prashanthi Simon at Anima Space. Psychological Consulting & Counselling Centre.",
+    images: ["/opengraph-image"],
+  },
 };
 
 export default function ContactPage() {

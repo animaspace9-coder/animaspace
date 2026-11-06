@@ -11,6 +11,27 @@ export const metadata: Metadata = {
   title: "Our Services — Anima Space",
   description:
     "Explore our full range of services: Psychological Counselling, Coaching, Emotional Well-being & Personal Growth, Career Counselling, and Training for children, adolescents, and adults.",
+  openGraph: {
+    title: "Our Services — Anima Space",
+    description:
+      "Explore our full range of services: Psychological Counselling, Coaching, Emotional Well-being & Personal Growth, Career Counselling, and Training for children, adolescents, and adults.",
+    url: "https://www.animaspace.net/services",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Our Services — Anima Space",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Our Services — Anima Space",
+    description:
+      "Explore our full range of services: Psychological Counselling, Coaching, Emotional Well-being & Personal Growth, Career Counselling, and Training for children, adolescents, and adults.",
+    images: ["/opengraph-image"],
+  },
 };
 
 export default async function ServicesPage() {

@@ -9,6 +9,27 @@ export const metadata: Metadata = {
   title: "About Us — Anima Space",
   description:
     "Well-being, Psychological Consulting & Counselling Centre — A Safe Space to Understand, Heal, and Grow.",
+  openGraph: {
+    title: "About Us — Anima Space",
+    description:
+      "Well-being, Psychological Consulting & Counselling Centre — A Safe Space to Understand, Heal, and Grow.",
+    url: "https://www.animaspace.net/about",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "About Us — Anima Space",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Us — Anima Space",
+    description:
+      "Well-being, Psychological Consulting & Counselling Centre — A Safe Space to Understand, Heal, and Grow.",
+    images: ["/opengraph-image"],
+  },
 };
 
 export default async function AboutPage() {

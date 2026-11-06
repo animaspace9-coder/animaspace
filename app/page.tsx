@@ -24,10 +24,32 @@ export async function generateMetadata(): Promise<Metadata> {
     .fetch(siteSettingsQuery, {}, { next: { revalidate: 60 } })
     .catch(() => null);
 
+  const title = `Anima Space — ${settings?.tagline ?? "Well-being, Psychological Consulting & Counselling Centre"}`;
+  const description =
+    "A safe, confidential, and compassionate space for psychological counselling, coaching, career guidance, and training for children, adolescents, and adults.";
+
   return {
-    title: `Anima Space — ${settings?.tagline ?? "Well-being, Psychological Consulting & Counselling Centre"}`,
-    description:
-      "A safe, confidential, and compassionate space for psychological counselling, coaching, career guidance, and training for children, adolescents, and adults.",
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: "https://www.animaspace.net",
+      images: [
+        {
+          url: "/opengraph-image",
+          width: 1200,
+          height: 630,
+          alt: "Anima Space — Psychological Consulting & Counselling Centre",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/opengraph-image"],
+    },
   };
 }
 
